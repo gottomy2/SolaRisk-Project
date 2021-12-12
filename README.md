@@ -1,6 +1,6 @@
 # Solarisk - Computer Game measuring aptitude to take a risk
 
-![](https://i.ibb.co/RDVNnw1/solarisk-Logo.png)
+![](https://i.ibb.co/Z1J46cW/solarisk-Logo.png)
 
 ### Developer Guide
 Dodając swój projekt do projektu głównego należy:
