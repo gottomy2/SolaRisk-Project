@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+
+public class SetVolume : MonoBehaviour
+{
+    public GlobalVars global;
+    public AudioMixer mixer;
+    private float volume;
+    private Slider slider;
+
+    public void Awake()
+    {
+        slider = gameObject.GetComponent<Slider>();
+        volume = global.MainMenuSliderValue;
+        slider.value = volume;
+        mixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void setValue(float sliderVal)
+    {
+        global.MainMenuSliderValue = sliderVal;
+        mixer.SetFloat("MasterVolume", Mathf.Log10(global.MainMenuSliderValue) * 20);
+    }
+}
