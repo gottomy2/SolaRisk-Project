@@ -77,7 +77,7 @@ public class TextWriter : MonoBehaviour
             characterIndex = 0;
         }
 
-        //Returns true on complet
+        //Returns true on complete
         public bool Update()
         {
             timer -= Time.deltaTime;
