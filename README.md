@@ -1,12 +1,12 @@
 # Solarisk - Computer Game measuring aptitude to take a risk
 
-![](https://i.ibb.co/Z1J46cW/solarisk-Logo.png)
+![](https://user-images.githubusercontent.com/68858742/145803256-4271e535-9947-4a6d-8b15-e05593a3d950.png)
 
 ### Developer Guide
 
 #### Uruchamiając projekt należy:
 - Zainstalować następujące paczki:  
-![](https://i.ibb.co/xHtMNx2/packages.png)
+![](https://user-images.githubusercontent.com/68858742/145803211-8f86f6eb-1a6f-4f03-9e5a-c39135167187.png)
 
 
 #### Dodając swój projekt do projektu głównego należy:
@@ -26,7 +26,7 @@ Jest on utworzony na bazie skryptu GlobalVars znajdującego się w Assets/Script
 > public GlobalVars global;
 
 - Załączamy obiekt "Database" w unity do naszego skryptu - przykład:
-![](https://i.ibb.co/wpKGdY1/script.png)
+![](https://user-images.githubusercontent.com/68858742/145803286-1c22e5cb-23ce-49c3-b414-ae65bddba769.png)
 
 #### Przełączanie między scenami
 W celu połączenia wybranych scen można skorzystać z istniejącego skryptu SwitchScene, w sposób następujący:
