@@ -19,12 +19,10 @@ public class GameAssets : MonoBehaviour
     public Transform pfPipeHead;
     public Transform pfPipeBody;
 
-    public SoundAudioClip[] soundAudioClips;
+    [SerializeField]
+    public AudioClip jumpSound;
+    public AudioClip scoreSound;
+    public AudioClip deathSound;
 
-    [Serializable]
-    public class SoundAudioClip {
-        public SoundManager.Sound sound;
-        public AudioClip audioClip;
-    }
 
 }

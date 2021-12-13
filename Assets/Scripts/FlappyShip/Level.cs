@@ -60,7 +60,7 @@ public class Level : MonoBehaviour
 
     private void Ship_OnDeath(object sender, System.EventArgs e){
         state = State.ShipDown;
-        SoundManager.PlaySound(SoundManager.Sound.Death);
+        SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
     }
 
     private void Update() {
@@ -92,7 +92,7 @@ public class Level : MonoBehaviour
             p.Move();
             if(isRightOfShip && p.GetXPos() <= SHIP_X_POS){
                 pipesPassedCount++;
-                SoundManager.PlaySound(SoundManager.Sound.Score);
+                SoundManager.PlaySound(GameAssets.GetInstance().scoreSound);
             }
             if (p.GetXPos() < PIPE_DESTROY_X_POS) {
                 p.DestroyThis();
