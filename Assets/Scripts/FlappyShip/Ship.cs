@@ -58,7 +58,7 @@ public class Ship : MonoBehaviour {
 
     private void Jump() {
         shipRigidbody2D.velocity = Vector2.up * JUMP_AMOUNT;
-        SoundManager.PlaySound(SoundManager.Sound.Jump);
+        SoundManager.PlaySound(GameAssets.GetInstance().jumpSound);
         checkHeight();
     }
 
@@ -71,8 +71,6 @@ public class Ship : MonoBehaviour {
 
     private void checkHeight(){
         if(shipRigidbody2D.transform.position.y > 40){
-            //shipRigidbody2D.bodyType = RigidbodyType2D.Static;
-            //Death from jumping too high depending on the Difficulty level? 
             if (OnDeath != null) {
                 OnDeath(this, EventArgs.Empty);
             }

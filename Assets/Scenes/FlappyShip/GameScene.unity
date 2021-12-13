@@ -259,11 +259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2415551594754751521, guid: abebc80061f29ee449c29e90200001ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 102.8
+      value: 131.6
       objectReference: {fileID: 0}
     - target: {fileID: 2415551594754751521, guid: abebc80061f29ee449c29e90200001ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -50
+      value: -50.6
       objectReference: {fileID: 0}
     - target: {fileID: 2415551594754751522, guid: abebc80061f29ee449c29e90200001ba, type: 3}
       propertyPath: m_Name
@@ -900,11 +900,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2227537299743813782, guid: 4e74ce7e48e1b274e90d7165a3b9fad6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 177.85498
+      value: 227.57704
       objectReference: {fileID: 0}
     - target: {fileID: 2227537299743813782, guid: 4e74ce7e48e1b274e90d7165a3b9fad6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2985
+      value: 0.6868
       objectReference: {fileID: 0}
     - target: {fileID: 2227537299743813782, guid: 4e74ce7e48e1b274e90d7165a3b9fad6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1323,7 +1323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 589, y: 317}
+  m_AnchoredPosition: {x: 694, y: 317}
   m_SizeDelta: {x: 59.879, y: 56.989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1752979851
@@ -1414,13 +1414,9 @@ MonoBehaviour:
   pipeHeadSprite: {fileID: 0}
   pfPipeHead: {fileID: 1227208808}
   pfPipeBody: {fileID: 509208010}
-  soundAudioClips:
-  - sound: 0
-    audioClip: {fileID: 8300000, guid: af6cad24318801649884b839a6d8599e, type: 3}
-  - sound: 1
-    audioClip: {fileID: 8300000, guid: 870716baabe4899488b4bd9a271b96c3, type: 3}
-  - sound: 2
-    audioClip: {fileID: 8300000, guid: 10970d59e93210c40a00c09ff6758e75, type: 3}
+  jumpSound: {fileID: 8300000, guid: af6cad24318801649884b839a6d8599e, type: 3}
+  scoreSound: {fileID: 8300000, guid: 870716baabe4899488b4bd9a271b96c3, type: 3}
+  deathSound: {fileID: 8300000, guid: 10970d59e93210c40a00c09ff6758e75, type: 3}
 --- !u!1 &1887671450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,11 +1644,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6490122436817225201, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 102.6
+      value: 131.4
       objectReference: {fileID: 0}
     - target: {fileID: 6490122436817225201, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -2.7
       objectReference: {fileID: 0}
     - target: {fileID: 6490122436817225203, guid: d1045b26d2cf41647a6ac20da8c29462, type: 3}
       propertyPath: m_Name
