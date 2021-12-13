@@ -5,7 +5,7 @@
 ### Developer Guide
 
 #### Uruchamiając projekt należy:
-- Zainstalować następujące paczki:
+- Zainstalować następujące paczki:  
 ![](https://i.ibb.co/xHtMNx2/packages.png)
 
 
