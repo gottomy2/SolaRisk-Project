@@ -34,9 +34,9 @@ W celu połączenia wybranych scen można skorzystać z istniejącego skryptu Sw
 - Dodajemy skrypt SceneSwitch jako komponent w głównym obiekcie ze sceny.
 - Dodajemy scene do Build Settings
 - Następnie pod konkretny przycisk odwołujemy się do jednej z funkcji:
-> NextScene() - przeniesie do następnej sceny według kolejności w Build Settings
-PreviousScene() - przeniesie do poprzedniej sceny według kolejności w Build Settings
-SceneByPath() - Przeniesie nas do sceny na podstawie ścieżki do sceny - dodawanie do Build Settings w tym wypadku nie jest konieczne. 
+> NextScene() - przeniesie do następnej sceny według kolejności w Build Settings  
+PreviousScene() - przeniesie do poprzedniej sceny według kolejności w Build Settings  
+SceneByPath() - Przeniesie nas do sceny na podstawie ścieżki do sceny - dodawanie do Build Settings w tym wypadku nie jest konieczne.  
 
 
 
