@@ -7,46 +7,36 @@ using TMPro;
 
 public class Assistant : MonoBehaviour
 {
-    
+    public GlobalVars global;
+    public int numerator;
+
     private Text messageText;
     private Button button;
     private TextWriter.TextWriterSingle textWriterSingle;
-    private int pressedCount = 0;
-    private int pressedCount2 = 0;
+    private int pressedCount;
     private Animator animator;
-    public GlobalVars global;
-    private Button inputButton;
-    private GameObject inputField;
-    private TextMeshProUGUI inputText;
     private SceneSwitch sceneSwitch;
 
     private void Awake()
     {
-        sceneSwitch = new SceneSwitch();
-
+        pressedCount = 0;
         //Dialogue
         messageText = transform.Find("messageBox").Find("message").GetComponent<Text>();
         animator = GetComponent<Animator>();
         button = transform.Find("messageBox").GetComponent<Button>();
         button.onClick.AddListener(pressDialogueBox);
-
-        //Input and c
-        inputButton = GameObject.Find("SubmitName").GetComponent<Button>();
-        inputText = GameObject.Find("TextInput").GetComponent<TextMeshProUGUI>();
-        inputField = GameObject.Find("NameInput");
-        inputButton.gameObject.SetActive(false);
-        inputField.gameObject.SetActive(false);
     }
 
     private void pressDialogueBox()
     {
+
         if (textWriterSingle != null && textWriterSingle.isActive())
         {
             textWriterSingle.WritaAllAndDestroy();
         }
         else
         {
-            string[] messageArray = global.Introduction;
+            string[] messageArray = global.dictionary[numerator];
             if (pressedCount >= messageArray.Length)
             {
                 hideAndDestroyAssistant();
@@ -54,35 +44,10 @@ public class Assistant : MonoBehaviour
             else
             {
                 string message = messageArray[pressedCount];
-                textWriterSingle = TextWriter.AddWriter_Static(messageText, message, .05f, true);
+                textWriterSingle = TextWriter.AddWriter_Static(messageText, message, .05f, false);
                 pressedCount++;
-            }
-        }
-    }
-
-    private void pressDialogueBox2()
-    {
-        animator.Play("IdleAnimation");
-        if (textWriterSingle != null && textWriterSingle.isActive())
-        {
-            textWriterSingle.WritaAllAndDestroy();
-        }
-        else
-        {
-            string[] messageArray = new string[]
-            {
-                global.PlayerName + " wspaniale!"
-            };
-
-            if (pressedCount2 >= messageArray.Length)
-            {
-                hideAndDestroyAssistant2();
-            }
-            else
-            {
-                string message2 = messageArray[pressedCount2];
-                textWriterSingle = TextWriter.AddWriter_Static(messageText, message2, .05f, true);
-                pressedCount2++;
+                Debug.Log("TextWriter: " + textWriterSingle.getUiText());
+                Debug.Log("pressedCount: " + pressedCount);
             }
         }
     }
@@ -92,29 +57,7 @@ public class Assistant : MonoBehaviour
         //Moves assistant out of range of camera:
         animator.SetBool("isDialogueFinished", true);
 
-        inputField.gameObject.SetActive(true);
-        inputButton.gameObject.SetActive(true);
-
         //Destroys the assistant objecT:
-        //Destroy(gameObject);
-    }
-
-    private void hideAndDestroyAssistant2()
-    {
-        //Moves assistant out of range of camera:
-        animator.SetBool("isDialogueFinished", true);
-
-        //Destroys the assistant objecT:
-        //Destroy(gameObject);
-    }
-
-    public void buttonPressed()
-    {
-        global.PlayerName = inputText.text;
-
-        inputButton.gameObject.SetActive(false);
-        inputField.gameObject.SetActive(false);
-        pressDialogueBox2();
-        //sceneSwitch.NextScene();
+        Destroy(gameObject,1f);
     }
 }

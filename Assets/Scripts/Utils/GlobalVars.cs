@@ -6,14 +6,17 @@ using UnityEngine;
 public class GlobalVars : ScriptableObject
 {
     public float MainMenuSliderValue;
-    public string PlayerName;
+    public string PlayerName = "";
 
-    //Introduction Text used in Assistant scene
-    public string[] Introduction = new string[]
-            {
+    public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
+    {
+        {0, new string[] {
                 "Oho, a kogo to przywia³o?",
                 "Nie wydaje mi siê ¿ebyœmy widzieli siê kiedykolwiek wczeœniej...",
+                "Pewnie jesteœ tym rekrutem o którym tyle s³ysza³em!",
                 "Pozwól no ¿e Ci siê przedstawiê, nazywam siê Mao",
                 "A jak Ciebie zw¹?"
-            };
+            }
+        },
+    };
 }
