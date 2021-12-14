@@ -31,4 +31,12 @@ public class GlobalVars : ScriptableObject
         this.flappyData = data;
         Debug.Log("FlappyData saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetJumps() + ", " + data.GetHasFinished());
     }
+
+    public SimonData simonData;
+
+    public void SaveSimonData(SimonData data){
+        this.simonData = data;
+        Debug.Log("SimonData saved to GlobalVars!\n" + data.GetOverallTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
+    }
+
 }
