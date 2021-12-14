@@ -24,4 +24,11 @@ public class GlobalVars : ScriptableObject
             }
         },
     };
+
+    public FlappyData flappyData;
+
+    public void SaveFlappyData(FlappyData data){
+        this.flappyData = data;
+        Debug.Log("FlappyData saved to GlobalVars!");
+    }
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FlappyDataHandler : MonoBehaviour {
+	
+	[SerializeField]
+	private GlobalVars globalVars;
 
 	private bool hasFailed;
 
@@ -31,7 +34,8 @@ public class FlappyDataHandler : MonoBehaviour {
 
 	public void RegisterMeasureEnd(){
 		isRegistering = false;
-		Debug.Log("Whole Time: " + wholeTime);
+		Debug.Log("Whole Time: " + wholeTime + ", all jumps: " + jumps);
+		globalVars.SaveFlappyData(new FlappyData(wholeTime, jumps));
 	}
 
 	public void Update(){
