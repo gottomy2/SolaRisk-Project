@@ -7,6 +7,11 @@ public class GlobalVars : ScriptableObject
 {
     public float MainMenuSliderValue;
     public string PlayerName = "";
+    public Dictionary<string,bool> dialoguePath = new Dictionary<string, bool>() 
+    {
+        {"assistant1",false},
+        {"assistant2",false},
+    };
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {
