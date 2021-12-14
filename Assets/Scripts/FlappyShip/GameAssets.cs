@@ -24,5 +24,4 @@ public class GameAssets : MonoBehaviour
     public AudioClip scoreSound;
     public AudioClip deathSound;
 
-
 }
