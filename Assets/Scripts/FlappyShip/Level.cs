@@ -27,6 +27,7 @@ public class Level : MonoBehaviour
 
     private State state;
     private GameMode gameMode;
+    private Difficulty inGameDifficulty;
 
     public enum Difficulty {
         Easy,
@@ -49,7 +50,8 @@ public class Level : MonoBehaviour
         instance = this;
         gameMode = GameMode.InGame;
         pipeList = new List<Pipe>();
-        SetDifficulty(Difficulty.Easy);
+        inGameDifficulty = Difficulty.Easy;
+        SetDifficulty(Difficulty.Easy); //pass this value through the player's choice
         state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
@@ -62,11 +64,17 @@ public class Level : MonoBehaviour
 
     private void Level_OnStartedPlaying(object sender, System.EventArgs e){
         state = State.Playing;
+        FlappyDataHandler.GetInstance().RegisterMeasureStart();
     }
 
     private void Ship_OnDeath(object sender, System.EventArgs e){
-        state = State.ShipDown;
-        SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
+        if(!Ship.GetInstance().GetIsDead()){
+            state = State.ShipDown;
+            Ship.GetInstance().SetIsDead(true);
+            FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+            FlappyDataHandler.GetInstance().SetIsFailed(true);
+            SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
+        }
     }
 
     private void Update() {
@@ -87,7 +95,10 @@ public class Level : MonoBehaviour
             float maxHeight = totalHeight - gapSize / 2f - heightEdgeLimit;
 
             float height = UnityEngine.Random.Range(minHeight, maxHeight);
-            CreateGapPipes(height, gapSize, PIPE_SPAWN_X_POS);
+
+            if(pipeCounter < 10 || gameMode == GameMode.Arcade) {
+                 CreateGapPipes(height, gapSize, PIPE_SPAWN_X_POS);
+            }
         }
     }
 
@@ -99,6 +110,10 @@ public class Level : MonoBehaviour
             if(isRightOfShip && p.GetXPos() <= SHIP_X_POS){
                 pipesPassedCount++;
                 SoundManager.PlaySound(GameAssets.GetInstance().scoreSound);
+                
+                if(pipesPassedCount / 2 == 10){
+                    FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+                }
             }
             if (p.GetXPos() < PIPE_DESTROY_X_POS) {
                 p.DestroyThis();
@@ -155,8 +170,8 @@ public class Level : MonoBehaviour
     }
 
     private Difficulty GetDifficulty() {
-          if(pipeCounter >= 20) return Difficulty.Hard;
-          if(pipeCounter >= 10) return Difficulty.Medium;
+          if(pipeCounter >= 30) return Difficulty.Hard;
+          if(pipeCounter >= 20) return Difficulty.Medium;
           return Difficulty.Easy;
     }
 
@@ -180,6 +195,10 @@ public class Level : MonoBehaviour
 
     public State GetState() {
         return state;
+    }
+
+    public GameMode GetGameMode() {
+        return gameMode;
     }
 
     /**

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ship : MonoBehaviour {
+
+    private bool isDead;
  
     private const float JUMP_AMOUNT = 100f;
 
@@ -27,6 +29,7 @@ public class Ship : MonoBehaviour {
     }
 
     private void Awake() {
+        isDead = false;
         instance = this;
         shipRigidbody2D = GetComponent<Rigidbody2D>();
         shipRigidbody2D.bodyType = RigidbodyType2D.Static;
@@ -48,7 +51,9 @@ public class Ship : MonoBehaviour {
                 break;
             case State.Flying:
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                    Jump();
+                    if(!isDead){
+                        Jump();
+                    }
                 }
                 if (shipRigidbody2D.transform.position.y < -40){
                     if (OnDeath != null) {
@@ -62,9 +67,10 @@ public class Ship : MonoBehaviour {
     }
 
     private void Jump() {
+        FlappyDataHandler.GetInstance().RegisterJump();
         shipRigidbody2D.velocity = Vector2.up * JUMP_AMOUNT;
         SoundManager.PlaySound(GameAssets.GetInstance().jumpSound);
-        checkHeight();
+        CheckHeight();
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
@@ -73,11 +79,20 @@ public class Ship : MonoBehaviour {
         }
     }
 
-    private void checkHeight(){
+    private void CheckHeight(){
         if(shipRigidbody2D.transform.position.y > 40){
             if (OnDeath != null) {
                 OnDeath(this, EventArgs.Empty);
             }
         }
     }
+
+    public bool GetIsDead(){
+        return isDead;
+    }
+
+    public void SetIsDead(bool isDead){
+        this.isDead = isDead;
+    }
+
 }
