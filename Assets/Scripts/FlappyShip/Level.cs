@@ -71,8 +71,8 @@ public class Level : MonoBehaviour
         if(!Ship.GetInstance().GetIsDead()){
             state = State.ShipDown;
             Ship.GetInstance().SetIsDead(true);
-            FlappyDataHandler.GetInstance().RegisterMeasureEnd();
             FlappyDataHandler.GetInstance().SetIsFailed(true);
+            FlappyDataHandler.GetInstance().RegisterMeasureEnd();
             SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
         }
     }

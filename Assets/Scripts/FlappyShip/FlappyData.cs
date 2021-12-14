@@ -6,10 +6,12 @@ public class FlappyData {
 
     private float wholeTime;
     private int jumps;
+    private bool hasFinished;
 
-    public FlappyData(float wholeTime, int jumps){
+    public FlappyData(float wholeTime, int jumps, bool hasFinished){
         this.wholeTime = wholeTime;
         this.jumps = jumps;
+        this.hasFinished = hasFinished;
     }
 
     public float GetWholeTime(){
@@ -18,6 +20,10 @@ public class FlappyData {
 
     public int GetJumps(){
         return jumps;
+    }
+
+    public bool GetHasFinished(){
+        return hasFinished;
     }
 
     public float GetRatio(){

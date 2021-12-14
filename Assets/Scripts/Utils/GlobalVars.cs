@@ -29,6 +29,6 @@ public class GlobalVars : ScriptableObject
 
     public void SaveFlappyData(FlappyData data){
         this.flappyData = data;
-        Debug.Log("FlappyData saved to GlobalVars!");
+        Debug.Log("FlappyData saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetJumps() + ", " + data.GetHasFinished());
     }
 }
