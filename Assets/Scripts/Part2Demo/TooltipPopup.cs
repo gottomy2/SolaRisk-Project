@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System.Text.RegularExpressions;
-using UnityEngine.UI;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TooltipPopup : MonoBehaviour, IPointerExitHandler
 {
@@ -14,7 +12,6 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
     Image riskIcon;
     GameObject line;
     GameObject planet;
-    ZoomIn zoom;
 
     public Sprite green;
     public Sprite yellow;
@@ -26,7 +23,6 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
         button = FindObjectOfType<TooltipButton>();
         riskIcon = GameObject.Find("RiskIcon").GetComponent<Image>();
         riskIcon.sprite = green;
-        zoom = FindObjectOfType<ZoomIn>();
     }
     public void Activate(GameObject planet2, GameObject line2)
     {
@@ -35,7 +31,7 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
         line = line2;
         Vector3 newPos = planet.transform.position;
         gameObject.transform.position = mainCamera.WorldToScreenPoint(newPos);
-        int difficulty = planet.GetComponent<Rotatator>().getDifficulty();
+        int difficulty = planet.GetComponent<Planet>().getDifficulty();
         switch (difficulty)
         {
             case 1:
@@ -55,9 +51,7 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
                 }
         }
 
-        string[] input = planet.GetComponent<MeshFilter>().sharedMesh.name.Split(' ');
-        string name = Regex.Replace(input[0], @"[\d-]", string.Empty);
-        text.SetText("Name: "+ planet.GetComponent<Rotatator>().getName()+"\n"+"Type: "+name+"\n"+"Risk: "+difficulty);
+        text.SetText("Name: " + planet.GetComponent<Planet>().getName() + "\n" + "Type: " + planet.GetComponent<Planet>().getName() + "\n" + "Risk: " + difficulty);
         button.SetPlanet(planet.name);
         //zoom.EnableZoom();
     }
@@ -66,7 +60,7 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
         gameObject.SetActive(false);
     }
     public void OnPointerExit(PointerEventData pointerEventData)
-    { 
+    {
         if (line != null) Destroy(line);
         //zoom.DisableZoom();
         gameObject.SetActive(false);

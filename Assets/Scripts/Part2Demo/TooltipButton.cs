@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TooltipButton : MonoBehaviour
 {
     private string planetName;
+    private MapData mapData;
     MainHandler mainHandler;
     Button button;
     TooltipPopup popup;
@@ -13,20 +12,21 @@ public class TooltipButton : MonoBehaviour
     {
         mainHandler = FindObjectOfType<MainHandler>();
         popup = FindObjectOfType<TooltipPopup>();
-        planetName = mainHandler.GetPlayerPosition();
+        mapData = mainHandler.mapData;
+        planetName = mainHandler.mapData.playerPosition;
 
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(Fly);
-        
+
     }
     private void Fly()
     {
         GameObject planet = GameObject.Find(planetName);
-        Rotatator rotatator = planet.GetComponent<Rotatator>();
-        
-        if (rotatator.getClickable())
+        Planet planet1 = planet.GetComponent<Planet>();
+
+        if (planet1.getClickable())
         {
-            rotatator.setVisible(true);
+            planet1.setVisited(true);
             mainHandler.ChangePlayerPosition(planetName);
             popup.Deactivate();
             Destroy(GameObject.Find("line"));
