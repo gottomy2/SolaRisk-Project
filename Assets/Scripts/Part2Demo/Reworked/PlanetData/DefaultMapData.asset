@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ada2a5bbc4fa74da973a17b0589f22, type: 3}
+  m_Name: DefaultMapData
+  m_EditorClassIdentifier: 
+  firstStart: 0
+  playerPosition: P2R3
+  planets:
+  - {fileID: 11400000, guid: 085fb279d603d1d4b89870028da4c50d, type: 2}
+  - {fileID: 11400000, guid: eaa60d946778e3f45a87f39e63894a2c, type: 2}
+  - {fileID: 11400000, guid: ea89405f2cd128f40a51c496fdad4094, type: 2}
+  - {fileID: 11400000, guid: 597f2a9f02bdb30488757eeaa08dba9a, type: 2}
+  - {fileID: 11400000, guid: a8a5dc7b27abacc4082e23db63555f91, type: 2}
+  - {fileID: 11400000, guid: 5876cd253dc611f49b60d4fb94035fc2, type: 2}
+  - {fileID: 11400000, guid: d313864a4b53a7f409ba818e208b702b, type: 2}
+  - {fileID: 11400000, guid: 52c25cfcd0079424c97057302f0fd96d, type: 2}
+  - {fileID: 11400000, guid: 2f7ad25930554854892ff1425fb0bb59, type: 2}
+  - {fileID: 11400000, guid: afefb31721d6a0b4e817751dba676ad8, type: 2}
+  - {fileID: 11400000, guid: 2363aa88be39d1542a87e8540672157f, type: 2}
+  path:
+  - P2R1
+  - P3R2
+  - P2R3
