@@ -50,6 +50,11 @@ public class Ship : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
                     Jump();
                 }
+                if (shipRigidbody2D.transform.position.y < -40){
+                    if (OnDeath != null) {
+                        OnDeath(this, EventArgs.Empty);
+                    }
+                }
                 break;
             case State.Down:
                 break;
@@ -63,7 +68,6 @@ public class Ship : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        shipRigidbody2D.bodyType = RigidbodyType2D.Static;
         if (OnDeath != null) {
             OnDeath(this, EventArgs.Empty);
         }

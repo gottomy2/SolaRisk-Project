@@ -26,12 +26,12 @@ public class Level : MonoBehaviour
     private float gapSize;
 
     private State state;
+    private GameMode gameMode;
 
     public enum Difficulty {
         Easy,
         Medium,
-        Hard,
-        Possiblent
+        Hard
     }
 
      public enum State {
@@ -40,8 +40,14 @@ public class Level : MonoBehaviour
         ShipDown
     }
 
+    public enum GameMode {
+        InGame,
+        Arcade
+    }
+
     private void Awake() {
         instance = this;
+        gameMode = GameMode.InGame;
         pipeList = new List<Pipe>();
         SetDifficulty(Difficulty.Easy);
         state = State.WaitingToStart;
@@ -145,15 +151,10 @@ public class Level : MonoBehaviour
                     gapSize = 33f; 
                     pipeSpawnDelay = 1.2f;
                     break;
-                case Difficulty.Possiblent:
-                    gapSize = 27f;
-                    pipeSpawnDelay = 1f;
-                    break;
           }
     }
 
     private Difficulty GetDifficulty() {
-          if(pipeCounter >= 30) return Difficulty.Possiblent;
           if(pipeCounter >= 20) return Difficulty.Hard;
           if(pipeCounter >= 10) return Difficulty.Medium;
           return Difficulty.Easy;
@@ -163,7 +164,10 @@ public class Level : MonoBehaviour
         CreatePipe(gapY - gapSize / 2f, xPosition, true);
         CreatePipe(CAMERA_ORTHO_SIZE * 2f - gapY - gapSize / 2f, xPosition, false);
         pipeCounter++;
-        SetDifficulty(GetDifficulty());
+
+        if(gameMode == GameMode.Arcade){
+             SetDifficulty(GetDifficulty());
+        }
     }
 
     public int GetPipeCount() {
