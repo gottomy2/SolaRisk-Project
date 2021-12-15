@@ -28,6 +28,7 @@ public class AsteroidController : MonoBehaviour
             a.transform.position = new Vector3(x, y, z);
             Rigidbody rigidBody = a.AddComponent<Rigidbody>();
             rigidBody.isKinematic = false;
+            rigidBody.useGravity = false;
             Vector3 direction = new Vector3(Random.Range(-0.1f,0.1f), Random.Range(-0.1f, 0.1f), 1);
             rigidBody.AddForce(direction * Random.Range(1000,2000));
         }
