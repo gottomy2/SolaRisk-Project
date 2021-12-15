@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour {
 
+    private float shipTakeOffVelocity;
+
+    private bool hasTakeOffStarted;
     private bool isDead;
  
     private const float JUMP_AMOUNT = 100f;
@@ -25,15 +28,18 @@ public class Ship : MonoBehaviour {
     private enum State {
         WaitingToStart,
         Flying,
-        Down
+        Down,
+        Finished
     }
 
     private void Awake() {
         isDead = false;
         instance = this;
+        hasTakeOffStarted = false;
         shipRigidbody2D = GetComponent<Rigidbody2D>();
         shipRigidbody2D.bodyType = RigidbodyType2D.Static;
         state = State.WaitingToStart;
+        shipTakeOffVelocity = 0.0f;
     }
 
     private void Update() {
@@ -50,8 +56,11 @@ public class Ship : MonoBehaviour {
                 }
                 break;
             case State.Flying:
+                if (Level.GetInstance().IsMoveTriggered() && shipRigidbody2D.transform.position.y != 0f){
+                    MoveToCenter();
+                }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                    if(!isDead){
+                    if(!isDead || Level.GetInstance().CanType()){
                         Jump();
                     }
                 }
@@ -61,9 +70,37 @@ public class Ship : MonoBehaviour {
                     }
                 }
                 break;
-            case State.Down:
+            case State.Finished:  
+                StartCoroutine(LaunchAwayWait());
                 break;
         }
+    }
+
+    private void TakeOff(){
+        shipRigidbody2D.transform.position = new Vector3(shipRigidbody2D.transform.position.x + shipTakeOffVelocity, 0);
+        shipTakeOffVelocity += 0.05f;
+    }
+
+    public void MoveToCenter(){
+        shipRigidbody2D.bodyType = RigidbodyType2D.Static;
+        if(shipRigidbody2D.transform.position.y < 0){
+            shipRigidbody2D.transform.position = new Vector3(0, shipRigidbody2D.transform.position.y + 0.1f);
+        }
+
+        if(shipRigidbody2D.transform.position.y > 0) {
+            shipRigidbody2D.transform.position = new Vector3(0, shipRigidbody2D.transform.position.y - 0.1f);
+        }
+
+        if(shipRigidbody2D.transform.position.y > -1f && shipRigidbody2D.transform.position.y < 1f){
+            shipRigidbody2D.transform.position = new Vector3(0, 0);
+            state = State.Finished;
+            SoundManager.PlaySound(GameAssets.GetInstance().takeOffSound);
+        }
+    }
+
+    private IEnumerator LaunchAwayWait(){
+         yield return new WaitForSeconds(1f); 
+         TakeOff();
     }
 
     private void Jump() {

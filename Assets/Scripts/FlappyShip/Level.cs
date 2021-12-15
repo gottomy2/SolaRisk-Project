@@ -24,6 +24,9 @@ public class Level : MonoBehaviour
     private float pipeSpawnTimer;
     private float pipeSpawnDelay;
     private float gapSize;
+    
+    private bool canType;
+    private bool isMoveTriggered;
 
     private State state;
     private GameMode gameMode;
@@ -46,12 +49,24 @@ public class Level : MonoBehaviour
         Arcade
     }
 
+    private void SetCanType(bool value){
+        if(gameMode == GameMode.InGame){
+            canType = value;
+        }
+    }
+
+    public bool CanType(){
+        return canType;
+    }
+
     private void Awake() {
         instance = this;
         gameMode = GameMode.InGame;
+        canType = true;
         pipeList = new List<Pipe>();
         inGameDifficulty = Difficulty.Easy;
-        SetDifficulty(Difficulty.Easy); //pass this value through the player's choice
+        SetDifficulty(inGameDifficulty); //pass this value through the player's choice
+        SetMoveTrigger(false);
         state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
@@ -111,8 +126,10 @@ public class Level : MonoBehaviour
                 pipesPassedCount++;
                 SoundManager.PlaySound(GameAssets.GetInstance().scoreSound);
                 
-                if(pipesPassedCount / 2 == 10){
+                if(pipesPassedCount / 2 == 10 && gameMode == GameMode.InGame){
                     FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+                    SetMoveTrigger(true);
+                    SetCanType(false);
                 }
             }
             if (p.GetXPos() < PIPE_DESTROY_X_POS) {
@@ -163,8 +180,8 @@ public class Level : MonoBehaviour
                     pipeSpawnDelay = 1.5f;
                     break;
                 case Difficulty.Hard: 
-                    gapSize = 33f; 
-                    pipeSpawnDelay = 1.2f;
+                    gapSize = 35f; 
+                    pipeSpawnDelay = 1.35f;
                     break;
           }
     }
@@ -183,6 +200,14 @@ public class Level : MonoBehaviour
         if(gameMode == GameMode.Arcade){
              SetDifficulty(GetDifficulty());
         }
+    }
+
+    private void SetMoveTrigger(bool value){
+        isMoveTriggered = value;
+    }
+
+    public bool IsMoveTriggered(){
+        return isMoveTriggered;
     }
 
     public int GetPipeCount() {
