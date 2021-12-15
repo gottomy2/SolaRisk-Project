@@ -372,7 +372,6 @@ GameObject:
   - component: {fileID: 242024101}
   - component: {fileID: 242024100}
   - component: {fileID: 242024099}
-  - component: {fileID: 242024102}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -504,25 +503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5fce8287a83df40a7ed6c2adeeb09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &242024102
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242024096}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35b5ccaf3ab7f5b45b3c0379ed9e3f05, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &317621412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,6 +1421,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: af6cad24318801649884b839a6d8599e, type: 3}
   scoreSound: {fileID: 8300000, guid: 870716baabe4899488b4bd9a271b96c3, type: 3}
   deathSound: {fileID: 8300000, guid: 10970d59e93210c40a00c09ff6758e75, type: 3}
+  takeOffSound: {fileID: 8300000, guid: 6f50de33d9801e84d9303ba564c1e68d, type: 3}
 --- !u!1 &1887671450
 GameObject:
   m_ObjectHideFlags: 0
