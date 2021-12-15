@@ -7,6 +7,11 @@ public class GlobalVars : ScriptableObject
 {
     public float MainMenuSliderValue;
     public string PlayerName = "";
+    public Dictionary<string,bool> dialoguePath = new Dictionary<string, bool>() 
+    {
+        {"assistant1",false},
+        {"assistant2",false},
+    };
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {
@@ -19,4 +24,19 @@ public class GlobalVars : ScriptableObject
             }
         },
     };
+
+    public FlappyData flappyData;
+
+    public void SaveFlappyData(FlappyData data){
+        this.flappyData = data;
+        Debug.Log("FlappyData saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetJumps() + ", " + data.GetHasFinished());
+    }
+
+    public SimonData simonData;
+
+    public void SaveSimonData(SimonData data){
+        this.simonData = data;
+        Debug.Log("SimonData saved to GlobalVars!\n" + data.GetOverallTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
+    }
+
 }

@@ -130,7 +130,7 @@ public class GameBoard : MonoBehaviour {
         indicator.SetActive();
 
         if(gameMode == GameMode.InGame){
-            DataHandler.GetInstance().RegisterMeasureStart();
+            SimonDataHandler.GetInstance().RegisterMeasureStart();
         }
         
         while (playerClicks < currentSequenceLength){  yield return null; }
@@ -151,15 +151,17 @@ public class GameBoard : MonoBehaviour {
     }
 
     public void HandleClick(int buttonIndex){
-        if(gameMode == GameMode.InGame && DataHandler.GetInstance().IsRegistering()) {
-            DataHandler.GetInstance().RegisterClick();
+        if(gameMode == GameMode.InGame && SimonDataHandler.GetInstance().IsRegistering()) {
+            SimonDataHandler.GetInstance().RegisterClick();
         }
 
-        IncrentPlayerClicks();
+        IncrementPlayerClicks();
 
         if (currentSequence[nextIndexToCheck] == buttonIndex){
             nextIndexToCheck++;
         } else {
+            SimonDataHandler.GetInstance().SetIsFailed(true);
+            SimonDataHandler.GetInstance().Finish();
             SoundManager.PlaySound(errorSound);
             SetAllLightsRed();
             StopAllCoroutines();
@@ -208,7 +210,7 @@ public class GameBoard : MonoBehaviour {
         currentSequenceLength++;
     }
 
-    private void IncrentPlayerClicks(){
+    private void IncrementPlayerClicks(){
         playerClicks++;
     }
 
@@ -229,6 +231,7 @@ public class GameBoard : MonoBehaviour {
 
     private void CheckLigtsInGame(){
         if(gameMode == GameMode.InGame && lightsOn == 5){
+            SimonDataHandler.GetInstance().Finish();
             Proceed();
         }
     }

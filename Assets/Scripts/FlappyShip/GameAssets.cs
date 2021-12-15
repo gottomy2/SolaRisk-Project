@@ -23,6 +23,6 @@ public class GameAssets : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip scoreSound;
     public AudioClip deathSound;
-
+    public AudioClip takeOffSound;
 
 }

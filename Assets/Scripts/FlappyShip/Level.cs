@@ -24,14 +24,18 @@ public class Level : MonoBehaviour
     private float pipeSpawnTimer;
     private float pipeSpawnDelay;
     private float gapSize;
+    
+    private bool canType;
+    private bool isMoveTriggered;
 
     private State state;
+    private GameMode gameMode;
+    private Difficulty inGameDifficulty;
 
     public enum Difficulty {
         Easy,
         Medium,
-        Hard,
-        Possiblent
+        Hard
     }
 
      public enum State {
@@ -40,10 +44,29 @@ public class Level : MonoBehaviour
         ShipDown
     }
 
+    public enum GameMode {
+        InGame,
+        Arcade
+    }
+
+    private void SetCanType(bool value){
+        if(gameMode == GameMode.InGame){
+            canType = value;
+        }
+    }
+
+    public bool CanType(){
+        return canType;
+    }
+
     private void Awake() {
         instance = this;
+        gameMode = GameMode.InGame;
+        canType = true;
         pipeList = new List<Pipe>();
-        SetDifficulty(Difficulty.Easy);
+        inGameDifficulty = Difficulty.Easy;
+        SetDifficulty(inGameDifficulty); //pass this value through the player's choice
+        SetMoveTrigger(false);
         state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
@@ -56,11 +79,17 @@ public class Level : MonoBehaviour
 
     private void Level_OnStartedPlaying(object sender, System.EventArgs e){
         state = State.Playing;
+        FlappyDataHandler.GetInstance().RegisterMeasureStart();
     }
 
     private void Ship_OnDeath(object sender, System.EventArgs e){
-        state = State.ShipDown;
-        SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
+        if(!Ship.GetInstance().GetIsDead()){
+            state = State.ShipDown;
+            Ship.GetInstance().SetIsDead(true);
+            FlappyDataHandler.GetInstance().SetIsFailed(true);
+            FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+            SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
+        }
     }
 
     private void Update() {
@@ -81,7 +110,10 @@ public class Level : MonoBehaviour
             float maxHeight = totalHeight - gapSize / 2f - heightEdgeLimit;
 
             float height = UnityEngine.Random.Range(minHeight, maxHeight);
-            CreateGapPipes(height, gapSize, PIPE_SPAWN_X_POS);
+
+            if(pipeCounter < 10 || gameMode == GameMode.Arcade) {
+                 CreateGapPipes(height, gapSize, PIPE_SPAWN_X_POS);
+            }
         }
     }
 
@@ -93,6 +125,12 @@ public class Level : MonoBehaviour
             if(isRightOfShip && p.GetXPos() <= SHIP_X_POS){
                 pipesPassedCount++;
                 SoundManager.PlaySound(GameAssets.GetInstance().scoreSound);
+                
+                if(pipesPassedCount / 2 == 10 && gameMode == GameMode.InGame){
+                    FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+                    SetMoveTrigger(true);
+                    SetCanType(false);
+                }
             }
             if (p.GetXPos() < PIPE_DESTROY_X_POS) {
                 p.DestroyThis();
@@ -142,20 +180,15 @@ public class Level : MonoBehaviour
                     pipeSpawnDelay = 1.5f;
                     break;
                 case Difficulty.Hard: 
-                    gapSize = 33f; 
-                    pipeSpawnDelay = 1.2f;
-                    break;
-                case Difficulty.Possiblent:
-                    gapSize = 27f;
-                    pipeSpawnDelay = 1f;
+                    gapSize = 35f; 
+                    pipeSpawnDelay = 1.35f;
                     break;
           }
     }
 
     private Difficulty GetDifficulty() {
-          if(pipeCounter >= 30) return Difficulty.Possiblent;
-          if(pipeCounter >= 20) return Difficulty.Hard;
-          if(pipeCounter >= 10) return Difficulty.Medium;
+          if(pipeCounter >= 30) return Difficulty.Hard;
+          if(pipeCounter >= 20) return Difficulty.Medium;
           return Difficulty.Easy;
     }
 
@@ -163,7 +196,18 @@ public class Level : MonoBehaviour
         CreatePipe(gapY - gapSize / 2f, xPosition, true);
         CreatePipe(CAMERA_ORTHO_SIZE * 2f - gapY - gapSize / 2f, xPosition, false);
         pipeCounter++;
-        SetDifficulty(GetDifficulty());
+
+        if(gameMode == GameMode.Arcade){
+             SetDifficulty(GetDifficulty());
+        }
+    }
+
+    private void SetMoveTrigger(bool value){
+        isMoveTriggered = value;
+    }
+
+    public bool IsMoveTriggered(){
+        return isMoveTriggered;
     }
 
     public int GetPipeCount() {
@@ -176,6 +220,10 @@ public class Level : MonoBehaviour
 
     public State GetState() {
         return state;
+    }
+
+    public GameMode GetGameMode() {
+        return gameMode;
     }
 
     /**

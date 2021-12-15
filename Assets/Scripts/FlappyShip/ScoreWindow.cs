@@ -21,7 +21,8 @@ public class ScoreWindow : MonoBehaviour {
 	}
 
 	private void Update() {
-		if(Level.GetInstance().GetState() == Level.State.Playing){
+		if(Level.GetInstance().GetState() == Level.State.Playing 
+			&& Level.GetInstance().GetGameMode() != Level.GameMode.InGame){
 			scoreText.gameObject.SetActive(true);
 			highScoreText.gameObject.SetActive(true);
 		}
