@@ -62,7 +62,8 @@ public class Level : MonoBehaviour
     private void Awake() {
         instance = this;
         gameMode = GameMode.InGame;
-        canType = true;
+        canType = false;
+        InitLighting();
         pipeList = new List<Pipe>();
         inGameDifficulty = Difficulty.Easy;
         SetDifficulty(inGameDifficulty); //pass this value through the player's choice
@@ -70,6 +71,15 @@ public class Level : MonoBehaviour
         state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
+    }
+
+    private void InitLighting(){
+        SceneShader.GetInstance().SetIsLighting(true);
+    }
+
+    private void CloseScene(){
+        SceneShader.GetInstance().SetIsShading(true);
+        //and change scene maybe here?
     }
 
     private void Start() {
@@ -86,9 +96,11 @@ public class Level : MonoBehaviour
         if(!Ship.GetInstance().GetIsDead()){
             state = State.ShipDown;
             Ship.GetInstance().SetIsDead(true);
+            SetCanType(false);
             FlappyDataHandler.GetInstance().SetIsFailed(true);
             FlappyDataHandler.GetInstance().RegisterMeasureEnd();
             SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
+            CloseScene();
         }
     }
 

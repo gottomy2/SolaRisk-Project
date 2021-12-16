@@ -7,7 +7,6 @@ public class Ship : MonoBehaviour {
 
     private float shipTakeOffVelocity;
 
-    private bool hasTakeOffStarted;
     private bool isDead;
  
     private const float JUMP_AMOUNT = 100f;
@@ -35,7 +34,6 @@ public class Ship : MonoBehaviour {
     private void Awake() {
         isDead = false;
         instance = this;
-        hasTakeOffStarted = false;
         shipRigidbody2D = GetComponent<Rigidbody2D>();
         shipRigidbody2D.bodyType = RigidbodyType2D.Static;
         state = State.WaitingToStart;
@@ -101,6 +99,7 @@ public class Ship : MonoBehaviour {
     private IEnumerator LaunchAwayWait(){
          yield return new WaitForSeconds(1f); 
          TakeOff();
+         SceneShader.GetInstance().SetIsShading(true);
     }
 
     private void Jump() {
