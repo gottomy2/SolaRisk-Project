@@ -36,13 +36,11 @@ public class EventManager : MonoBehaviour
 
     private void eventRandomizer(float percentage)
     {
-        //Way way = mapData.path[mapData.path.Count];
         if (Random.value < percentage)
         {
             if(Random.value < 0.5f)
             {
                 //When flappyShip Minigame
-                //way.setEventType("FlappyShip");
                 mapData.lastFlightType = "FlappyShip";
                 Debug.Log("flappyShip Minigame occured");
                 sceneSwitch.SceneByPath("Assets/Scenes/FlappyShip/LoadingScene.unity");
@@ -50,7 +48,6 @@ public class EventManager : MonoBehaviour
             else
             {
                 //When Asteroids Minigame occured
-                //way.setEventType("Asteroids");
                 mapData.lastFlightType = "Asteroids";
                 Debug.Log("Asteroids Minigame occured");
                 sceneSwitch.SceneByPath("Assets/Scenes/AsteroidsMiniGame/SampleScene.unity");
@@ -59,8 +56,6 @@ public class EventManager : MonoBehaviour
         else
         {
             //Going to the dialogue when no event occured
-            //sceneSwitch.SceneByPath("");
-            //way.setEventType("Safe");
             mapData.lastFlightType = "Safe";
             Debug.Log("No event occured");
         }
