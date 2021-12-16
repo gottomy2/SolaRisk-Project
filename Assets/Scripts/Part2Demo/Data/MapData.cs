@@ -8,5 +8,6 @@ public class MapData : ScriptableObject
     public string playerPosition = "Pstart";
     public List<PlanetData> planets;
     public List<string> path;
+    public string lastFlightType;
 }
 

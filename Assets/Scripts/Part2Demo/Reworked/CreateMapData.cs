@@ -20,7 +20,6 @@ public class CreateMapData : MonoBehaviour
         int difficulty;
 
         mapData.path = new List<string>();
-
         for (int i = 0; i <= 10; i++)
         {
             random = Random.Range(0, x);
