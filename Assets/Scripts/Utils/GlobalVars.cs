@@ -7,10 +7,12 @@ public class GlobalVars : ScriptableObject
 {
     public float MainMenuSliderValue;
     public string PlayerName = "";
-    public Dictionary<string,bool> dialoguePath = new Dictionary<string, bool>() 
+    public Dictionary<string, bool> dialoguePath = new Dictionary<string, bool>()
     {
-        {"assistant1",false},
-        {"assistant2",false},
+        {"intro1",false},
+        {"intro2",false},
+        {"hubTutorial1",true},
+        {"hubTutorial2",false}
     };
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
@@ -23,7 +25,15 @@ public class GlobalVars : ScriptableObject
                 "A jak Ciebie zw¹?"
             }
         },
+        {2, new string[]{
+                "Witaj na statku kapitanie!",
+                "Zanim zajmiemy przejdziemy do podró¿y pozwól ¿e Ciê oprowadzê!",
+                "Zacznijmy od g³ównego panelu!, to jest od mapy!"
+            } 
+        }
     };
+
+    public bool inMap = false;
 
     public FlappyData flappyData;
 

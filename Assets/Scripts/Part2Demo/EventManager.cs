@@ -8,12 +8,12 @@ public class EventManager : MonoBehaviour
 {
     public Button flyButton;
     public MapData mapData;
-    public Planet planet;
     public SceneSwitch sceneSwitch;
+
+    private Planet planet;
 
     private void Awake()
     {
-        sceneSwitch = new SceneSwitch();
         flyButton.onClick.AddListener(onButtonClick);
     }
 

@@ -6,6 +6,7 @@ public class OpenDoors : MonoBehaviour
 {
     public GameObject doors;
     public GameObject text;
+    public GlobalVars global;
     public float maxDistance = 4f;
     private Animator animator;
     private bool inView = false;
@@ -22,52 +23,61 @@ public class OpenDoors : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         playerPosition = player.transform.position;
         distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - gameObject.transform.position.x, 2) + Mathf.Pow(playerPosition.z - gameObject.transform.position.z, 2));
-     
-        if (Input.GetKeyDown(KeyCode.E) && inView && distance<=maxDistance)
-        {
-            if (animator.GetBool("DoorUp"))
+
+        if (global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        {   
+            if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
-                animator.SetBool("DoorUp", false);
-                state = "Close";
+                if (animator.GetBool("DoorUp"))
+                {
+                    animator.SetBool("DoorUp", false);
+                    state = "Close";
+                }
+                else
+                {
+                    animator.SetBool("DoorUp", true);
+                    state = "Open";
+                }
             }
-            else
+            if (distance > maxDistance && text.activeSelf == true)
             {
-                animator.SetBool("DoorUp", true );
-                state = "Open";
+                text.SetActive(false);
             }
-        }
-        if (distance > maxDistance && text.activeSelf == true)
-        {
-            text.SetActive(false);
-        }
-        else if(distance <= maxDistance && text.activeSelf == false && inView)
-        {
-            text.SetActive(true);
-        }
-        if (text.activeSelf)
-        {
-            if (animator.GetBool("DoorUp"))
+            else if (distance <= maxDistance && text.activeSelf == false && inView)
             {
-                state = "Open";
+                text.SetActive(true);
             }
-            else
+            if (text.activeSelf)
             {
-                state = "Close";
+                if (animator.GetBool("DoorUp"))
+                {
+                    state = "Open";
+                }
+                else
+                {
+                    state = "Close";
+                }
+                text.GetComponent<TextMesh>().text = "Click E\nTo " + state + " Doors";
             }
-            text.GetComponent<TextMesh>().text = "Click E\nTo " + state + " Doors";
         }
     }
     private void OnMouseEnter()
     {
-        inView = true;
-        text.SetActive(true);
+        if(global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        {
+            inView = true;
+            text.SetActive(true);
+        }
     }
     private void OnMouseExit()
     {
-        inView = false;
-        text.SetActive(false);
+        if(global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        {
+            inView = false;
+            text.SetActive(false);
+        }       
     }
 }
