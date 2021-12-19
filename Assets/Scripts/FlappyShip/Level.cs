@@ -63,7 +63,6 @@ public class Level : MonoBehaviour
         instance = this;
         gameMode = GameMode.InGame;
         canType = false;
-        InitLighting();
         pipeList = new List<Pipe>();
         inGameDifficulty = Difficulty.Easy;
         SetDifficulty(inGameDifficulty); //pass this value through the player's choice
@@ -83,6 +82,7 @@ public class Level : MonoBehaviour
     }
 
     private void Start() {
+        InitLighting();
         Ship.GetInstance().OnDeath += Ship_OnDeath;
         Ship.GetInstance().OnStartedPlaying += Level_OnStartedPlaying;
     }
