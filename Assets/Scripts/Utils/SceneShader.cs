@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneShader : MonoBehaviour {
 
@@ -25,19 +26,29 @@ public class SceneShader : MonoBehaviour {
     private void Awake(){
         instance = this;
         currentOpacity = FULL_SOLID;
+
+        if(blackCurtain.GetComponent<SpriteRenderer>() != null)
         blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+
+        if(blackCurtain.GetComponent<Image>() != null)
+        blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
     }
 
     void Update(){
         if(isShading){
             AddToSolid();
-            blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
         }
         
         if(isLighting){
             SubToOpaque();
-            blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
         }
+
+        if(blackCurtain.GetComponent<SpriteRenderer>() != null)
+        blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+
+        
+        if(blackCurtain.GetComponent<Image>() != null)
+        blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
     }
 
     private void AddToSolid(){

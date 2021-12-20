@@ -19,6 +19,8 @@ public class ShipController : MonoBehaviour
     float horizontal;
     float vertical;
     
+    bool isDead;
+    bool canShoot;
 
     Rigidbody rigidBody;
     Animator animator;
@@ -30,13 +32,18 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneShader.GetInstance().SetIsLighting(true);
+
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
+        isDead = false;
+        canShoot = true;
         health = maxHealth;
         ammo = maxAmmo;
         Debug.Log("Health: " + health + "/" + maxHealth);
+        StartCounting();
     }
 
     // Update is called once per frame
@@ -45,18 +52,24 @@ public class ShipController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal")*-1;
         vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
+            AsteroidDataHandler.GetInstance().RegisterClick();
             Launch();
         }
+
+        /** 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             Application.LoadLevel(Application.loadedLevel);
         }
+        */
 
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
@@ -95,10 +108,26 @@ public class ShipController : MonoBehaviour
             health--;
 
             UIHealthBar.Instance.SetValue(health / (float)maxHealth);
-
+            CheckHealth();
             Destroy(e, 2);
         }
     }
+    private void CheckHealth()
+    {
+        if(health <= 0 && !isDead)
+        {
+            TriggerDeath();
+        }
+    }
+
+    private void TriggerDeath()
+    {
+        isDead = true;
+        canShoot = false;
+        AsteroidDataHandler.GetInstance().SetIsFailed(true);
+        AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
+    }
+
     void Launch()
     {
         if (ammo >= 1)
@@ -111,8 +140,15 @@ public class ShipController : MonoBehaviour
             audioSource.PlayOneShot(laserShoot);
             ammo--;
             UIAmmoBar.Instance.SetValue(ammo / (float)maxAmmo);
+
+            AsteroidDataHandler.GetInstance().RegisterShoot();
         }
         
-
     }
+
+    private void StartCounting()
+    {
+        AsteroidDataHandler.GetInstance().RegisterMeasureStart();
+    }
+
 }

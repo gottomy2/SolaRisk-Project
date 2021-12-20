@@ -62,7 +62,5 @@ public class SimonDataHandler : MonoBehaviour {
 		this.hasFailed = isFailed;
 	}
 
-
-
 }
 
