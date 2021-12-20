@@ -46,8 +46,6 @@ public class Assistant : MonoBehaviour
                 string message = messageArray[pressedCount];
                 textWriterSingle = TextWriter.AddWriter_Static(messageText, message, .05f, false);
                 pressedCount++;
-                Debug.Log("TextWriter: " + textWriterSingle.getUiText());
-                Debug.Log("pressedCount: " + pressedCount);
             }
         }
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8445836587896520970}
   - component: {fileID: 6890143963189655372}
   m_Layer: 0
-  m_Name: Desert_Design1
+  m_Name: Temperate_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationOffset: 20
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!135 &6890143963189655372
 SphereCollider:
   m_ObjectHideFlags: 0

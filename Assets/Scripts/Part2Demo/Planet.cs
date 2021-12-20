@@ -12,6 +12,7 @@ public class Planet : MonoBehaviour
 
     private MapData mapData;
     public float rotationOffset = 20f;
+    public GlobalVars global;
 
     Material[] materials;
     Color[] materialsCopy;
@@ -55,8 +56,8 @@ public class Planet : MonoBehaviour
     // Update is called once per frame
 
     void FixedUpdate()
-    {
-        if (visited)
+    {  
+        if (visited && !global.getDialoguePath("mapAssistantActive"))
         {
             for (int i = 0; i < materialsCopy.Length; i++)
             {
@@ -67,7 +68,7 @@ public class Planet : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (!visited && clickable && line == null)
+        if (!visited && clickable && line == null && !global.getDialoguePath("mapAssistantActive"))
         {
             line = Instantiate(linePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             line.name = "line";
