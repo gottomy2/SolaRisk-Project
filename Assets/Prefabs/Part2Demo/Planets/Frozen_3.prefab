@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 837057342129828137}
   - component: {fileID: -2288539383720104926}
   m_Layer: 0
-  m_Name: Frozen_Design3
+  m_Name: Frozen_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationOffset: 20
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!135 &-2288539383720104926
 SphereCollider:
   m_ObjectHideFlags: 0
