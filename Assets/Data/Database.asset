@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   MainMenuSliderValue: 0.44
-  PlayerName: Igor
-  testDialoguePath:
+  PlayerName: "Igor\u200B"
+  dialoguePath:
+  - key: intro1
+    value: 0
+  - key: intro2
+    value: 0
+  - key: hubTutorial1
+    value: 0
   - key: mapTutorial1
     value: 0
   - key: mapTutorial2
@@ -23,6 +29,8 @@ MonoBehaviour:
     value: 0
   - key: mapAssistantActive
     value: 1
+  - key: hubTutorial2
+    value: 0
   - key: mapReset
     value: 0
   inMap: 1

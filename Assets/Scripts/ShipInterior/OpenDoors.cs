@@ -27,7 +27,7 @@ public class OpenDoors : MonoBehaviour
         playerPosition = player.transform.position;
         distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - gameObject.transform.position.x, 2) + Mathf.Pow(playerPosition.z - gameObject.transform.position.z, 2));
 
-        if (global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        if (global.getDialoguePath("hubTutorial1") && global.getDialoguePath("hubTutorial2"))
         {   
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
@@ -66,7 +66,7 @@ public class OpenDoors : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if(global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        if(global.getDialoguePath("hubTutorial1") && global.getDialoguePath("hubTutorial2"))
         {
             inView = true;
             text.SetActive(true);
@@ -74,7 +74,7 @@ public class OpenDoors : MonoBehaviour
     }
     private void OnMouseExit()
     {
-        if(global.dialoguePath["hubTutorial1"] && global.dialoguePath["hubTutorial2"])
+        if(global.getDialoguePath("hubTutorial1") && global.getDialoguePath("hubTutorial2"))
         {
             inView = false;
             text.SetActive(false);

@@ -22,20 +22,7 @@ public class GlobalVars : ScriptableObject
     public float MainMenuSliderValue;
     public string PlayerName = "";
     [SerializeField]
-    public variable[] testDialoguePath;
-
-    
-    public Dictionary<string, bool> dialoguePath = new Dictionary<string, bool>()
-    {
-        {"intro1",false},
-        {"intro2",false},
-        {"hubTutorial1",false},
-        {"mapTutorial1",false},
-        {"mapTutorial2",false},
-        {"mapTutorialFinished",false},
-        {"mapAssistantActive",true},
-        {"hubTutorial2",false}
-    };
+    public variable[] dialoguePath;
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {
@@ -73,21 +60,21 @@ public class GlobalVars : ScriptableObject
     public void setDialoguePath(string key, bool value)
     {   
         
-        for(int i = 0; i < this.testDialoguePath.Length; i++)
+        for(int i = 0; i < this.dialoguePath.Length; i++)
         {
-            if (this.testDialoguePath[i].key == key)
+            if (this.dialoguePath[i].key == key)
             {
-                this.testDialoguePath[i].value = value; ;
+                this.dialoguePath[i].value = value; ;
             }
         }
     }
     public bool getDialoguePath(string key) {
         bool returned = false;
-        for (int i = 0; i < this.testDialoguePath.Length; i++)
+        for (int i = 0; i < this.dialoguePath.Length; i++)
         {
-            if (this.testDialoguePath[i].key == key)
+            if (this.dialoguePath[i].key == key)
             {
-                returned = this.testDialoguePath[i].value;
+                returned = this.dialoguePath[i].value;
             }
         }
         return returned;
