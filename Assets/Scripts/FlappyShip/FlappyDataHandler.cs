@@ -36,7 +36,7 @@ public class FlappyDataHandler : MonoBehaviour {
 	public void RegisterMeasureEnd(){
 		isRegistering = false;
 		Debug.Log("Whole Time: " + wholeTime + ", all jumps: " + jumps);
-		globalVars.SaveFlappyData(new FlappyData(wholeTime, jumps, !hasFailed));
+		globalVars.SaveData(new FlappyData(wholeTime, jumps, !hasFailed));
 	}
 
 	public void Update(){

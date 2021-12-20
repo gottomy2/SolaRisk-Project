@@ -52,7 +52,7 @@ public class SimonDataHandler : MonoBehaviour {
 	}
 
 	public void Finish(){
-		globalVars.SaveSimonData(new SimonData(responseTime, clicksNum, !hasFailed));
+		globalVars.SaveData(new SimonData(responseTime, clicksNum, !hasFailed));
 	}
 
 	public bool IsRegistering(){

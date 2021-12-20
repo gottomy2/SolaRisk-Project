@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimonData {
+public class SimonData: IData {
 
     private float overallTime;
     private int clicks;
@@ -14,7 +14,7 @@ public class SimonData {
         this.hasFinished = hasFinished;
     }
 
-    public float GetOverallTime(){
+    public float GetWholeTime(){
         return overallTime;
     }
 

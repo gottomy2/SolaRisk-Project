@@ -35,18 +35,11 @@ public class GlobalVars : ScriptableObject
 
     public bool inMap = false;
 
-    public List<FlappyData> flappyDataList = new List<FlappyData>();
+    public List<IData> dataList = new List<IData>();
 
-    public void SaveFlappyData(FlappyData data){
-        flappyDataList.Add(data);
-        Debug.Log("FlappyData saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetJumps() + ", " + data.GetHasFinished());
-    }
-
-    public List<SimonData> simonDataList = new List<SimonData>();
-
-    public void SaveSimonData(SimonData data){
-        simonDataList.Add(data);
-        Debug.Log("SimonData saved to GlobalVars!\n" + data.GetOverallTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
+    public void SaveData(IData data){
+        dataList.Add(data);
+        Debug.Log("Data saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
     }
 
 }
