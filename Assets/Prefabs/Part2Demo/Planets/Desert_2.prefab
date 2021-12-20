@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3647470440650643688}
   - component: {fileID: -4847054174059545966}
   m_Layer: 0
-  m_Name: Desert_Design3
+  m_Name: Desert_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationOffset: 20
-  torus: {fileID: 905275974195532317, guid: cf71f706648663c4a86b9561807cc680, type: 3}
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!135 &-4847054174059545966
 SphereCollider:
   m_ObjectHideFlags: 0

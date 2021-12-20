@@ -7,7 +7,8 @@ public class MainHandler : MonoBehaviour
     CreateMapData createMap;
     ShowPlanets showPlanets;
     public TooltipPopup popup;
-    public GameObject hubButton;
+    public GlobalVars global;
+    private string playerName;
 
     private void Start()
     {
@@ -17,14 +18,9 @@ public class MainHandler : MonoBehaviour
 
         if (mapData.firstStart)
         {
-            hubButton.SetActive(false);
             mapData.playerPosition = "Pstart";
             mapData.firstStart = false;
             createMap.Generate(mapData);
-        }
-        else
-        {
-            hubButton.SetActive(true);
         }
         showPlanets.Show(mapData);
         popup.Deactivate();

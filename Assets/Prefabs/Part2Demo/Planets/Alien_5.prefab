@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2379711748564669931}
   - component: {fileID: 7996942278848050596}
   m_Layer: 0
-  m_Name: Alien_Design9
+  m_Name: Alien_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationOffset: 20
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!135 &7996942278848050596
 SphereCollider:
   m_ObjectHideFlags: 0
