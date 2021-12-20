@@ -61,7 +61,6 @@ public class ChangePlanet : MonoBehaviour {
                 frozen.SetActive(true);
                 mapGenerator.DrawMapInEditor();
                 break;
-            // TODO do tundry dodać drzewka ma być frozen a do temperate to jak earth like więcej wody chuj wie mokra ma być 
             case "Tundra":
                 mapGenerator.terrainData = m_PlanetAssets.frozenTerrainData;
                 mapGenerator.noiseData = m_PlanetAssets.frozenNoiseData;
