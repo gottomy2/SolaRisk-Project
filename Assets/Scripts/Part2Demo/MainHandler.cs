@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class MainHandler : MonoBehaviour
@@ -7,7 +8,7 @@ public class MainHandler : MonoBehaviour
     CreateMapData createMap;
     ShowPlanets showPlanets;
     public TooltipPopup popup;
-    public GlobalVars global;
+    public GlobalVars globalVars;
     private string playerName;
 
     private void Start()
@@ -71,6 +72,13 @@ public class MainHandler : MonoBehaviour
                 }
             }
         }
+
         mapData.path.Add(name);
+        SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
+    }
+
+    private void SaveDifficultyChoiceToProcess(int choice)
+    {
+        globalVars.SaveDifficultyChoice(choice);
     }
 }
