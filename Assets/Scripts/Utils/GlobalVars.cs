@@ -23,6 +23,8 @@ public class GlobalVars : ScriptableObject
     public string PlayerName = "";
     [SerializeField]
     public variable[] dialoguePath;
+    public variable[] hubStats;
+    public Vector3 playerPosition;
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {
@@ -78,5 +80,29 @@ public class GlobalVars : ScriptableObject
             }
         }
         return returned;
+    }
+
+    public bool getVar(string key, variable[] variables)
+    {
+        bool returned = false;
+        for (int i = 0; i < variables.Length; i++)
+        {
+            if (variables[i].key == key)
+            {
+                returned = variables[i].value;
+            }
+        }
+        return returned;
+    }
+
+    public void setVar(string key, bool value, variable[] variables)
+    {
+        for (int i = 0; i < variables.Length; i++)
+        {
+            if (variables[i].key == key)
+            {
+                variables[i].value = value; ;
+            }
+        }
     }
 }

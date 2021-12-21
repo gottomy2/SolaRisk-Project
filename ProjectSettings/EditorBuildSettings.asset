@@ -44,4 +44,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Part2Demo/Part2Demo.unity
     guid: 37f0901e646c0fb4ca7fcb7b7aa6ca76
+  - enabled: 1
+    path: Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity
+    guid: 506f46308a22a3142b8339f25ea4a72c
+  - enabled: 1
+    path: Assets/Scenes/FixLightsWireSwitches/FixTheLightsScene.unity
+    guid: 0e8048d1e719ffe498cb4940c4ad5352
   m_configObjects: {}

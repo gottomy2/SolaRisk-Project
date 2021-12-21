@@ -16,21 +16,35 @@ MonoBehaviour:
   PlayerName: "Igor\u200B"
   dialoguePath:
   - key: intro1
-    value: 0
+    value: 1
   - key: intro2
-    value: 0
+    value: 1
   - key: hubTutorial1
-    value: 0
+    value: 1
   - key: mapTutorial1
     value: 0
   - key: mapTutorial2
     value: 0
   - key: mapTutorialFinished
-    value: 0
-  - key: mapAssistantActive
     value: 1
-  - key: hubTutorial2
+  - key: mapAssistantActive
     value: 0
+  - key: hubTutorial2
+    value: 1
   - key: mapReset
     value: 0
+  hubStats:
+  - key: wiresBroken
+    value: 0
+  - key: switchesBroken
+    value: 0
+  - key: canLandOnPlanet
+    value: 0
+  - key: simonBroken
+    value: 0
+  - key: switchesFix
+    value: 0
+  - key: wiresFix
+    value: 0
+  playerPosition: {x: 0, y: 0, z: 0}
   inMap: 1

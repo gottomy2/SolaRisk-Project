@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855e2197a4a7d6a438103ab1c3b76eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
   switchCount: 4
   winText: {fileID: 1734410217}
 --- !u!212 &726067085
