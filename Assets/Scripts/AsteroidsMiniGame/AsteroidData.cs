@@ -2,24 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimonData: IData {
+public class AsteroidData: IData {
 
-    private float overallTime;
+    private float wholeTime;
+    private int shoots;
     private int clicks;
     private bool hasFinished;
 
-    public SimonData(float overallTime, int clicks, bool hasFinished){
-        this.overallTime = overallTime;
+    public AsteroidData(float wholeTime, int shoots, int clicks, bool hasFinished){
+        this.wholeTime = wholeTime;
+        this.shoots = shoots;
         this.clicks = clicks;
         this.hasFinished = hasFinished;
     }
 
     public float GetWholeTime(){
-        return overallTime;
+        return wholeTime;
     }
 
     public int GetClicks(){
         return clicks;
+    }
+
+    public int GetShoots(){
+        return shoots;
     }
 
     public bool GetHasFinished(){
@@ -27,7 +33,7 @@ public class SimonData: IData {
     }
 
     public float GetRatio(){
-        return overallTime / clicks;
+        return wholeTime / shoots;
     }
-    
+ 
 }
