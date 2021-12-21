@@ -1110,8 +1110,7 @@ MonoBehaviour:
   mapData: {fileID: 11400000, guid: 23067f8b6741fe14185f83267a247176, type: 2}
   line: {fileID: 6605497607639789663, guid: 0a6569fa895224443801193f4d09acd2, type: 3}
   popup: {fileID: 6880698465956716884, guid: 32a02f60920b98942ba5f49a8ed82f1a, type: 3}
-  hubButton: {fileID: 1303676803}
-  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
+  globalVars: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!114 &1694859939
 MonoBehaviour:
   m_ObjectHideFlags: 0
