@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlappyData {
+public class FlappyData: IData {
 
     private float wholeTime;
     private int jumps;
@@ -18,7 +18,7 @@ public class FlappyData {
         return wholeTime;
     }
 
-    public int GetJumps(){
+    public int GetClicks(){
         return jumps;
     }
 

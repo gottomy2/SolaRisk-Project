@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlappyDataHandler : MonoBehaviour {
-	
+public class AsteroidDataHandler : MonoBehaviour {
+    
 	[SerializeField]
 	private GlobalVars globalVars;
 
@@ -13,11 +13,13 @@ public class FlappyDataHandler : MonoBehaviour {
 
 	private float wholeTime;
 
-	private int jumps;
+	private int shoots;
 
-	private static FlappyDataHandler instance;
+	private int clicks;
 
-	public static FlappyDataHandler GetInstance() {
+	private static AsteroidDataHandler instance;
+
+	public static AsteroidDataHandler GetInstance() {
 		return instance;
 	}
 
@@ -25,7 +27,7 @@ public class FlappyDataHandler : MonoBehaviour {
 		hasFailed = false;
 		instance = this;
 		isRegistering = false;
-		jumps = 0;
+		shoots = 0;
 	}
 
 	public void RegisterMeasureStart(){
@@ -35,20 +37,27 @@ public class FlappyDataHandler : MonoBehaviour {
 
 	public void RegisterMeasureEnd(){
 		isRegistering = false;
-		Debug.Log("Whole Time: " + wholeTime + ", all jumps: " + jumps);
-		globalVars.SaveData(new FlappyData(wholeTime, jumps, !hasFailed));
+		Debug.Log("Whole Time: " + wholeTime + ", all shoots: " + shoots);
+		Debug.Log("All clicks: " + clicks);
+		globalVars.SaveData(new AsteroidData(wholeTime, shoots, clicks, !hasFailed));
 	}
 
 	public void Update(){
-		if(Level.GetInstance().GetGameMode() == Level.GameMode.InGame && isRegistering) {
+		if(isRegistering) {
 			wholeTime += Time.deltaTime;
 		}
 	}
 
-	public void RegisterJump(){
+	public void RegisterShoot(){
 		if(isRegistering){
-			jumps++;
-			Debug.Log("Jumps: " + jumps + ", time now: " + wholeTime);
+			shoots++;
+			Debug.Log("Shoots: " + shoots + ", time now: " + wholeTime);
+		}
+	}
+
+	public void RegisterClick(){
+		if(isRegistering){
+			clicks++;
 		}
 	}
 
@@ -59,5 +68,4 @@ public class FlappyDataHandler : MonoBehaviour {
 	public void SetIsFailed(bool isFailed) {
 		this.hasFailed = isFailed;
 	}
-
 }
