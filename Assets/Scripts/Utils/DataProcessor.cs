@@ -1,8 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DataProcessor {
+
+	public static double CalculateChoicePercentage(List<int> choices, int choiceToCalculate)
+	{
+		int i = 0;
+		choices.ForEach(e =>{
+			if (e == choiceToCalculate)
+			{
+				i++;
+			}
+		});
+		
+		return Math.Round((double) 100 * i / choices.Count, 2);
+	}
    
 	public static int CalculateRatio(){
 		return 1;
