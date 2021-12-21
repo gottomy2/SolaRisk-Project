@@ -30,13 +30,22 @@ public class NameForm : MonoBehaviour
 
     public void Update()
     {
-        if(assistant1 == null && !global.dialoguePath["intro1"])
+        if(assistant1 == null && !global.getDialoguePath("intro1"))
         {
             form.SetActive(true);
         }
-        if(assistant2 != null && global.dialoguePath["intro1"])
+
+        if(assistant2 == null)
         {
-            assistant2.SetActive(true);
+            global.setDialoguePath("intro2", true);
+            sceneSwitch.NextScene();
+        }
+        else
+        {
+            if (global.getDialoguePath("intro1"))
+            {
+                assistant2.SetActive(true);
+            }
         }
     }
 
@@ -50,7 +59,7 @@ public class NameForm : MonoBehaviour
         {
             warningText.SetActive(false);
             global.PlayerName = input.text;
-            global.dialoguePath["intro1"] = true;
+            global.setDialoguePath("intro1", true);
 
             global.dictionary.Add(
                1, new string[] {
@@ -63,7 +72,6 @@ public class NameForm : MonoBehaviour
            );
 
             form.SetActive(false);
-            //sceneSwitch.NextScene();
         }
     }
 }

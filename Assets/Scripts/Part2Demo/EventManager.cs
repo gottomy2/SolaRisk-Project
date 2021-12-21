@@ -98,6 +98,7 @@ public class EventManager : MonoBehaviour
                 global.setDialoguePath("mapTutorialFinished", true);
                 flappyShip();
                 global.setDialoguePath("mapReset", true);
+                global.setDialoguePath("hubTutorial2", true);
             }
         }
         else

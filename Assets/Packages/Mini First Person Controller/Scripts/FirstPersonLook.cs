@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonLook : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class FirstPersonLook : MonoBehaviour
     public float sensitivity = 2;
     public float smoothing = 1.5f;
     public GlobalVars global;
+    private bool condition;
 
     Vector2 velocity;
     Vector2 frameVelocity;
@@ -20,21 +22,46 @@ public class FirstPersonLook : MonoBehaviour
 
     void Start()
     {
-        if (global.dialoguePath["hubTutorial1"])
+        condition = (SceneManager.GetActiveScene() == SceneManager.GetSceneByPath("Assets/Scenes/ShipInterior/InteriorScene.unity"));
+
+        if (condition)
         {
-            // Lock the mouse cursor to the game screen.
-            Cursor.lockState = CursorLockMode.Locked;
+            if (!global.getDialoguePath("hubTutorial1"))
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }            
         }
         else
         {
-            // Unlock the mouse cursor to the game screen.
-            Cursor.lockState = CursorLockMode.Confined;
+            // Lock the mouse cursor to the game screen.
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
     void Update()
     {
-        if (global.dialoguePath["hubTutorial1"])
+        if (condition)
+        {
+            if (global.getDialoguePath("hubTutorial1"))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                // Get smooth velocity.
+                Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+                Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
+                frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
+                velocity += frameVelocity;
+                velocity.y = Mathf.Clamp(velocity.y, -90, 90);
+
+                // Rotate camera up-down and controller left-right from velocity.
+                transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
+                character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            }
+        }
+        else
         {
             Cursor.lockState = CursorLockMode.Locked;
             // Get smooth velocity.

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonMovement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FirstPersonMovement : MonoBehaviour
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
     public GlobalVars global;
+    private bool condition;
 
     Rigidbody rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
@@ -22,6 +24,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
         // Get the rigidbody on this.
         rigidbody = GetComponent<Rigidbody>();
+        condition = SceneManager.GetActiveScene() != SceneManager.GetSceneByPath("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     void FixedUpdate()
@@ -36,7 +39,7 @@ public class FirstPersonMovement : MonoBehaviour
             targetMovingSpeed = speedOverrides[speedOverrides.Count - 1]();
         }
 
-        if (global.dialoguePath["hubTutorial1"])
+        if(condition)
         {
             // Get targetVelocity from input.
             Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
@@ -44,8 +47,13 @@ public class FirstPersonMovement : MonoBehaviour
             // Apply movement.
             rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
         }
-        else { 
-            
+        else if (global.getDialoguePath("hubTutorial1"))
+        {
+            // Get targetVelocity from input.
+            Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);
+
+            // Apply movement.
+            rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
         }
     }
 }
