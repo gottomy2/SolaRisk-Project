@@ -28,23 +28,31 @@ public class GlobalVars : ScriptableObject
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {
         {0, new string[] {
-                "Oho, a kogo to przywia³o?",
-                "Nie wydaje mi siê ¿ebyœmy widzieli siê kiedykolwiek wczeœniej...",
-                "Pewnie jesteœ tym rekrutem o którym tyle s³ysza³em!",
-                "Pozwól no ¿e Ci siê przedstawiê, nazywam siê Mao",
-                "A jak Ciebie zw¹?"
+                "Oho, a kogo to przywiaÂ³o?",
+                "Nie wydaje mi siÃª Â¿ebyÅ“my widzieli siÃª kiedykolwiek wczeÅ“niej...",
+                "Pewnie jesteÅ“ tym rekrutem o ktÃ³rym tyle sÂ³yszaÂ³em!",
+                "PozwÃ³l no Â¿e Ci siÃª przedstawiÃª, nazywam siÃª Mao",
+                "A jak Ciebie zwÂ¹?"
             }
         },
         {2, new string[]{
                 "Witaj na statku kapitanie!",
-                "Zanim zajmiemy przejdziemy do podró¿y pozwól ¿e Ciê oprowadzê!",
-                "Zacznijmy od g³ównego panelu!, to jest od mapy!"
+                "Zanim zajmiemy przejdziemy do podrÃ³Â¿y pozwÃ³l Â¿e CiÃª oprowadzÃª!",
+                "Zacznijmy od gÂ³Ã³wnego panelu!, to jest od mapy!"
             } 
         },
     };
 
     public bool inMap = false;
 
+    public List<int> difficultyChoicesList = new List<int>();
+
+    public void SaveDifficultyChoice(int choice)
+    {
+        difficultyChoicesList.Add(choice);
+        Debug.Log("Saved choice: " + choice);
+    }
+    
     public List<IData> dataList = new List<IData>();
 
     public void SaveData(IData data){
