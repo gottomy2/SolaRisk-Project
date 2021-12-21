@@ -50,4 +50,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FixLightsWireSwitches/FixTheLightsScene.unity
     guid: 0e8048d1e719ffe498cb4940c4ad5352
+  - enabled: 1
+    path: Assets/Scenes/SimonSays/SimonSays.unity
+    guid: 3f14f3d4926a2e54c83e1868b4cef95b
+  - enabled: 1
+    path: Assets/Scenes/PlanetaryView/SampleScene.unity
+    guid: d2d15e1ab9088fd4186b915a099b517c
   m_configObjects: {}

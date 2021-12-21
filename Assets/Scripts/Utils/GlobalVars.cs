@@ -24,7 +24,6 @@ public class GlobalVars : ScriptableObject
     [SerializeField]
     public variable[] dialoguePath;
     public variable[] hubStats;
-    public Vector3 playerPosition;
 
     public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
     {

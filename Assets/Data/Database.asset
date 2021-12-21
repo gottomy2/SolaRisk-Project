@@ -41,10 +41,11 @@ MonoBehaviour:
   - key: canLandOnPlanet
     value: 0
   - key: simonBroken
-    value: 0
+    value: 1
   - key: switchesFix
     value: 0
   - key: wiresFix
     value: 0
-  playerPosition: {x: 0, y: 0, z: 0}
+  - key: planetCanLand
+    value: 1
   inMap: 1

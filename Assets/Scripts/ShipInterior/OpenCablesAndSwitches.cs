@@ -49,10 +49,6 @@ public class OpenCablesAndSwitches : MonoBehaviour
             {
                 text.SetActive(true);
             }
-            if (text.activeSelf)
-            {
-                text.GetComponent<TextMesh>().text = "Click E\n to Repair";
-            }
         }
     }
 
