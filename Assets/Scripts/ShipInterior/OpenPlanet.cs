@@ -7,6 +7,8 @@ public class OpenPlanet : MonoBehaviour
     public GameObject text;
     public GlobalVars global;
     public float maxDistance = 4f;
+    public PlanetData planetData;
+    public MapData mapData;
 
     private SceneSwitch sceneSwitch;
     private bool inView = false;
@@ -14,6 +16,7 @@ public class OpenPlanet : MonoBehaviour
     private Vector3 playerPosition;
     private float distance;
     private bool condition;
+    private string currentPlanetName;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,17 @@ public class OpenPlanet : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
+                //setting the planet to the correct type:
+                currentPlanetName = mapData.path[mapData.path.Count-1];
+                for(int i = 0; i < mapData.planets.Count; i++)
+                {
+                    if(mapData.planets[i].name == currentPlanetName)
+                    {
+                        planetData.name = mapData.planets[i].planetName;
+                        planetData.type = mapData.planets[i].type;
+                        return;
+                    }
+                }
                 sceneSwitch.SceneByPath("Assets/Scenes/PlanetaryView/SampleScene.unity");
             }
             if (distance > maxDistance && text.activeSelf == true)

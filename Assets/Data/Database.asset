@@ -41,7 +41,7 @@ MonoBehaviour:
   - key: canLandOnPlanet
     value: 0
   - key: simonBroken
-    value: 1
+    value: 0
   - key: switchesFix
     value: 0
   - key: wiresFix
@@ -49,3 +49,4 @@ MonoBehaviour:
   - key: planetCanLand
     value: 1
   inMap: 1
+  difficultyChoicesList: 0200000003000000010000000300000003000000010000000300000001000000030000000200000001000000

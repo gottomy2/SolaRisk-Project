@@ -1500,6 +1500,8 @@ MonoBehaviour:
   text: {fileID: 1436617864}
   global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
   maxDistance: 4
+  planetData: {fileID: 11400000, guid: 8f43a163754fdff46a4017433cea6e37, type: 2}
+  mapData: {fileID: 11400000, guid: 23067f8b6741fe14185f83267a247176, type: 2}
 --- !u!1 &322635412 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5793838533049956662, guid: 03a9582d6d0f6294da3e157d8555b7d0, type: 3}
@@ -19855,7 +19857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489699126}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.0063, y: -0.018, z: 0.0024}
+  m_LocalPosition: {x: -0.0008, y: -0.0025, z: 0.0024}
   m_LocalScale: {x: 0.0030369512, y: 0.0030042073, z: 0.0010446007}
   m_Children: []
   m_Father: {fileID: 521953391}
