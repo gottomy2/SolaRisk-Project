@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EpilogueHandler : MonoBehaviour {
+public class EpilogueHandler : MonoBehaviour
+{
 
     private const string DEFAULT_DATA = "No Data Provided";
-    private const string EMPTY = "";
     private const string PERCENTAGE_CHAR = "%";
 
     private const int GREEN_CHOICE = 1;
@@ -81,7 +82,7 @@ public class EpilogueHandler : MonoBehaviour {
              minigameSuccessRatio.text = DataProcessor.GetSuccessTryRatio(data) + PERCENTAGE_CHAR;
         } else {
             minigameSuccess.text = DEFAULT_DATA;
-            minigameSuccessRatio.text = EMPTY;
+            minigameSuccessRatio.text = String.Empty;
         }
     }
 
@@ -89,9 +90,15 @@ public class EpilogueHandler : MonoBehaviour {
     {
         if (choices.Any())
         {
-            greenChoices.text = DataProcessor.CalculateChoicePercentage(choices, GREEN_CHOICE) + "%";
-            yellowChoices.text = DataProcessor.CalculateChoicePercentage(choices, YELLOW_CHOICE) + "%";
-            redChoices.text = DataProcessor.CalculateChoicePercentage(choices, RED_CHOICE) + "%";
+            greenChoices.text = DataProcessor.CalculateChoicePercentage(choices, GREEN_CHOICE) + PERCENTAGE_CHAR;
+            yellowChoices.text = DataProcessor.CalculateChoicePercentage(choices, YELLOW_CHOICE) + PERCENTAGE_CHAR;
+            redChoices.text = DataProcessor.CalculateChoicePercentage(choices, RED_CHOICE) + PERCENTAGE_CHAR;
+        }
+        else
+        {
+            greenChoices.text = String.Empty;
+            yellowChoices.text = DEFAULT_DATA;
+            redChoices.text = String.Empty;
         }
     }
 
@@ -101,6 +108,11 @@ public class EpilogueHandler : MonoBehaviour {
         {
             planetsVisited.text = DataProcessor.CalculatePlanetVisits(visits).ToString(); 
             allPlanets.text = " / " + visits.Count;
+        }
+        else
+        {
+            planetsVisited.text = String.Empty;
+            allPlanets.text = DEFAULT_DATA;
         }
     }
 
