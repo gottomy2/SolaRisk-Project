@@ -11,7 +11,8 @@ public class SceneShader : MonoBehaviour {
     private bool isShading;
     private bool isLighting;
 
-    private const float SHADE_SPEED = 1f;
+    private float shadeSpeed;
+    
     private const float FULL_OPAQUE = 0f;
     private const float FULL_SOLID = 255f;
 
@@ -26,12 +27,12 @@ public class SceneShader : MonoBehaviour {
     private void Awake(){
         instance = this;
         currentOpacity = FULL_SOLID;
-
+        shadeSpeed = 1f;
         if(blackCurtain.GetComponent<SpriteRenderer>() != null)
-        blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+            blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
 
         if(blackCurtain.GetComponent<Image>() != null)
-        blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+            blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
     }
 
     void Update(){
@@ -44,21 +45,25 @@ public class SceneShader : MonoBehaviour {
         }
 
         if(blackCurtain.GetComponent<SpriteRenderer>() != null)
-        blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+            blackCurtain.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, (byte) currentOpacity);
 
         
         if(blackCurtain.GetComponent<Image>() != null)
-        blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
+            blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
     }
 
     private void AddToSolid(){
-         if(currentOpacity < FULL_SOLID) currentOpacity += SHADE_SPEED;
+         if(currentOpacity < FULL_SOLID) currentOpacity += shadeSpeed;
          else isShading = false;
+         
+         if (currentOpacity > FULL_SOLID) currentOpacity = FULL_SOLID;
     }
 
     private void SubToOpaque(){
-         if(currentOpacity > FULL_OPAQUE) currentOpacity -= SHADE_SPEED;
+         if(currentOpacity > FULL_OPAQUE) currentOpacity -= shadeSpeed;
          else isLighting = false;
+         
+         if (currentOpacity < FULL_OPAQUE) currentOpacity = FULL_OPAQUE;
     }
 
     public float GetCurrentOpacity(){
@@ -85,4 +90,13 @@ public class SceneShader : MonoBehaviour {
         this.isLighting = value;
     }
 
+    public void SetShadeSpeed(float value)
+    {
+        this.shadeSpeed = value;
+    }
+
+    public float GetShadeSpeed()
+    {
+        return shadeSpeed;
+    }
 }

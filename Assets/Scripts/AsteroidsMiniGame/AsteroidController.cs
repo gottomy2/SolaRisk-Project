@@ -9,13 +9,14 @@ public class AsteroidController : MonoBehaviour
     public int waveNumber = 10;
     Transform shipTransform;
     GameObject ship;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
+        
         ship = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(AsteroidWave());
     }
+    
     private void SpawnAsteroid()
     {
         shipTransform = ship.transform;
@@ -35,10 +36,11 @@ public class AsteroidController : MonoBehaviour
     }
     IEnumerator AsteroidWave()
     {
-        while (true)
+        while (!ship.GetComponent<ShipController>().CanSeeEnd())
         {
             yield return new WaitForSeconds(respawnTime);
             SpawnAsteroid();
         }
     }
+
 }

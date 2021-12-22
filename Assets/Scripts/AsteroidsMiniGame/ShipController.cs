@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour
 {
@@ -10,15 +11,19 @@ public class ShipController : MonoBehaviour
     public AudioClip laserShoot;
     AudioSource audioSource;
 
+    private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
+
+    private Text timerText;
+
     public float speed = 3.0f;
     public int maxHealth = 5;
     public float bulletSpeed = 1500;
     public int maxAmmo = 5;
     public int ammoReload = 2;
-    
+
     float horizontal;
     float vertical;
-    
+
     bool isDead;
     bool canShoot;
 
@@ -28,48 +33,47 @@ public class ShipController : MonoBehaviour
     int health;
     float ammo;
     float ammoTimer = 0;
-
-    // Start is called before the first frame update
+    
+    private float gameTimer;
+    private bool canSeeEnd;
+    private bool hasFinished;
+    
     void Start()
     {
+        timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
-
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         isDead = false;
+        canSeeEnd = false;
+        hasFinished = false;
         canShoot = true;
         health = maxHealth;
         ammo = maxAmmo;
         Debug.Log("Health: " + health + "/" + maxHealth);
         StartCounting();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal")*-1;
+        horizontal = Input.GetAxis("Horizontal") * -1;
         vertical = Input.GetAxis("Vertical");
 
+        if (!isDead)
+        {
+            UpdateTimer();
+            CheckTimer();
+        }
+        
+        //DEBUG_OPTIONS();
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
             AsteroidDataHandler.GetInstance().RegisterClick();
             Launch();
         }
-
-        /** 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Application.LoadLevel(Application.loadedLevel);
-        }
-        */
 
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
@@ -78,22 +82,24 @@ public class ShipController : MonoBehaviour
         {
             ammoTimer += Time.deltaTime;
             ammo += Time.deltaTime;
-            UIAmmoBar.Instance.SetValue(ammo / (float)maxAmmo);
+            UIAmmoBar.Instance.SetValue(ammo / (float) maxAmmo);
             if (ammoTimer >= ammoReload)
             {
                 ammoTimer = 0;
             }
         }
     }
+
     void FixedUpdate()
     {
         Vector3 position = rigidBody.position;
-        position.x = position.x + speed/2 * horizontal * Time.deltaTime;
-        position.y = position.y + speed/2 * vertical * Time.deltaTime;
-        position.z = position.z + speed * (-1) * Time.deltaTime;
+        position.x += speed / 2 * horizontal * Time.deltaTime;
+        position.y += speed / 2 * vertical * Time.deltaTime;
+        position.z += speed * (-1) * Time.deltaTime;
 
         rigidBody.MovePosition(position);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 7)
@@ -107,14 +113,15 @@ public class ShipController : MonoBehaviour
             asteroid.FractureObject();
             health--;
 
-            UIHealthBar.Instance.SetValue(health / (float)maxHealth);
+            UIHealthBar.Instance.SetValue(health / (float) maxHealth);
             CheckHealth();
             Destroy(e, 2);
         }
     }
+
     private void CheckHealth()
     {
-        if(health <= 0 && !isDead)
+        if (health <= 0 && !isDead)
         {
             TriggerDeath();
         }
@@ -126,29 +133,89 @@ public class ShipController : MonoBehaviour
         canShoot = false;
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
+        SceneShader.GetInstance().SetShadeSpeed(2f);
+        SceneShader.GetInstance().SetIsShading(true);
+        StartCoroutine(TriggerSceneChange());
+    }
+
+    private void TriggerFinish()
+    {
+        canShoot = false;
+        hasFinished = true;
+        AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
+        SceneShader.GetInstance().SetShadeSpeed(2f);
+        SceneShader.GetInstance().SetIsShading(true);
+        StartCoroutine(TriggerSceneChange());
     }
 
     void Launch()
     {
         if (ammo >= 1)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab, rigidBody.position + new Vector3(0, 0, -7), Quaternion.identity);
+            GameObject projectileObject = Instantiate(projectilePrefab, rigidBody.position + new Vector3(0, 0, -7),
+                Quaternion.identity);
             projectileObject.transform.Rotate(new Vector3(90, 0, 0));
 
             Projectile projectile = projectileObject.GetComponent<Projectile>();
             projectile.Launch(new Vector3(0, 0, -1), bulletSpeed);
             audioSource.PlayOneShot(laserShoot);
             ammo--;
-            UIAmmoBar.Instance.SetValue(ammo / (float)maxAmmo);
+            UIAmmoBar.Instance.SetValue(ammo / (float) maxAmmo);
 
             AsteroidDataHandler.GetInstance().RegisterShoot();
         }
-        
+
     }
 
     private void StartCounting()
     {
         AsteroidDataHandler.GetInstance().RegisterMeasureStart();
+        gameTimer = 0f;
+    }
+
+    private void UpdateTimer()
+    {
+        gameTimer += Time.deltaTime;
+
+        timerText.text = 60 - gameTimer < 0f ? "0" : (60 - gameTimer).ToString();
+        Debug.Log("Timer: " + gameTimer);
+    }
+
+    private void CheckTimer()
+    {
+        if (gameTimer >= 53 && !canSeeEnd)
+        {
+            canSeeEnd = true;
+        }
+        
+        if (!isDead && gameTimer >= 60)
+        {
+            TriggerFinish();
+        }
+    }
+
+    private IEnumerator TriggerSceneChange()
+    {
+        yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
+        //change scene here
+    }
+
+    public bool CanSeeEnd()
+    {
+        return canSeeEnd;
+    }
+
+    private void DEBUG_OPTIONS()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
 
 }
