@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class DataProcessor {
 
+	public static int CalculatePlanetVisits(List<bool> visits)
+	{
+		int i = 0;
+		visits.ForEach(e =>
+		{
+			if (e)
+			{
+				i++;
+			}
+		});
+		return i;
+	}
+	
 	public static double CalculateChoicePercentage(List<int> choices, int choiceToCalculate)
 	{
 		int i = 0;

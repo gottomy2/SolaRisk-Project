@@ -112,6 +112,12 @@ public class Planet : MonoBehaviour
     {
         visited = x;
     }
+
+    public bool isVisited()
+    {
+        return visited;
+    }
+    
     public int getDifficulty()
     {
         return difficulty;

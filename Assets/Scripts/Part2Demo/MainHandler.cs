@@ -75,10 +75,16 @@ public class MainHandler : MonoBehaviour
 
         mapData.path.Add(name);
         SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
+        SaveVisitChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().isVisited());
     }
 
     private void SaveDifficultyChoiceToProcess(int choice)
     {
         globalVars.SaveDifficultyChoice(choice);
+    }
+
+    private void SaveVisitChoiceToProcess(bool isVisited)
+    {
+        globalVars.SaveVisitChoice(isVisited);
     }
 }

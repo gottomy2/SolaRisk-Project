@@ -46,11 +46,18 @@ public class GlobalVars : ScriptableObject
     public bool inMap = false;
 
     public List<int> difficultyChoicesList = new List<int>();
+    public List<bool> visitedChoicesList = new List<bool>();
 
     public void SaveDifficultyChoice(int choice)
     {
         difficultyChoicesList.Add(choice);
         Debug.Log("Saved choice: " + choice);
+    }
+
+    public void SaveVisitChoice(bool isVisited)
+    {
+        visitedChoicesList.Add(isVisited);
+        Debug.Log("Saved planet visit" + isVisited);
     }
     
     public List<IData> dataList = new List<IData>();

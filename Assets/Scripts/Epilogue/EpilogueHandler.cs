@@ -19,6 +19,7 @@ public class EpilogueHandler : MonoBehaviour {
 
     private List<IData> data;
     private List<int> choices;
+    private List<bool> visits;
 
     private Text minigameSuccess;
     private Text minigameSuccessRatio;
@@ -26,10 +27,14 @@ public class EpilogueHandler : MonoBehaviour {
     private Text greenChoices;
     private Text yellowChoices;
     private Text redChoices;
+
+    private Text planetsVisited;
+    private Text allPlanets;
     
     private void Awake(){
        data = globalVars.dataList;
        choices = globalVars.difficultyChoicesList;
+       visits = globalVars.visitedChoicesList;
 
        // choices.Add(1);
        // choices.Add(2);
@@ -38,6 +43,11 @@ public class EpilogueHandler : MonoBehaviour {
        // choices.Add(1);
        // choices.Add(1);
       // data.Add(new FlappyData(10, 10, true));
+      
+       //visits.Add(true);
+       //visits.Add(false);
+       //visits.Add(false);
+       //visits.Add(true);
 
        minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
        minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
@@ -45,6 +55,9 @@ public class EpilogueHandler : MonoBehaviour {
        greenChoices = GameObject.Find("GreenPaths").GetComponent<Text>();
        yellowChoices = GameObject.Find("YellowPaths").GetComponent<Text>();
        redChoices = GameObject.Find("RedPaths").GetComponent<Text>();
+
+       planetsVisited = GameObject.Find("PlanetsVisited").GetComponent<Text>();
+       allPlanets = GameObject.Find("AllPlanets").GetComponent<Text>();
     }
 
     private void InitLighting(){
@@ -53,6 +66,8 @@ public class EpilogueHandler : MonoBehaviour {
 
     void Start(){
         SetSuccessFields();
+        SetRiskFields();
+        SetPlanetVisitFields();
         InitLighting();
     }
 
@@ -68,12 +83,24 @@ public class EpilogueHandler : MonoBehaviour {
             minigameSuccess.text = DEFAULT_DATA;
             minigameSuccessRatio.text = EMPTY;
         }
+    }
 
+    private void SetRiskFields()
+    {
         if (choices.Any())
         {
             greenChoices.text = DataProcessor.CalculateChoicePercentage(choices, GREEN_CHOICE) + "%";
             yellowChoices.text = DataProcessor.CalculateChoicePercentage(choices, YELLOW_CHOICE) + "%";
             redChoices.text = DataProcessor.CalculateChoicePercentage(choices, RED_CHOICE) + "%";
+        }
+    }
+
+    private void SetPlanetVisitFields()
+    {
+        if (visits.Any())
+        {
+            planetsVisited.text = DataProcessor.CalculatePlanetVisits(visits).ToString(); 
+            allPlanets.text = " / " + visits.Count;
         }
     }
 
