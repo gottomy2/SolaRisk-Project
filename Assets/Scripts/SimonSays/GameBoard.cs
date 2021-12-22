@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameBoard : MonoBehaviour {
 
@@ -98,7 +100,13 @@ public class GameBoard : MonoBehaviour {
         }
     }
 
-    public void StartGame(){
+    private void Start()
+    {
+        SceneShader.GetInstance().SetIsLighting(true);
+    }
+
+    public void StartGame()
+    {
         playerHandler.SetCanClick(true);
         playerHandler.SetCanType(false);
         //GameOverWindow.GetInstance().Hide();
@@ -147,6 +155,8 @@ public class GameBoard : MonoBehaviour {
 
     private IEnumerator StartSceneChangeRoutine(){
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
+        SceneShader.GetInstance().SetIsShading(true);
+        yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
         //UnityEngine.SceneManagement.SceneManager.LoadScene(SCENE_NAME); //set NEXT_SCENE const to be next scene
     }
 
@@ -168,6 +178,11 @@ public class GameBoard : MonoBehaviour {
             BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
+
+            if (gameMode == GameMode.InGame)
+            {
+                Proceed();
+            }
 
             if(gameMode == GameMode.Arcade) {
                 //GameOverWindow.GetInstance().Show();
@@ -223,7 +238,7 @@ public class GameBoard : MonoBehaviour {
             case GameMode.InGame:{
                 Debug.Log("Should go forward");
                 StopAllCoroutines();
-                StartSceneChangeRoutine();
+                StartCoroutine(StartSceneChangeRoutine());
                 break;
             }
         }
