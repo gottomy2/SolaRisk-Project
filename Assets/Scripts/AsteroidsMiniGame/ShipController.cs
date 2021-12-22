@@ -12,6 +12,7 @@ public class ShipController : MonoBehaviour
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
+    private const float GAME_LENGTH = 60f;
 
     private Text timerText;
 
@@ -177,18 +178,18 @@ public class ShipController : MonoBehaviour
     {
         gameTimer += Time.deltaTime;
 
-        timerText.text = 60 - gameTimer < 0f ? "0" : (60 - gameTimer).ToString();
+        timerText.text = GAME_LENGTH - gameTimer < 0f ? "0" : (GAME_LENGTH - gameTimer).ToString();
         Debug.Log("Timer: " + gameTimer);
     }
 
     private void CheckTimer()
     {
-        if (gameTimer >= 53 && !canSeeEnd)
+        if (gameTimer >= (GAME_LENGTH - 7) && !canSeeEnd)
         {
             canSeeEnd = true;
         }
         
-        if (!isDead && gameTimer >= 60)
+        if (!isDead && gameTimer >= GAME_LENGTH)
         {
             TriggerFinish();
         }
