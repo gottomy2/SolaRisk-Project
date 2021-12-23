@@ -23,6 +23,8 @@ public class GameBoard : MonoBehaviour {
     private int playerClicks;
     private int nextIndexToCheck;
 
+    private GameObject startText;
+
     [SerializeField]
     private GameButton[] buttons;
 
@@ -62,6 +64,9 @@ public class GameBoard : MonoBehaviour {
         difficulty = Difficulty.Medium; // let the player decide
         gameMode = GameMode.InGame;
 
+        startText = GameObject.Find("StartText");
+        startText.SetActive(false);
+        
         CheckDifficulty();
         playerHandler = GetComponent<PlayerHandler>();
 
@@ -115,6 +120,18 @@ public class GameBoard : MonoBehaviour {
         currentSequenceLength = startSequenceLength;
         DeactivateLights();
         StartCoroutine(SequenceRoutine());
+    }
+
+    private void Update()
+    {
+        if (state == State.Waiting)
+        {
+            startText.SetActive(true);
+        }
+        else
+        {
+            startText.SetActive(false);
+        }
     }
 
     private IEnumerator SequenceRoutine(){
