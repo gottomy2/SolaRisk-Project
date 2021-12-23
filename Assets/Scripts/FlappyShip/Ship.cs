@@ -100,6 +100,8 @@ public class Ship : MonoBehaviour {
          yield return new WaitForSeconds(1f); 
          TakeOff();
          SceneShader.GetInstance().SetIsShading(true);
+         yield return new WaitForSeconds(1f);
+         //change scene here
     }
 
     private void Jump() {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Level : MonoBehaviour
     private GameMode gameMode;
     private Difficulty inGameDifficulty;
 
+    private GameObject startText;
+    
     public enum Difficulty {
         Easy,
         Medium,
@@ -67,6 +70,8 @@ public class Level : MonoBehaviour
         inGameDifficulty = Difficulty.Easy;
         SetDifficulty(inGameDifficulty); //pass this value through the player's choice
         SetMoveTrigger(false);
+        startText = GameObject.Find("StartText");
+        startText.SetActive(false);
         state = State.WaitingToStart;
         pipesPassedCount = 0;
         pipeCounter = 0;
@@ -105,6 +110,12 @@ public class Level : MonoBehaviour
     }
 
     private void Update() {
+        if (state == State.WaitingToStart) {
+            startText.SetActive(true);
+        } else {
+            startText.SetActive(false);
+        }
+        
         if (state == State.Playing) {
             HandlePipeMovement();
             HandlePipeSpawning();
