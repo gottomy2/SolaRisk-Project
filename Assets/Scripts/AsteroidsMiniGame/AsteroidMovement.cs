@@ -16,10 +16,10 @@ public class AsteroidMovement : MonoBehaviour
     {
         ship = GameObject.FindGameObjectWithTag("Player");
 
-        scaleChange = new Vector3(Random.Range(2f,4f), Random.Range(2f, 4f), Random.Range(2f,4f));
+        scaleChange = new Vector3(Random.Range(2f, 4f), Random.Range(2f, 4f), Random.Range(2f, 4f));
         gameObject.transform.localScale += scaleChange;
 
-        randomRotation.x = Random.Range(-rotationOffset,rotationOffset);
+        randomRotation.x = Random.Range(-rotationOffset, rotationOffset);
         randomRotation.y = Random.Range(-rotationOffset, rotationOffset);
         randomRotation.z = Random.Range(-rotationOffset, rotationOffset);
     }
@@ -27,9 +27,9 @@ public class AsteroidMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(randomRotation*Time.deltaTime);
+        gameObject.transform.Rotate(randomRotation * Time.deltaTime);
 
-        if (gameObject.transform.position.z > ship.transform.position.z+20)
+        if (gameObject.transform.position.z > ship.transform.position.z + 10 || !GetComponent<Renderer>().isVisible)
         {
             Destroy(gameObject);
         }

@@ -12,7 +12,7 @@ public class ShipController : MonoBehaviour
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
-    private const float GAME_LENGTH = 60f;
+    private const float GAME_LENGTH = 30f;
 
     private Text timerText;
 
@@ -134,8 +134,6 @@ public class ShipController : MonoBehaviour
         canShoot = false;
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
-        SceneShader.GetInstance().SetShadeSpeed(2f);
-        SceneShader.GetInstance().SetIsShading(true);
         StartCoroutine(TriggerSceneChange());
     }
 
@@ -144,8 +142,6 @@ public class ShipController : MonoBehaviour
         canShoot = false;
         hasFinished = true;
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
-        SceneShader.GetInstance().SetShadeSpeed(2f);
-        SceneShader.GetInstance().SetIsShading(true);
         StartCoroutine(TriggerSceneChange());
     }
 
@@ -197,6 +193,9 @@ public class ShipController : MonoBehaviour
 
     private IEnumerator TriggerSceneChange()
     {
+        yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
+        SceneShader.GetInstance().SetShadeSpeed(2f);
+        SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
         //change scene here
     }
