@@ -15,5 +15,10 @@ public class SceneDifficultyHandler
         SceneManager.LoadScene("GameScene");
         FlappyLevel.SetDifficulty(d);
     }
-    
+
+    public static void OpenAsteroids(Difficulty d)
+    {
+        SceneManager.LoadScene("Scenes/AsteroidsMiniGame/SampleScene");
+        ShipController.SetDifficulty(d);
+    }
 }

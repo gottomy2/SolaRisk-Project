@@ -22,6 +22,8 @@ public class ShipController : MonoBehaviour
     public int maxAmmo = 5;
     public int ammoReload = 2;
 
+    private static Difficulty difficulty;
+
     float horizontal;
     float vertical;
 
@@ -34,13 +36,14 @@ public class ShipController : MonoBehaviour
     int health;
     float ammo;
     float ammoTimer = 0;
-    
+
     private float gameTimer;
     private bool canSeeEnd;
     private bool hasFinished;
-    
+
     void Start()
     {
+
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
         rigidBody = GetComponent<Rigidbody>();
@@ -56,7 +59,7 @@ public class ShipController : MonoBehaviour
         Debug.Log("Health: " + health + "/" + maxHealth);
         StartCounting();
     }
-    
+
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal") * -1;
@@ -67,7 +70,7 @@ public class ShipController : MonoBehaviour
             UpdateTimer();
             CheckTimer();
         }
-        
+
         //DEBUG_OPTIONS();
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
@@ -184,7 +187,7 @@ public class ShipController : MonoBehaviour
         {
             canSeeEnd = true;
         }
-        
+
         if (!isDead && gameTimer >= GAME_LENGTH)
         {
             TriggerFinish();
@@ -203,6 +206,16 @@ public class ShipController : MonoBehaviour
     public bool CanSeeEnd()
     {
         return canSeeEnd;
+    }
+
+    public static Difficulty GetDifficulty()
+    {
+        return difficulty;
+    }
+
+    public static void SetDifficulty(Difficulty d)
+    {
+        difficulty = d;
     }
 
     private void DEBUG_OPTIONS()

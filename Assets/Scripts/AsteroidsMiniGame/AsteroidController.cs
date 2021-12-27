@@ -6,13 +6,12 @@ public class AsteroidController : MonoBehaviour
 {
     public GameObject asteroid;
     public float respawnTime = 2.0f;
-    public int waveNumber = 10;
+    public int waveNumber;
     Transform shipTransform;
     GameObject ship;
     
     void Start()
     {
-        
         ship = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(AsteroidWave());
     }
@@ -20,8 +19,9 @@ public class AsteroidController : MonoBehaviour
     private void SpawnAsteroid()
     {
         shipTransform = ship.transform;
-        for (int i = 0; i < waveNumber; i++)
+        for (int i = 0; i < GetWaveNumberFromDifficulty(); i++)
         {
+            Debug.Log("Get num from dif: " + GetWaveNumberFromDifficulty() +", Diff: " + ShipController.GetDifficulty());
             float x = ship.transform.position.x + Random.Range(-150.0f, 150.0f);
             float y = ship.transform.position.y + Random.Range(-150.0f, 150.0f);
             float z = ship.transform.position.z + Random.Range(-300.0f, -250.0f);
@@ -31,7 +31,7 @@ public class AsteroidController : MonoBehaviour
             rigidBody.isKinematic = false;
             rigidBody.useGravity = false;
             Vector3 direction = new Vector3(Random.Range(-0.1f,0.1f), Random.Range(-0.1f, 0.1f), 1);
-            rigidBody.AddForce(direction * Random.Range(1000,2000));
+            rigidBody.AddForce(direction * Random.Range(1000 * GetNumberFromDifficulty(),2000 * GetNumberFromDifficulty()));
         }
     }
     IEnumerator AsteroidWave()
@@ -40,6 +40,29 @@ public class AsteroidController : MonoBehaviour
         {
             yield return new WaitForSeconds(respawnTime);
             SpawnAsteroid();
+        }
+    }
+
+    private float GetNumberFromDifficulty()
+    {
+        switch (ShipController.GetDifficulty())
+        {
+            case Difficulty.Easy:
+            default: return 1;
+            case Difficulty.Medium: return 1.5f;
+            case Difficulty.Hard: return 2f;
+            
+        }
+    }
+
+    private int GetWaveNumberFromDifficulty()
+    {
+        switch (ShipController.GetDifficulty())
+        {
+            case Difficulty.Easy:
+            default: return 10;
+            case Difficulty.Medium: return 15;
+            case Difficulty.Hard: return 20;
         }
     }
 
