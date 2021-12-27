@@ -1,13 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GameBoard : MonoBehaviour {
-
-    [SerializeField]
-    public AudioClip errorSound;
+public class GameBoard : MonoBehaviour
+{
+    [SerializeField] public AudioClip errorSound;
 
     private const string GRID_NAME = "ButtonGrid";
     private const int GRID_SIZE = 9;
@@ -25,17 +22,16 @@ public class GameBoard : MonoBehaviour {
 
     private GameObject startText;
 
-    [SerializeField]
-    private GameButton[] buttons;
+    [SerializeField] private GameButton[] buttons;
 
-    [SerializeField]
-    private GameLight[] lights;
-  
-    [SerializeField]
-    private GameLight indicator;
+    [SerializeField] private GameLight[] lights;
+
+    [SerializeField] private GameLight indicator;
 
     private int lightsOn;
     private int score;
+
+    private bool isCoroutinesStopping;
 
     private GameButton nextButton;
 
@@ -46,27 +42,31 @@ public class GameBoard : MonoBehaviour {
 
     private static GameBoard instance;
 
-    public static GameBoard GetInstance(){
+    public static GameBoard GetInstance()
+    {
         return instance;
     }
 
-    public enum State{
+    public enum State
+    {
         Waiting,
-        Playing,
-        GameOver
+        Playing
     }
 
     private State state;
 
-    void Awake(){
+    void Awake()
+    {
         instance = this;
         state = State.Waiting;
         difficulty = Difficulty.Medium; // let the player decide
         gameMode = GameMode.InGame;
 
+        isCoroutinesStopping = false;
+
         startText = GameObject.Find("StartText");
         startText.SetActive(false);
-        
+
         CheckDifficulty();
         playerHandler = GetComponent<PlayerHandler>();
 
@@ -78,19 +78,24 @@ public class GameBoard : MonoBehaviour {
         indicator.SetInactive();
     }
 
-    private void CheckDifficulty(){
-        switch(difficulty){
-            case Difficulty.Easy:{
+    private void CheckDifficulty()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+            {
                 buttonSequenceActiveDuration = 0.4f;
                 buttonSequenceCooldownDuration = 0.2f;
                 break;
             }
-            case Difficulty.Medium:{
+            case Difficulty.Medium:
+            {
                 buttonSequenceActiveDuration = 0.3f;
                 buttonSequenceCooldownDuration = 0.1f;
                 break;
             }
-            case Difficulty.Hard:{
+            case Difficulty.Hard:
+            {
                 buttonSequenceActiveDuration = 0.2f;
                 buttonSequenceCooldownDuration = 0.05f;
                 break;
@@ -98,10 +103,12 @@ public class GameBoard : MonoBehaviour {
         }
     }
 
-    private void GenerateSequence(){
+    private void GenerateSequence()
+    {
         currentSequence = new int[currentSequenceLength];
-        for (int i = 0; i < currentSequenceLength; i++){
-           currentSequence[i] = Random.Range(0, buttons.Length);
+        for (int i = 0; i < currentSequenceLength; i++)
+        {
+            currentSequence[i] = Random.Range(0, buttons.Length);
         }
     }
 
@@ -114,7 +121,6 @@ public class GameBoard : MonoBehaviour {
     {
         playerHandler.SetCanClick(true);
         playerHandler.SetCanType(false);
-        //GameOverWindow.GetInstance().Hide();
         state = State.Playing;
         score = 0;
         currentSequenceLength = startSequenceLength;
@@ -124,41 +130,44 @@ public class GameBoard : MonoBehaviour {
 
     private void Update()
     {
-        if (state == State.Waiting)
-        {
-            startText.SetActive(true);
-        }
-        else
-        {
-            startText.SetActive(false);
-        }
+        startText.SetActive(state == State.Waiting);
     }
 
-    private IEnumerator SequenceRoutine(){
-        indicator.SetWronglyActive();    
+    private IEnumerator SequenceRoutine()
+    {
+        indicator.SetWronglyActive();
         yield return new WaitForSeconds(SEQUENCE_DELAY);
         playerHandler.SetCanClick(false);
         GenerateSequence();
 
-        for (int i = 0; i < currentSequenceLength; i++){
+        for (int i = 0; i < currentSequenceLength; i++)
+        {
+            if (isCoroutinesStopping) yield break;
+
             nextButton = buttons[currentSequence[i]];
-            yield return StartCoroutine(nextButton.PlayBlinkRoutine(buttonSequenceActiveDuration, buttonSequenceCooldownDuration));
+            yield return StartCoroutine(nextButton.PlayBlinkRoutine(buttonSequenceActiveDuration,
+                buttonSequenceCooldownDuration));
         }
 
         StartCoroutine(PlayerResponseRoutine());
     }
 
-    private IEnumerator PlayerResponseRoutine(){
+    private IEnumerator PlayerResponseRoutine()
+    {
         nextIndexToCheck = 0;
         playerClicks = 0;
         playerHandler.SetCanClick(true);
         indicator.SetActive();
 
-        if(gameMode == GameMode.InGame){
+        if (gameMode == GameMode.InGame)
+        {
             SimonDataHandler.GetInstance().RegisterMeasureStart();
         }
-        
-        while (playerClicks < currentSequenceLength){  yield return null; }
+
+        while (playerClicks < currentSequenceLength)
+        {
+            yield return null;
+        }
 
         ActivateNextLight();
         CheckLigtsInGame();
@@ -168,25 +177,29 @@ public class GameBoard : MonoBehaviour {
         StartCoroutine(SequenceRoutine());
     }
 
-    //private const string SCENE_NAME;
-
-    private IEnumerator StartSceneChangeRoutine(){
+    private IEnumerator StartSceneChangeRoutine()
+    {
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
-        //UnityEngine.SceneManagement.SceneManager.LoadScene(SCENE_NAME); //set NEXT_SCENE const to be next scene
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(SCENE_NAME); 
     }
 
-    public void HandleClick(int buttonIndex){
-        if(gameMode == GameMode.InGame && SimonDataHandler.GetInstance().IsRegistering()) {
+    public void HandleClick(int buttonIndex)
+    {
+        if (gameMode == GameMode.InGame && SimonDataHandler.GetInstance().IsRegistering())
+        {
             SimonDataHandler.GetInstance().RegisterClick();
         }
 
         IncrementPlayerClicks();
 
-        if (currentSequence[nextIndexToCheck] == buttonIndex){
+        if (currentSequence[nextIndexToCheck] == buttonIndex)
+        {
             nextIndexToCheck++;
-        } else {
+        }
+        else
+        {
             SimonDataHandler.GetInstance().SetIsFailed(true);
             SimonDataHandler.GetInstance().Finish();
             SoundManager.PlaySound(errorSound);
@@ -195,65 +208,75 @@ public class GameBoard : MonoBehaviour {
             BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
-
-            if (gameMode == GameMode.InGame)
-            {
-                Proceed();
-            }
-
-            if(gameMode == GameMode.Arcade) {
-                //GameOverWindow.GetInstance().Show();
-            }
+            Proceed();
         }
     }
 
-    private void BlinkButtonsRed(){
-        foreach(GameButton gb in buttons){
+    private void BlinkButtonsRed()
+    {
+        foreach (GameButton gb in buttons)
+        {
             StartCoroutine(gb.PlayErrorRoutine());
         }
     }
 
-    private void ActivateNextLight(){
-        if(lightsOn < 5){
+    private void ActivateNextLight()
+    {
+        if (lightsOn < 5)
+        {
             lights[lightsOn].SetActive();
         }
+
         lightsOn++;
     }
 
-    private void DeactivateLights(){
-        foreach(GameLight g in lights){
+    private void DeactivateLights()
+    {
+        foreach (GameLight g in lights)
+        {
             g.SetInactive();
         }
+
         lightsOn = 0;
     }
 
-    private void SetAllLightsRed(){
-        foreach(GameLight g in lights){
+    private void SetAllLightsRed()
+    {
+        foreach (GameLight g in lights)
+        {
             g.SetWronglyActive();
         }
+
         lightsOn = 0;
     }
 
-    private void IncrementScore(){
+    private void IncrementScore()
+    {
         score++;
     }
 
-    private void IncrementSequenceLength(){
+    private void IncrementSequenceLength()
+    {
         currentSequenceLength++;
     }
 
-    private void IncrementPlayerClicks(){
+    private void IncrementPlayerClicks()
+    {
         playerClicks++;
     }
 
-    private void Proceed(){
-        switch(gameMode){
-            case GameMode.Arcade:{
+    private void Proceed()
+    {
+        switch (gameMode)
+        {
+            case GameMode.Arcade:
+            {
                 //retry or exit
                 break;
             }
-            case GameMode.InGame:{
-                Debug.Log("Should go forward");
+            case GameMode.InGame:
+            {
+                isCoroutinesStopping = true;
                 StopAllCoroutines();
                 StartCoroutine(StartSceneChangeRoutine());
                 break;
@@ -261,23 +284,27 @@ public class GameBoard : MonoBehaviour {
         }
     }
 
-    private void CheckLigtsInGame(){
-        if(gameMode == GameMode.InGame && lightsOn == 5){
+    private void CheckLigtsInGame()
+    {
+        if (gameMode == GameMode.InGame && lightsOn == 5)
+        {
             SimonDataHandler.GetInstance().Finish();
             Proceed();
         }
     }
 
-    public State GetState(){
+    public State GetState()
+    {
         return state;
     }
 
-    public GameMode GetGameMode(){
+    public GameMode GetGameMode()
+    {
         return gameMode;
     }
 
-    public int GetScore(){
+    public int GetScore()
+    {
         return score;
     }
-
 }
