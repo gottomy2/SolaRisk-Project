@@ -40,7 +40,7 @@ public class FlappyDataHandler : MonoBehaviour {
 	}
 
 	public void Update(){
-		if(Level.GetInstance().GetGameMode() == Level.GameMode.InGame && isRegistering) {
+		if(FlappyLevel.GetInstance().GetGameMode() == FlappyLevel.GameMode.InGame && isRegistering) {
 			wholeTime += Time.deltaTime;
 		}
 	}

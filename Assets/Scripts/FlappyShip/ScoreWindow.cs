@@ -16,18 +16,19 @@ public class ScoreWindow : MonoBehaviour {
 		highScoreText.gameObject.SetActive(false);
 	}
 
-	private void Start() {
-		highScoreText.text = HIGH_SCORE_PREFIX + Score.GetHighscore().ToString();
+	private void Start()
+	{
+		highScoreText.text = HIGH_SCORE_PREFIX + Score.GetHighscore();
 	}
 
 	private void Update() {
-		if(Level.GetInstance().GetState() == Level.State.Playing 
-			&& Level.GetInstance().GetGameMode() != Level.GameMode.InGame){
+		if(FlappyLevel.GetInstance().GetState() == FlappyLevel.State.Playing 
+			&& FlappyLevel.GetInstance().GetGameMode() != FlappyLevel.GameMode.InGame){
 			scoreText.gameObject.SetActive(true);
 			highScoreText.gameObject.SetActive(true);
 		}
 
-		int currScore = Level.GetInstance().GetPipesPassedCount();
+		int currScore = FlappyLevel.GetInstance().GetPipesPassedCount();
 
 		scoreText.text = currScore.ToString();
 		

@@ -40,7 +40,7 @@ public class SimonDataHandler : MonoBehaviour {
 	}
 
 	public void Update(){
-		if(GameBoard.GetInstance().GetGameMode() == GameMode.InGame && isRegistering) {
+		if(SimonGameBoard.GetInstance().GetGameMode() == GameMode.InGame && isRegistering) {
 			measureResponseTime += Time.deltaTime;
 		}
 	}

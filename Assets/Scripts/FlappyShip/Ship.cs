@@ -54,11 +54,11 @@ public class Ship : MonoBehaviour {
                 }
                 break;
             case State.Flying:
-                if (Level.GetInstance().IsMoveTriggered() && shipRigidbody2D.transform.position.y != 0f){
+                if (FlappyLevel.GetInstance().IsMoveTriggered() && shipRigidbody2D.transform.position.y != 0f){
                     MoveToCenter();
                 }
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                    if(!isDead || Level.GetInstance().CanType()){
+                    if(!isDead || FlappyLevel.GetInstance().CanType()){
                         Jump();
                     }
                 }
@@ -101,7 +101,7 @@ public class Ship : MonoBehaviour {
          TakeOff();
          SceneShader.GetInstance().SetIsShading(true);
          yield return new WaitForSeconds(1f);
-         //change scene here
+         //Scene change here
     }
 
     private void Jump() {

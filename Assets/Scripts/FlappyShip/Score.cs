@@ -13,7 +13,7 @@ public static class Score {
 	}
 
 	private static void Ship_OnDeath(object sender, System.EventArgs e) {
-		TrySetNewHighscore(Level.GetInstance().GetPipesPassedCount());
+		TrySetNewHighscore(FlappyLevel.GetInstance().GetPipesPassedCount());
 	}
 
 	public static bool TrySetNewHighscore(int score) {

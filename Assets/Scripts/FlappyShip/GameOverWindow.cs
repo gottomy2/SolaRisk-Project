@@ -26,8 +26,8 @@ public class GameOverWindow : MonoBehaviour {
 	}
 
 	private void Ship_OnDeath(object sender, System.EventArgs e) {
-		if(Level.GetInstance().GetGameMode() == Level.GameMode.Arcade){
-			scoreText.text = Level.GetInstance().GetPipesPassedCount().ToString();
+		if(FlappyLevel.GetInstance().GetGameMode() == FlappyLevel.GameMode.Arcade){
+			scoreText.text = FlappyLevel.GetInstance().GetPipesPassedCount().ToString();
 			Show();
 		}
 	}

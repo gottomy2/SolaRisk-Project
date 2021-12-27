@@ -25,7 +25,7 @@ public class PlayerHandler : MonoBehaviour {
     }
 
     private void checkKeyboard(){
-        GameBoard g = GameBoard.GetInstance();
+        SimonGameBoard g = SimonGameBoard.GetInstance();
 
         if (canType && Input.GetKeyDown(KeyCode.Space)) {
           g.StartGame();

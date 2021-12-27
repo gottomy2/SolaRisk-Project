@@ -14,7 +14,7 @@ public class GameButton : MonoBehaviour {
     public int index;
 
     [SerializeField]
-    public GameBoard gameBoard;
+    public SimonGameBoard simonGameBoard;
 
     private Color32 activeColor = new Color32(124, 252, 0, 255);
     private Color32 inactiveColor = new Color32(41, 41, 41, 255);
@@ -23,7 +23,7 @@ public class GameButton : MonoBehaviour {
     private void Awake(){
         ExtractIndexFromName();
 
-        gameBoard = GetComponentInParent<GameBoard>();
+        simonGameBoard = GetComponentInParent<SimonGameBoard>();
     }
 
     public IEnumerator PlayBlinkRoutine(float active, float cooldown){
@@ -45,7 +45,7 @@ public class GameButton : MonoBehaviour {
     public void PlayerClick(){
         StartCoroutine(PlayBlinkRoutine(0.1f, 0.1f));
         SoundManager.PlaySound(clickSound);
-        gameBoard.HandleClick(index);
+        simonGameBoard.HandleClick(index);
     }
 
     public int GetIndex(){

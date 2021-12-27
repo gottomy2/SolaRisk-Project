@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Level : MonoBehaviour
+public class FlappyLevel : MonoBehaviour
 {
     private const float CAMERA_ORTHO_SIZE = 50f;
     private const float PIPE_WIDTH = 9f;
@@ -13,9 +13,9 @@ public class Level : MonoBehaviour
     private const float PIPE_SPAWN_X_POS = 100f;
     private const float SHIP_X_POS = 0f;
 
-    private static Level instance;
+    private static FlappyLevel instance;
 
-    public static Level GetInstance() {
+    public static FlappyLevel GetInstance() {
         return instance;
     }
 
@@ -31,17 +31,11 @@ public class Level : MonoBehaviour
 
     private State state;
     private GameMode gameMode;
-    private Difficulty inGameDifficulty;
+    private static Difficulty inGameDifficulty;
 
     private GameObject startText;
-    
-    public enum Difficulty {
-        Easy,
-        Medium,
-        Hard
-    }
 
-     public enum State {
+    public enum State {
         WaitingToStart,
         Playing,
         ShipDown
@@ -67,8 +61,8 @@ public class Level : MonoBehaviour
         gameMode = GameMode.InGame;
         canType = false;
         pipeList = new List<Pipe>();
-        inGameDifficulty = Difficulty.Easy;
-        SetDifficulty(inGameDifficulty); //pass this value through the player's choice
+        
+        SetDifficultyValues(inGameDifficulty);
         SetMoveTrigger(false);
         startText = GameObject.Find("StartText");
         startText.SetActive(false);
@@ -192,7 +186,7 @@ public class Level : MonoBehaviour
         pipeList.Add(new Pipe(pipeHead, pipeBody));
     }
 
-    private void SetDifficulty(Difficulty difficulty) {
+    private void SetDifficultyValues(Difficulty difficulty) {
           switch(difficulty){
                 case Difficulty.Easy: 
                     gapSize = 50f; 
@@ -221,7 +215,7 @@ public class Level : MonoBehaviour
         pipeCounter++;
 
         if(gameMode == GameMode.Arcade){
-             SetDifficulty(GetDifficulty());
+             SetDifficultyValues(GetDifficulty());
         }
     }
 
@@ -247,6 +241,11 @@ public class Level : MonoBehaviour
 
     public GameMode GetGameMode() {
         return gameMode;
+    }
+    
+    public static void SetDifficulty(Difficulty d)
+    {
+        inGameDifficulty = d;
     }
 
     /**
