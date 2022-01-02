@@ -10,13 +10,15 @@ public class EpilogueHandler : MonoBehaviour
 
     private const string DEFAULT_DATA = "No Data Provided";
     private const string PERCENTAGE_CHAR = "%";
+    private const string RISKY_SOB = "YOU RISKY SON OF A BITCH";
+    private const string NEUTRAL_BRD = "YOU NEUTRAL BASTARD";
+    private const string AVERSIVE_BRT = "YOU AVERSIVE BRAT";
 
     private const int GREEN_CHOICE = 1;
     private const int YELLOW_CHOICE = 2;
     private const int RED_CHOICE = 3;
 
-    [SerializeField]
-    private GlobalVars globalVars;
+    [SerializeField] private GlobalVars globalVars;
 
     private List<IData> data;
     private List<int> choices;
@@ -30,57 +32,54 @@ public class EpilogueHandler : MonoBehaviour
     private Text redChoices;
 
     private Text planetsVisited;
-    private Text allPlanets;
-    
-    private void Awake(){
-       data = globalVars.dataList;
-       choices = globalVars.difficultyChoicesList;
-       visits = globalVars.visitedChoicesList;
 
-       // choices.Add(1);
-       // choices.Add(2);
-       // choices.Add(3);
-       // choices.Add(3);
-       // choices.Add(1);
-       // choices.Add(1);
-      // data.Add(new FlappyData(10, 10, true));
-      
-       //visits.Add(true);
-       //visits.Add(false);
-       //visits.Add(false);
-       //visits.Add(true);
+    private Text summaryText;
 
-       minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
-       minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
+    private void Awake()
+    {
+        data = globalVars.dataList;
+        choices = globalVars.difficultyChoicesList;
+        visits = globalVars.visitedChoicesList;
 
-       greenChoices = GameObject.Find("GreenPaths").GetComponent<Text>();
-       yellowChoices = GameObject.Find("YellowPaths").GetComponent<Text>();
-       redChoices = GameObject.Find("RedPaths").GetComponent<Text>();
+        // choices.Clear();
+        // data.Clear();
+        // visits.Clear();
 
-       planetsVisited = GameObject.Find("PlanetsVisited").GetComponent<Text>();
-       allPlanets = GameObject.Find("AllPlanets").GetComponent<Text>();
+        minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
+        minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
+
+        greenChoices = GameObject.Find("GreenPaths").GetComponent<Text>();
+        yellowChoices = GameObject.Find("YellowPaths").GetComponent<Text>();
+        redChoices = GameObject.Find("RedPaths").GetComponent<Text>();
+
+        planetsVisited = GameObject.Find("PlanetsVisited").GetComponent<Text>();
+
+        summaryText = GameObject.Find("SummaryText").GetComponent<Text>();
     }
 
-    private void InitLighting(){
+    private void InitLighting()
+    {
         SceneShader.GetInstance().SetIsLighting(true);
     }
 
-    void Start(){
+    void Start()
+    {
         SetSuccessFields();
         SetRiskFields();
         SetPlanetVisitFields();
+        SetSummary(100);
         InitLighting();
     }
 
-    void Update(){
-        
-    }
-
-    private void SetSuccessFields(){
-        if(data.Any()){
-             minigameSuccess.text = DataProcessor.GetSuccededTryString(data);
-             minigameSuccessRatio.text = DataProcessor.GetSuccessTryRatio(data) + PERCENTAGE_CHAR;
-        } else {
+    private void SetSuccessFields()
+    {
+        if (data.Any())
+        {
+            minigameSuccess.text = DataProcessor.GetSuccededTryString(data);
+            minigameSuccessRatio.text = DataProcessor.GetSuccessTryRatio(data) + PERCENTAGE_CHAR;
+        }
+        else
+        {
             minigameSuccess.text = DEFAULT_DATA;
             minigameSuccessRatio.text = String.Empty;
         }
@@ -104,15 +103,25 @@ public class EpilogueHandler : MonoBehaviour
 
     private void SetPlanetVisitFields()
     {
-        if (visits.Any())
+        planetsVisited.text = visits.Any()
+            ? (DataProcessor.CalculatePlanetVisits(visits)
+               + " / " + visits.Count)
+            : DEFAULT_DATA;
+    }
+
+    private void SetSummary(int riskPercentage)
+    {
+        if (riskPercentage <= 40)
         {
-            planetsVisited.text = DataProcessor.CalculatePlanetVisits(visits).ToString(); 
-            allPlanets.text = " / " + visits.Count;
+            summaryText.text = AVERSIVE_BRT;
+        }
+        else if (riskPercentage > 40 && riskPercentage <= 60)
+        {
+            summaryText.text = NEUTRAL_BRD;
         }
         else
         {
-            planetsVisited.text = String.Empty;
-            allPlanets.text = DEFAULT_DATA;
+            summaryText.text = RISKY_SOB;
         }
     }
 
