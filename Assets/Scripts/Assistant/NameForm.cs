@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class NameForm : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class NameForm : MonoBehaviour
     private TextMeshProUGUI input;
     private Button button;
     private GameObject inputBox;
-    private SceneSwitch sceneSwitch = new SceneSwitch();
     private GameObject form, assistant1, assistant2;
     private GameObject warningText;
 
@@ -30,19 +30,19 @@ public class NameForm : MonoBehaviour
 
     public void Update()
     {
-        if(assistant1 == null && !global.getDialoguePath("intro1"))
+        if(assistant1 == null && !global.getVar("intro1", global.dialoguePath))
         {
             form.SetActive(true);
         }
 
         if(assistant2 == null)
         {
-            global.setDialoguePath("intro2", true);
-            sceneSwitch.NextScene();
+            global.setVar("intro2", true, global.dialoguePath);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {
-            if (global.getDialoguePath("intro1"))
+            if (global.getVar("intro1", global.dialoguePath))
             {
                 assistant2.SetActive(true);
             }
@@ -59,7 +59,7 @@ public class NameForm : MonoBehaviour
         {
             warningText.SetActive(false);
             global.PlayerName = input.text;
-            global.setDialoguePath("intro1", true);
+            global.setVar("intro1", true, global.dialoguePath);
 
             global.dictionary.Add(
                1, new string[] {

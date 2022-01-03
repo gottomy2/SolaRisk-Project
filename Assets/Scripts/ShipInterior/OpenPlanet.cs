@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OpenPlanet : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class OpenPlanet : MonoBehaviour
     public PlanetData planetData;
     public MapData mapData;
 
-    private SceneSwitch sceneSwitch;
     private bool inView = false;
     private GameObject player;
     private Vector3 playerPosition;
@@ -21,7 +21,6 @@ public class OpenPlanet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneSwitch = new SceneSwitch();
         player = GameObject.FindGameObjectWithTag("Player");
         condition = global.getVar("planetCanLand", global.hubStats);
     }
@@ -31,6 +30,7 @@ public class OpenPlanet : MonoBehaviour
     {
         playerPosition = player.transform.position;
         distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - gameObject.transform.position.x, 2) + Mathf.Pow(playerPosition.z - gameObject.transform.position.z, 2));
+        //condition = global.getVar("planetCanLand", global.hubStats);
         if (condition)
         {
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
@@ -43,10 +43,10 @@ public class OpenPlanet : MonoBehaviour
                     {
                         planetData.name = mapData.planets[i].planetName;
                         planetData.type = mapData.planets[i].type;
-                        return;
+                        break;
                     }
                 }
-                sceneSwitch.SceneByPath("Assets/Scenes/PlanetaryView/SampleScene.unity");
+                SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
             }
             if (distance > maxDistance && text.activeSelf == true)
             {
@@ -61,12 +61,18 @@ public class OpenPlanet : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        inView = true;
-        text.SetActive(true);
+        if (condition)
+        {
+            inView = true;
+            text.SetActive(true);
+        }  
     }
     private void OnMouseExit()
     {
-        inView = false;
-        text.SetActive(false);
+        if (!condition)
+        {
+            inView = false;
+            text.SetActive(false);
+        }
     }
 }

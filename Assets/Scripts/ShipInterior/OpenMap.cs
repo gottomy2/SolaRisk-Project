@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OpenMap : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class OpenMap : MonoBehaviour
     public GlobalVars global;
     public float maxDistance = 4f;
 
-    private SceneSwitch sceneSwitch;
     private bool inView = false;
     private GameObject player;
     private Vector3 playerPosition;
@@ -17,7 +17,6 @@ public class OpenMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneSwitch = new SceneSwitch();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -32,7 +31,7 @@ public class OpenMap : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                sceneSwitch.SceneByPath("Assets/Scenes/Part2Demo/Part2Demo.unity");
+                SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
             }
             if (distance > maxDistance && text.activeSelf == true)
             {

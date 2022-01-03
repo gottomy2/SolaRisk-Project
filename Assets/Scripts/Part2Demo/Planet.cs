@@ -57,7 +57,7 @@ public class Planet : MonoBehaviour
 
     void FixedUpdate()
     {  
-        if (visited && !global.getDialoguePath("mapAssistantActive"))
+        if (visited && !global.getVar("mapAssistantActive", global.dialoguePath))
         {
             for (int i = 0; i < materialsCopy.Length; i++)
             {
@@ -68,7 +68,7 @@ public class Planet : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (!visited && clickable && line == null && !global.getDialoguePath("mapAssistantActive"))
+        if (!visited && clickable && line == null && !global.getVar("mapAssistantActive", global.dialoguePath))
         {
             line = Instantiate(linePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             line.name = "line";

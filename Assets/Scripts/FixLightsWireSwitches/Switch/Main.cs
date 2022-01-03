@@ -11,11 +11,9 @@ public class Main : MonoBehaviour {
     public int switchCount;
     public GameObject winText;
     private int _onCount = 0;
-    private SceneSwitch sceneSwitch;
 
     private void Awake() {
         Instance = this;
-        sceneSwitch = new SceneSwitch();
     }
     
     public void SwitchChange(int points) {
@@ -33,7 +31,7 @@ public class Main : MonoBehaviour {
                 global.setVar("switchesBroken", false, global.hubStats);
                 global.setVar("switchesFix", true, global.hubStats);
             }
-            sceneSwitch.SceneByPath("Assets/Scenes/ShipInterior/InteriorScene.unity");
+            SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
         }
     }
 
