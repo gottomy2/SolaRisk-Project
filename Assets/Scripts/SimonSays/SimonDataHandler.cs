@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimonDataHandler : MonoBehaviour {
@@ -48,7 +46,8 @@ public class SimonDataHandler : MonoBehaviour {
 	public void RegisterClick(){
 		clicksNum++;
 		RegisterMeasureEnd();
-		Debug.Log("Clicks: " + clicksNum + ", current measure: " + measureResponseTime + ", overall responseTime: " + responseTime);
+		Debug.Log("Clicks: " + clicksNum + ", current measure: " 
+		          + measureResponseTime + ", overall responseTime: " + responseTime);
 	}
 
 	public void Finish(){
