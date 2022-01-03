@@ -43,7 +43,6 @@ public class ShipController : MonoBehaviour
 
     void Start()
     {
-
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
         rigidBody = GetComponent<Rigidbody>();
@@ -183,7 +182,7 @@ public class ShipController : MonoBehaviour
 
     private void CheckTimer()
     {
-        if (gameTimer >= (GAME_LENGTH - 7) && !canSeeEnd)
+        if (gameTimer >= GetCanSeeEndCases() && !canSeeEnd)
         {
             canSeeEnd = true;
         }
@@ -191,6 +190,17 @@ public class ShipController : MonoBehaviour
         if (!isDead && gameTimer >= GAME_LENGTH)
         {
             TriggerFinish();
+        }
+    }
+
+    private float GetCanSeeEndCases()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy: 
+                default: return GAME_LENGTH - 7;
+            case Difficulty.Medium: return GAME_LENGTH - 5;
+            case Difficulty.Hard: return GAME_LENGTH - 3;
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AsteroidController : MonoBehaviour
 {
     public GameObject asteroid;
-    public float respawnTime = 2.0f;
+    public float respawnTime = 0.3f;
     public int waveNumber;
     Transform shipTransform;
     GameObject ship;
@@ -13,6 +13,7 @@ public class AsteroidController : MonoBehaviour
     void Start()
     {
         ship = GameObject.FindGameObjectWithTag("Player");
+        respawnTime = GetRespawnTimeFromDifficulty();
         StartCoroutine(AsteroidWave());
     }
     
@@ -63,6 +64,17 @@ public class AsteroidController : MonoBehaviour
             default: return 10;
             case Difficulty.Medium: return 15;
             case Difficulty.Hard: return 20;
+        }
+    }
+
+    private float GetRespawnTimeFromDifficulty()
+    {
+        switch (ShipController.GetDifficulty())
+        {
+            case Difficulty.Easy:
+            default: return 0.3f;
+            case Difficulty.Medium: return 0.2f;
+            case Difficulty.Hard: return 0.1f;
         }
     }
 
