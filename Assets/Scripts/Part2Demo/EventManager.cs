@@ -10,12 +10,33 @@ public class EventManager : MonoBehaviour
     public MapData mapData;
     public GlobalVars global;
     public GameObject assistant1;
+    public GameObject warningText;
 
     private Planet planet;
 
     private void Awake()
     {
+        //Sets the minigames to be available at random when player fails in flappyShip or AsteroidsMiniGame
+        if (global.getVar("minigameFailed", global.hubStats) && global.getVar("mapTutorialFinished", global.dialoguePath))
+        {
+            warningText.SetActive(true);
+            global.setVar("mapActive", false, global.hubStats);
+            //global.setVar("mapAssistantActive", true, global.dialoguePath);
+            switch ((int)System.Math.Round(Random.value % 3))
+            {
+                case 0:
+                    global.setVar("simonBroken", true, global.hubStats);
+                    break;
+                case 1:
+                    global.setVar("wiresBroken", true, global.hubStats);
+                    break;
+                case 2:
+                    global.setVar("switchesBroken", true, global.hubStats);
+                    break;
+            }
+        }
 
+        //Resets the map when tutorial is finished.
         if (global.getVar("mapTutorialFinished", global.dialoguePath) && global.getVar("mapReset", global.dialoguePath))
         {
             global.setVar("mapReset", false, global.dialoguePath);
@@ -38,7 +59,8 @@ public class EventManager : MonoBehaviour
             }
         }
 
-
+        //Destroys assistant if player talked to him before or tutorial is finished
+        //Otherwise adds dialogue for the assistant to talk to the player.
         if (global.getVar("mapTutorial1", global.dialoguePath) || global.getVar("mapTutorialFinished", global.dialoguePath))
         {
             Destroy(assistant1);
@@ -67,6 +89,7 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
+        //If assistant is dead 
         if (assistant1 == null && !global.getVar("mapTutorial1", global.dialoguePath)) {
             if (global.getVar("mapTutorialFinished", global.dialoguePath))
             {
@@ -77,6 +100,10 @@ public class EventManager : MonoBehaviour
                 global.setVar("mapTutorial1", true, global.dialoguePath);
             }
             global.setVar("mapAssistantActive", false, global.dialoguePath);
+        }
+        if (!global.getVar("mapAssistantActive", global.dialoguePath) && !global.getVar("mapTutorialFinished", global.dialoguePath))
+        {
+            global.setVar("mapActive", true, global.hubStats);
         }
     }
 

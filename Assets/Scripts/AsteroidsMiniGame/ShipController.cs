@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
+    public GlobalVars global;
     public GameObject explosion;
     public GameObject projectilePrefab;
     public AudioClip explosionSound;
@@ -44,6 +45,7 @@ public class ShipController : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
         rigidBody = GetComponent<Rigidbody>();
@@ -138,6 +140,10 @@ public class ShipController : MonoBehaviour
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
         StartCoroutine(TriggerSceneChange());
+        if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        {
+            global.setVar("minigameFailed", true, global.hubStats);
+        }
     }
 
     private void TriggerFinish()

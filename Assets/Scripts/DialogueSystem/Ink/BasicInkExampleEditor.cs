@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Ink.UnityIntegration;
 using Ink.Runtime;
+using Ink.UnityIntegration;
 
 [CustomEditor(typeof(BasicInkExample))]
 [InitializeOnLoad]
@@ -18,7 +19,9 @@ public class BasicInkExampleEditor : Editor {
         InkPlayerWindow window = InkPlayerWindow.GetWindow(true);
         if(window != null) InkPlayerWindow.Attach(story);
     }
-	public override void OnInspectorGUI () {
+
+    
+    public override void OnInspectorGUI () {
 		Repaint();
 		base.OnInspectorGUI ();
 		var realTarget = target as BasicInkExample;
@@ -26,3 +29,4 @@ public class BasicInkExampleEditor : Editor {
 		InkPlayerWindow.DrawStoryPropertyField(story, new GUIContent("Story"));
 	}
 }
+#endif

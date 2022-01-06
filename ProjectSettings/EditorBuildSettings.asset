@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Assistant/Wprowadzenie.unity
     guid: 6b82a38facb5d4c47a0278c41612c45e
   - enabled: 1
-    path: Assets/Scenes/Fillers/ShipSelection.unity
-    guid: 86ac405c84d3f334a8ba2243239db2f2
+    path: Assets/Scenes/ShipInterior/InteriorScene.unity
+    guid: 1fc1ca375022c1c43a576888c9799100
   - enabled: 1
     path: Assets/Scenes/FlappyShip/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -21,26 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/DIalogueSystem/DialogueManager.unity
     guid: 8af1c5cbac5094782904447c9410b35d
   - enabled: 1
-    path: Assets/Scenes/Fillers/FillerZF.unity
-    guid: e87f1641e0dfafe4ea6b785c35b10bba
-  - enabled: 1
-    path: Assets/Scenes/Fillers/FillerScoreDisplay.unity
-    guid: d02fa9e7eaa7afb43aa5d5ffb766c380
-  - enabled: 1
     path: Assets/Scenes/FlappyShip/LoadingScene.unity
     guid: fb7f0c651c556ce4890762606ed51d2e
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/FlappyShip/MainMenuScene.unity
-    guid: 2071d95934827fb4cabe44ebacdd3eb6
   - enabled: 1
     path: Assets/Scenes/AsteroidsMiniGame/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/ShipInterior/InteriorScene.unity
-    guid: 1fc1ca375022c1c43a576888c9799100
   - enabled: 1
     path: Assets/Scenes/Part2Demo/Part2Demo.unity
     guid: 37f0901e646c0fb4ca7fcb7b7aa6ca76
@@ -54,6 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SimonSays/SimonSays.unity
     guid: 3f14f3d4926a2e54c83e1868b4cef95b
   - enabled: 1
+    path: Assets/Scenes/Fillers/FillerZF.unity
+    guid: e87f1641e0dfafe4ea6b785c35b10bba
+  - enabled: 1
+    path: Assets/Scenes/Epilogue/EpilogueScene.unity
+    guid: 6bcd51356925b6d4b97ebf0a1a667ac0
+  - enabled: 1
     path: Assets/Scenes/PlanetaryView/SampleScene.unity
-    guid: d2d15e1ab9088fd4186b915a099b517c
+    guid: db3913cbcf332fd4cb004078b2a83390
   m_configObjects: {}

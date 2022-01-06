@@ -13,6 +13,7 @@ public class MainHandler : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         createMap = gameObject.GetComponent<CreateMapData>();
         showPlanets = gameObject.GetComponent<ShowPlanets>();
         popup = FindObjectOfType<TooltipPopup>();
@@ -31,14 +32,7 @@ public class MainHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Application.LoadLevel(Application.loadedLevel);
-        }
+
     }
     public void ChangePlayerPosition(string name)
     {

@@ -26,21 +26,17 @@ public class OpenMap : MonoBehaviour
         playerPosition = player.transform.position;
         distance = Mathf.Sqrt(Mathf.Pow(playerPosition.x - gameObject.transform.position.x, 2) + Mathf.Pow(playerPosition.z - gameObject.transform.position.z, 2));
 
-        if(!global.getVar("wiresBroken", global.hubStats) && !global.getVar("switchesBroken", global.hubStats) && !global.getVar("simonBroken", global.hubStats))
+        if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
         {
-            if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
-            }
-            if (distance > maxDistance && text.activeSelf == true)
-            {
-                text.SetActive(false);
-            }
-            else if (distance <= maxDistance && text.activeSelf == false && inView)
-            {
-                text.SetActive(true);
-            }
+            SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
+        }
+        if (distance > maxDistance && text.activeSelf == true)
+        {
+            text.SetActive(false);
+        }
+        else if (distance <= maxDistance && text.activeSelf == false && inView)
+        {
+            text.SetActive(true);
         }
     }
 

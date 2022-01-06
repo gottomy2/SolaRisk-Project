@@ -59,6 +59,7 @@ public class SimonGameBoard : MonoBehaviour
 
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         instance = this;
         state = State.Waiting;
         gameMode = GameMode.InGame;

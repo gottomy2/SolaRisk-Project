@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class ChangePlanet : MonoBehaviour {
@@ -79,8 +78,5 @@ public class ChangePlanet : MonoBehaviour {
                 // break;
         }
         GameObject.Find("Mesh").AddComponent<MeshCollider>();
-
-
-        
     }
 }

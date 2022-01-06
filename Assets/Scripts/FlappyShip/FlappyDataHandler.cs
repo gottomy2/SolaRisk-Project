@@ -13,6 +13,8 @@ public class FlappyDataHandler : MonoBehaviour {
 
 	private int jumps;
 
+	public GlobalVars global;
+
 	private static FlappyDataHandler instance;
 
 	public static FlappyDataHandler GetInstance() {
@@ -55,6 +57,9 @@ public class FlappyDataHandler : MonoBehaviour {
 	}
 
 	public void SetIsFailed(bool isFailed) {
+		if(global.getVar("mapTutorialFinished", global.dialoguePath)){
+			global.setVar("minigameFailed", true, global.hubStats);
+		}
 		this.hasFailed = isFailed;
 	}
 

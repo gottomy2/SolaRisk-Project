@@ -386,9 +386,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyButton: {fileID: 953459391}
   mapData: {fileID: 11400000, guid: 23067f8b6741fe14185f83267a247176, type: 2}
-  sceneSwitch: {fileID: 1690924219}
   global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
   assistant1: {fileID: 1863827154}
+  warningText: {fileID: 1110304178}
 --- !u!1 &269510886
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 1110304181}
   - component: {fileID: 1110304180}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Warning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

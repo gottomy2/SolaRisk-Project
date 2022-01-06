@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d42774e8c84be9f4ea5f7e3e9a0bfe4d, type: 3}
-  m_Name: 
+  m_Name: piri
   m_EditorClassIdentifier: 
   planetName: settings
   prefab: {fileID: 0}
@@ -18,5 +18,5 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   visited: 0
   difficulty: 1
-  type: 
+  type: Alien
   clickable: 0

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class FlappyLevel : MonoBehaviour
 {
-    //public GlobalVars global;
 
     private const float CAMERA_ORTHO_SIZE = 50f;
     private const float PIPE_WIDTH = 9f;
@@ -80,7 +79,6 @@ public class FlappyLevel : MonoBehaviour
 
     private void CloseScene(){
         SceneShader.GetInstance().SetIsShading(true);
-        //global.setVar("minigameFailed", true, global.hubStats);
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 
