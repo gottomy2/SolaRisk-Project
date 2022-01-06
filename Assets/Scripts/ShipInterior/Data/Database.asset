@@ -47,12 +47,12 @@ MonoBehaviour:
   - key: wiresFix
     value: 0
   - key: planetCanLand
-    value: 1
+    value: 0
   - key: planetVisited
     value: 0
   - key: minigameFailed
     value: 0
   - key: mapActive
     value: 0
-  difficultyChoicesList: 
-  visitedChoicesList: 
+  difficultyChoicesList: 030000000200000002000000010000000200000003000000010000000300000003000000
+  visitedChoicesList: 010101010101010101
