@@ -43,8 +43,6 @@ public class GlobalVars : ScriptableObject
         },
     };
 
-    public bool inMap = false;
-
     public List<int> difficultyChoicesList = new List<int>();
     public List<bool> visitedChoicesList = new List<bool>();
 
