@@ -89,6 +89,11 @@ public class EventManager : MonoBehaviour
             global.setVar("mapActive", true, global.hubStats);
         }
     }
+
+    private void Update()
+    {
+        ParseDifficulty();
+    }
     
     private void Awake()
     {
@@ -215,6 +220,7 @@ public class EventManager : MonoBehaviour
 
     private void ParseDifficulty()
     {
+        planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
         switch (planet.getDifficulty())
         {
             default: difficulty = Difficulty.Easy; break;
