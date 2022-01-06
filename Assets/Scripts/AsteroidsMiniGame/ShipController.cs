@@ -14,7 +14,7 @@ public class ShipController : MonoBehaviour
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
-    private const float GAME_LENGTH = 30f;
+    private float GAME_LENGTH = 30f;
 
     private Text timerText;
 
@@ -175,7 +175,15 @@ public class ShipController : MonoBehaviour
 
     private void StartCounting()
     {
-        AsteroidDataHandler.GetInstance().RegisterMeasureStart();
+        if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        {
+            AsteroidDataHandler.GetInstance().RegisterMeasureStart();
+        }
+        else
+        {
+            GAME_LENGTH = 15f;
+        }
+        
         gameTimer = 0f;
     }
 

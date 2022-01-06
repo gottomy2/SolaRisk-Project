@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EventManager : MonoBehaviour
 {
@@ -10,19 +10,39 @@ public class EventManager : MonoBehaviour
     public MapData mapData;
     public GlobalVars global;
     public GameObject assistant1;
-    public GameObject warningText;
-
+    public GameObject warningText;  
+    
     private Planet planet;
-
-    private void Awake()
+    private Difficulty difficulty;
+    private enum State
     {
-        //Sets the minigames to be available at random when player fails in flappyShip or AsteroidsMiniGame
-        if (global.getVar("minigameFailed", global.hubStats) && global.getVar("mapTutorialFinished", global.dialoguePath))
+        Tutorial,
+        Game
+    }
+    
+    private string[] TUTORIAL_DIALOGUE = {
+        ", witaj w panelu kontroli lotu!",
+        "Pozwól, ?e wyt?umacz? Ci jak si? nim pos?ugiwa?.",
+        "Aby dosta? si? do celu naszej podró?y, b?dziemy musieli odwiedzi? a? 3 nieznane planety!",
+        "Na ca?e szcz??cie, system kontroli lotu jest wyposa?ony w czujnik zagro?e?...",
+        "Po najechaniu kursorem na planetê mo¿emy sprawdziæ trudnoœæ danej trasy!",
+        "Wyró?niamy 3 rodzaje tras...",
+        "1.Trasy oznaczone kolorem zielonym, wybieraj¹c takie trasy mamy 50% szansê na unikniêcie przeszkód...",
+        "2.Trasy oznaczone kolorem ¿óltym, wybieraj¹c takie trasy mamy 25% szansê na unikniêcie przeszkód...",
+        "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybieraj¹c takie trasy nie obêdzie siê bez przeszkód.",
+        "To jakimi trasami bêdziemy siê poruszaæ zale¿y tylko i wy³¹cznie od Cieie kapitanie!",
+        "SprawdŸmy jak byœ sobie poradzi³, œmia³o wybierz pierwsz¹ trasê!"
+    };
+
+    private void HandleMinigameFails()
+    {
+        if (global.getVar("minigameFailed", global.hubStats) 
+            && global.getVar("mapTutorialFinished", global.dialoguePath))
         {
             warningText.SetActive(true);
             global.setVar("mapActive", false, global.hubStats);
             //global.setVar("mapAssistantActive", true, global.dialoguePath);
-            switch ((int)System.Math.Round(Random.value % 3))
+            switch ((int) Math.Round(Random.value % 3))
             {
                 case 0:
                     global.setVar("simonBroken", true, global.hubStats);
@@ -35,12 +55,52 @@ public class EventManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void SetTutorialDialogue()
+    {
+        if (!global.dictionary.ContainsKey(3))
+        {
+            TUTORIAL_DIALOGUE[0] = global.PlayerName + TUTORIAL_DIALOGUE[0];
+            global.dictionary.Add(3, TUTORIAL_DIALOGUE);
+        }
+    }
+
+    
+    private void KillAssistant()
+    {
+        //Destroys assistant if player talked to him before or tutorial is finished
+        global.setVar("mapActive", true, global.hubStats);
+        if (global.getVar("mapTutorial1", global.dialoguePath) 
+            || global.getVar("mapTutorialFinished", global.dialoguePath))
+        {
+            Destroy(assistant1);
+            global.setVar("mapAssistantActive", false, global.dialoguePath);
+        }
+    }
+
+    private void SetMapActive()
+    {
+        if (!global.getVar("mapAssistantActive", global.dialoguePath) 
+            && !global.getVar("mapTutorialFinished", global.dialoguePath) 
+            && !global.getVar("mapActive", global.dialoguePath))
+        {
+            Debug.Log("Setting map active");
+            global.setVar("mapActive", true, global.hubStats);
+        }
+    }
+    
+    private void Awake()
+    {
+        SetTutorialDialogue();
+        HandleMinigameFails();
 
         //Resets the map when tutorial is finished.
-        if (global.getVar("mapTutorialFinished", global.dialoguePath) && global.getVar("mapReset", global.dialoguePath))
+        if (global.getVar("mapTutorialFinished", global.dialoguePath) 
+            && global.getVar("mapReset", global.dialoguePath))
         {
             global.setVar("mapReset", false, global.dialoguePath);
-            tutorialFinished();
+            SetTutorialFinished();
         }
         else
         {
@@ -59,38 +119,15 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        //Destroys assistant if player talked to him before or tutorial is finished
-        //Otherwise adds dialogue for the assistant to talk to the player.
-        if (global.getVar("mapTutorial1", global.dialoguePath) || global.getVar("mapTutorialFinished", global.dialoguePath))
-        {
-            Destroy(assistant1);
-        }
-        else if (!global.dictionary.ContainsKey(3))
-        {
-            global.dictionary.Add(3,
-            new string[]{
-                global.PlayerName + ", witaj w panelu kontroli lotu!",
-                "Pozwól, ¿e wyt³umacze Ci jak siê nim pos³ugiwaæ.",
-                "Aby dostaæ siê do celu naszej podró¿y bêdziemy musieli odwiedziæ a¿ 3 nieznane planety!",
-                "Na ca³e szczêœcie z system kontroli lotu jest wyposa¿ony w czujnik zagro¿eñ...",
-                "Po najechaniu kursorem na planetê mo¿emy sprawdziæ trudnoœæ danej trasy!",
-                "Wyró¿niamy 3 rodzaje tras...",
-                "1.Trasy oznaczone kolorem zielonym, wybieraj¹c takie trasy mamy 50% szansê na unikniêcie przeszkód...",
-                "2.Trasy oznaczone kolorem ¿óltym, wybieraj¹c takie trasy mamy 25% szansê na unikniêcie przeszkód...",
-                "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybieraj¹c takie trasy nie obêdzie siê bez przeszkód.",
-                "To jakimi trasami bêdziemy siê poruszaæ zale¿y tylko i wy³¹cznie od Cieie kapitanie!",               
-                "SprawdŸmy jak byœ sobie poradzi³, œmia³o wybierz pierwsz¹ trasê!"
-                }
-            );
-        }
-
+        KillAssistant();
+        ConfirmAssistantIsDead();
+        SetMapActive();
         flyButton.onClick.AddListener(onButtonClick);
     }
 
-    private void Update()
+    private void ConfirmAssistantIsDead()
     {
-        //If assistant is dead 
-        if (assistant1 == null && !global.getVar("mapTutorial1", global.dialoguePath)) {
+        if (assistant1 == null && global.getVar("mapTutorial1", global.dialoguePath)) {
             if (global.getVar("mapTutorialFinished", global.dialoguePath))
             {
                 global.setVar("mapTutorial1", false, global.dialoguePath);
@@ -99,65 +136,51 @@ public class EventManager : MonoBehaviour
             {
                 global.setVar("mapTutorial1", true, global.dialoguePath);
             }
-            global.setVar("mapAssistantActive", false, global.dialoguePath);
-        }
-        if (!global.getVar("mapAssistantActive", global.dialoguePath) && !global.getVar("mapTutorialFinished", global.dialoguePath))
-        {
-            global.setVar("mapActive", true, global.hubStats);
         }
     }
 
     private void onButtonClick()
     {
         planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
+        ParseDifficulty();
         if (!global.getVar("mapTutorialFinished", global.dialoguePath))
         {
-            if (!global.getVar("mapTutorial2", global.dialoguePath))
+            if (!global.getVar("mapTutorial1", global.dialoguePath))
             {
-                Debug.Log("[TUTORIAL]: Asteroids Minigame occured");
-                global.setVar("mapTutorial2", true, global.dialoguePath);
-                asteroids();
+                global.setVar("mapTutorial1", true, global.dialoguePath);
+                SetDifficulty(Difficulty.Easy);
+                OpenAsteroids(State.Tutorial);
             }
             else
             {
-                Debug.Log("[TUTORIAL]: flappyShip Minigame occured");
-                global.setVar("mapTutorialFinished", true, global.dialoguePath);
-                flappyShip();
-                global.setVar("mapReset", true, global.dialoguePath);
                 global.setVar("hubTutorial2", true, global.dialoguePath);
+                SetDifficulty(Difficulty.Easy);
+                OpenFlappyShip(State.Tutorial);
             }
         }
         else
         {
             if (planet.getDifficulty() == 1)
             {
-                eventRandomizer(0.5f);
+                RandomizeEvent(0.5f);
             }
             else if (planet.getDifficulty() == 2)
             {
-                eventRandomizer(0.75f);
+                RandomizeEvent(0.75f);
             }
             else
             {
-                eventRandomizer(1f);
+                RandomizeEvent(1f);
             }
         }
     }
 
-    private void eventRandomizer(float percentage)
+    private void RandomizeEvent(float percentage)
     {
         if (Random.value < percentage)
         {
-            if (Random.value < 0.5f)
-            {
-                Debug.Log("[GAME]: flappyShip Minigame occured");
-                flappyShip();
-            }
-            else
-            {
-                Debug.Log("[GAME]: Asteroids Minigame occured");
-                asteroids();
-            }
+            if (Random.value < 0.5f)  OpenFlappyShip(State.Game);
+            else OpenAsteroids(State.Game);
         }
         else
         {
@@ -167,21 +190,21 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void asteroids()
+    private void OpenAsteroids(State state)
     {
-        //When Asteroids Minigame occured
+        Debug.Log("["+ state + "]: Asteroids Minigame occured");
         mapData.lastFlightType = "Asteroids";
-        SceneManager.LoadScene("Assets/Scenes/AsteroidsMiniGame/SampleScene.unity");
+        SceneDifficultyHandler.OpenAsteroids(difficulty);
     }
 
-    private void flappyShip()
+    private void OpenFlappyShip(State state)
     {
-        //When flappyShip Minigame
+        Debug.Log("["+ state + "]: OpenFlappyShip Minigame occured");
         mapData.lastFlightType = "FlappyShip";
-        SceneManager.LoadScene("Assets/Scenes/FlappyShip/LoadingScene.unity");
+        SceneDifficultyHandler.OpenFlappyShip(difficulty);
     }
 
-    private void tutorialFinished()
+    private void SetTutorialFinished()
     {
         mapData.firstStart = true;
         mapData.lastFlightType = "";
@@ -189,4 +212,20 @@ public class EventManager : MonoBehaviour
         mapData.path = null;
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
+
+    private void ParseDifficulty()
+    {
+        switch (planet.getDifficulty())
+        {
+            default: difficulty = Difficulty.Easy; break;
+            case 2: difficulty = Difficulty.Medium; break;
+            case 3: difficulty = Difficulty.Hard; break;
+        }
+    }
+
+    private void SetDifficulty(Difficulty d)
+    {
+        difficulty = d;
+    }
+    
 }

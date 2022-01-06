@@ -507,7 +507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5fce8287a83df40a7ed6c2adeeb09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!1001 &416641401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1008,6 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da73e6abaf206f04d8131faad8d8a07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  global: {fileID: 11400000, guid: 2b141211214e99b4ca6f3f080d7a611a, type: 2}
 --- !u!224 &1222867278 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6960851551145647494, guid: bc984b351bdef1a4082cb132d431f79a, type: 3}

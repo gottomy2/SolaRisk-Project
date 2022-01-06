@@ -80,12 +80,15 @@ public class GlobalVars : ScriptableObject
 
     public void setVar(string key, bool value, variable[] variables)
     {
+        Debug.Log("Key: " + key + ", value:" + value);
         for (int i = 0; i < variables.Length; i++)
         {
             if (variables[i].key == key)
             {
+                Debug.Log("Setting value to variables[i].key= " + variables[i].key);
                 variables[i].value = value; ;
             }
         }
+        
     }
 }
