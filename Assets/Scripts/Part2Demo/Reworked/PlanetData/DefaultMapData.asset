@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultMapData
   m_EditorClassIdentifier: 
   firstStart: 0
-  playerPosition: Pstart
+  playerPosition: P3R3
   planets:
   - {fileID: 11400000, guid: 085fb279d603d1d4b89870028da4c50d, type: 2}
   - {fileID: 11400000, guid: eaa60d946778e3f45a87f39e63894a2c, type: 2}
@@ -26,5 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f7ad25930554854892ff1425fb0bb59, type: 2}
   - {fileID: 11400000, guid: afefb31721d6a0b4e817751dba676ad8, type: 2}
   - {fileID: 11400000, guid: 2363aa88be39d1542a87e8540672157f, type: 2}
-  path: []
-  lastFlightType: FlappyShip
+  path:
+  - P3R1
+  - P2R2
+  - P3R3
+  lastFlightType: Asteroids

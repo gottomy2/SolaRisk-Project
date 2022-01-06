@@ -66,28 +66,6 @@ public class GlobalVars : ScriptableObject
         dataList.Add(data);
         Debug.Log("Data saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
     }
-    public void setDialoguePath(string key, bool value)
-    {   
-        
-        for(int i = 0; i < this.dialoguePath.Length; i++)
-        {
-            if (this.dialoguePath[i].key == key)
-            {
-                this.dialoguePath[i].value = value; ;
-            }
-        }
-    }
-    public bool getDialoguePath(string key) {
-        bool returned = false;
-        for (int i = 0; i < this.dialoguePath.Length; i++)
-        {
-            if (this.dialoguePath[i].key == key)
-            {
-                returned = this.dialoguePath[i].value;
-            }
-        }
-        return returned;
-    }
 
     public bool getVar(string key, variable[] variables)
     {

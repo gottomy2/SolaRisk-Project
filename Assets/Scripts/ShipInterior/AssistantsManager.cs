@@ -11,7 +11,7 @@ public class AssistantsManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        if (global.getDialoguePath("hubTutorial1"))
+        if (global.getVar("hubTutorial1", global.dialoguePath))
         {
             assistant1.gameObject.SetActive(false);
         }
@@ -27,7 +27,7 @@ public class AssistantsManager : MonoBehaviour
     {
         if (assistant1 == null)
         {
-            global.setDialoguePath("hubTutorial1", true);
+            global.setVar("hubTutorial1", true, global.dialoguePath);
         }
     }
 }

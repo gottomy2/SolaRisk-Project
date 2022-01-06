@@ -8,7 +8,6 @@ public class EventManager : MonoBehaviour
 {
     public Button flyButton;
     public MapData mapData;
-    public SceneSwitch sceneSwitch;
     public GlobalVars global;
     public GameObject assistant1;
 
@@ -17,30 +16,30 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
 
-        if (global.getDialoguePath("mapTutorialFinished") && global.getDialoguePath("mapReset"))
+        if (global.getVar("mapTutorialFinished", global.dialoguePath) && global.getVar("mapReset", global.dialoguePath))
         {
-            global.setDialoguePath("mapReset", false);
+            global.setVar("mapReset", false, global.dialoguePath);
             tutorialFinished();
         }
         else
         {
             if (mapData.firstStart)
             {
-                global.setDialoguePath("mapTutorial1", false);
-                global.setDialoguePath("mapTutorial2", false);
-                if (!global.getDialoguePath("mapTutorialFinished"))
+                global.setVar("mapTutorial1", false, global.dialoguePath);
+                global.setVar("mapTutorial2", false, global.dialoguePath);
+                if (!global.getVar("mapTutorialFinished", global.dialoguePath))
                 {
-                    global.setDialoguePath("mapAssistantActive", true);
+                    global.setVar("mapAssistantActive", true, global.dialoguePath);
                 }
                 else
                 {
-                    global.setDialoguePath("mapAssistantActive", false);
+                    global.setVar("mapAssistantActive", false, global.dialoguePath);
                 }
             }
         }
 
 
-        if (global.getDialoguePath("mapTutorial1") || global.getDialoguePath("mapTutorialFinished"))
+        if (global.getVar("mapTutorial1", global.dialoguePath) || global.getVar("mapTutorialFinished", global.dialoguePath))
         {
             Destroy(assistant1);
         }
@@ -68,37 +67,37 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        if (assistant1 == null && !global.getDialoguePath("mapTutorial1")) {
-            if (global.getDialoguePath("mapTutorialFinished"))
+        if (assistant1 == null && !global.getVar("mapTutorial1", global.dialoguePath)) {
+            if (global.getVar("mapTutorialFinished", global.dialoguePath))
             {
-                global.setDialoguePath("mapTutorial1", false);
+                global.setVar("mapTutorial1", false, global.dialoguePath);
             }
             else
             {
-                global.setDialoguePath("mapTutorial1", true);
+                global.setVar("mapTutorial1", true, global.dialoguePath);
             }
-            global.setDialoguePath("mapAssistantActive", false);
+            global.setVar("mapAssistantActive", false, global.dialoguePath);
         }
     }
 
     private void onButtonClick()
     {
         planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
-        if (!global.getDialoguePath("mapTutorialFinished"))
+        if (!global.getVar("mapTutorialFinished", global.dialoguePath))
         {
-            if (!global.getDialoguePath("mapTutorial2"))
+            if (!global.getVar("mapTutorial2", global.dialoguePath))
             {
                 Debug.Log("[TUTORIAL]: Asteroids Minigame occured");
-                global.setDialoguePath("mapTutorial2", true);
+                global.setVar("mapTutorial2", true, global.dialoguePath);
                 asteroids();
             }
             else
             {
                 Debug.Log("[TUTORIAL]: flappyShip Minigame occured");
-                global.setDialoguePath("mapTutorialFinished", true);
+                global.setVar("mapTutorialFinished", true, global.dialoguePath);
                 flappyShip();
-                global.setDialoguePath("mapReset", true);
-                global.setDialoguePath("hubTutorial2", true);
+                global.setVar("mapReset", true, global.dialoguePath);
+                global.setVar("hubTutorial2", true, global.dialoguePath);
             }
         }
         else
@@ -145,14 +144,14 @@ public class EventManager : MonoBehaviour
     {
         //When Asteroids Minigame occured
         mapData.lastFlightType = "Asteroids";
-        sceneSwitch.SceneByPath("Assets/Scenes/AsteroidsMiniGame/SampleScene.unity");
+        SceneManager.LoadScene("Assets/Scenes/AsteroidsMiniGame/SampleScene.unity");
     }
 
     private void flappyShip()
     {
         //When flappyShip Minigame
         mapData.lastFlightType = "FlappyShip";
-        sceneSwitch.SceneByPath("Assets/Scenes/FlappyShip/LoadingScene.unity");
+        SceneManager.LoadScene("Assets/Scenes/FlappyShip/LoadingScene.unity");
     }
 
     private void tutorialFinished()
@@ -161,6 +160,6 @@ public class EventManager : MonoBehaviour
         mapData.lastFlightType = "";
         mapData.playerPosition = "Pstart";
         mapData.path = null;
-        sceneSwitch.SceneByPath("Assets/Scenes/ShipInterior/InteriorScene.unity");
+        SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 }

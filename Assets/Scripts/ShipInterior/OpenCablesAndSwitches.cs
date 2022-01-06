@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OpenCablesAndSwitches : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class OpenCablesAndSwitches : MonoBehaviour
     public GlobalVars global;
     public float maxDistance = 4f;
 
-    private SceneSwitch sceneSwitch;
     private bool inView = false;
     private GameObject player;
     private Vector3 playerPosition;
@@ -18,7 +18,6 @@ public class OpenCablesAndSwitches : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneSwitch = new SceneSwitch();
         player = GameObject.FindGameObjectWithTag("Player");
         condition = (global.getVar("wiresBroken", global.hubStats) || global.getVar("switchesBroken", global.hubStats));
     }
@@ -34,11 +33,11 @@ public class OpenCablesAndSwitches : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 if(global.getVar("wiresBroken", global.hubStats)){
-                    sceneSwitch.SceneByPath("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity");
+                    SceneManager.LoadScene("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity");
                 }
                 else
                 {
-                    sceneSwitch.SceneByPath("Assets/Scenes/FixLightsWireSwitches/FixTheLightsScene.unity");
+                    SceneManager.LoadScene("Assets/Scenes/FixLightsWireSwitches/FixTheLightsScene.unity");
                 }
             }
             if (distance > maxDistance && text.activeSelf == true)
@@ -54,12 +53,18 @@ public class OpenCablesAndSwitches : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        inView = true;
-        text.SetActive(true);
+        if (condition)
+        {
+            inView = true;
+            text.SetActive(true);
+        }
     }
     private void OnMouseExit()
     {
-        inView = false;
-        text.SetActive(false);
+        if (!condition)
+        {
+            inView = false;
+            text.SetActive(false);
+        }
     }
 }

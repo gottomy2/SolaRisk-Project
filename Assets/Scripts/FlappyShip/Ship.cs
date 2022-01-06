@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ship : MonoBehaviour {
 
@@ -96,11 +97,12 @@ public class Ship : MonoBehaviour {
     }
 
     private IEnumerator LaunchAwayWait(){
-         yield return new WaitForSeconds(1f); 
-         TakeOff();
-         SceneShader.GetInstance().SetIsShading(true);
-         yield return new WaitForSeconds(1f);
-         //Scene change here
+        yield return new WaitForSeconds(1f); 
+        TakeOff();
+        SceneShader.GetInstance().SetIsShading(true);
+        yield return new WaitForSeconds(1f);
+        //Scene change here
+        SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 
     private void Jump() {

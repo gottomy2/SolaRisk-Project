@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class SimonGameBoard : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SimonGameBoard : MonoBehaviour
 
     public float buttonSequenceActiveDuration = 0.3f;
     public float buttonSequenceCooldownDuration = 0.1f;
+    public GlobalVars global;
 
     private int[] currentSequence;
     private int currentSequenceLength;
@@ -184,6 +186,7 @@ public class SimonGameBoard : MonoBehaviour
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
         //Change scene here
+        SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     public void HandleClick(int buttonIndex)
@@ -209,6 +212,7 @@ public class SimonGameBoard : MonoBehaviour
             BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
+            global.setVar("simonFix", true, global.hubStats);
             Proceed();
         }
     }
@@ -290,6 +294,7 @@ public class SimonGameBoard : MonoBehaviour
         if (gameMode == GameMode.InGame && lightsOn == 5)
         {
             SimonDataHandler.GetInstance().Finish();
+            global.setVar("simonBroken", false, global.hubStats);
             Proceed();
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
@@ -211,6 +212,8 @@ public class ShipController : MonoBehaviour
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
         //change scene here
+
+        SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 
     public bool CanSeeEnd()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OpenSimon : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class OpenSimon : MonoBehaviour
     public GlobalVars global;
     public float maxDistance = 4f;
 
-    private SceneSwitch sceneSwitch;
     private bool inView = false;
     private GameObject player;
     private Vector3 playerPosition;
@@ -18,7 +18,6 @@ public class OpenSimon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneSwitch = new SceneSwitch();
         player = GameObject.FindGameObjectWithTag("Player");
         condition = global.getVar("simonBroken", global.hubStats);
     }
@@ -33,7 +32,7 @@ public class OpenSimon : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                sceneSwitch.SceneByPath("Assets/Scenes/SimonSays/SimonSays.unity");
+                SceneManager.LoadScene("Assets/Scenes/SimonSays/SimonSays.unity");
             }
             if (distance > maxDistance && text.activeSelf == true)
             {
@@ -48,12 +47,18 @@ public class OpenSimon : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        inView = true;
-        text.SetActive(true);
+        if (condition)
+        {
+            inView = true;
+            text.SetActive(true);
+        }
     }
     private void OnMouseExit()
     {
-        inView = false;
-        text.SetActive(false);
+        if (!condition)
+        {
+            inView = false;
+            text.SetActive(false);
+        }
     }
 }
