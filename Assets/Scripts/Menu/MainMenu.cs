@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     {
         if (firstTime)
         {
+            GlobalDataHandler.Init(); //inits global variables
             System.IO.File.CreateText("Assets/Data/data.txt");
             firstTime = false;
         }

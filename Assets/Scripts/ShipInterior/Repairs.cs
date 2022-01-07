@@ -9,10 +9,11 @@ public class Repairs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (global.getVar("minigameFailed", global.hubStats) && !global.getVar("simonBroken", global.hubStats) && !global.getVar("wiresBroken", global.hubStats) && !global.getVar("switchesBroken", global.hubStats))
+        if (GlobalDataHandler.GetPref(GlobalDataHandler.MINIGAME_FAILED) && !GlobalDataHandler.GetPref(GlobalDataHandler.SIMON_BROKEN) && !GlobalDataHandler.GetPref(GlobalDataHandler.WIRES_BROKEN) && !GlobalDataHandler.GetPref(GlobalDataHandler.SWITCHES_BROKEN))
         {
-            global.setVar("minigameFailed", false, global.hubStats);
-            global.setVar("mapActive", true, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MINIGAME_FAILED, false);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_ACTIVE, true);
+            
         }
     }
 }

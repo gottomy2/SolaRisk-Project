@@ -33,7 +33,7 @@ public class OxygenHandler : MonoBehaviour {
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(1f);
 
-        global.setVar("planetCanLand", false, global.hubStats);
+        GlobalDataHandler.SavePref(GlobalDataHandler.PLANET_CAN_LAND, false);
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 }

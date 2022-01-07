@@ -57,8 +57,8 @@ public class FlappyDataHandler : MonoBehaviour {
 	}
 
 	public void SetIsFailed(bool isFailed) {
-		if(global.getVar("mapTutorialFinished", global.dialoguePath)){
-			global.setVar("minigameFailed", true, global.hubStats);
+		if(GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED)){
+			GlobalDataHandler.SavePref(GlobalDataHandler.MINIGAME_FAILED, true);;
 		}
 		this.hasFailed = isFailed;
 	}

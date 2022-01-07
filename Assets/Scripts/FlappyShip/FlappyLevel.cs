@@ -82,10 +82,10 @@ public class FlappyLevel : MonoBehaviour
 
     private void CloseScene(){
         SceneShader.GetInstance().SetIsShading(true);
-        if (!global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (!GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED))
         {
-            global.setVar("mapTutorialFinished", true, global.dialoguePath);
-            global.setVar("mapReset", true, global.dialoguePath);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_TUTORIAL_FINISHED, true);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_RESET, true);
         }
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
@@ -98,7 +98,7 @@ public class FlappyLevel : MonoBehaviour
 
     private void Level_OnStartedPlaying(object sender, System.EventArgs e){
         state = State.Playing;
-        if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED))
         {
             FlappyDataHandler.GetInstance().RegisterMeasureStart();
         }

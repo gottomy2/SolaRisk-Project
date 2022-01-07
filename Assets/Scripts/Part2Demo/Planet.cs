@@ -57,7 +57,7 @@ public class Planet : MonoBehaviour
 
     void FixedUpdate()
     {  
-        if (visited && global.getVar("mapActive", global.hubStats))
+        if (visited && GlobalDataHandler.GetPref(GlobalDataHandler.MAP_ACTIVE))
         {
             for (int i = 0; i < materialsCopy.Length; i++)
             {
@@ -68,7 +68,7 @@ public class Planet : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (!visited && clickable && line == null && global.getVar("mapActive",global.hubStats))
+        if (!visited && clickable && line == null && GlobalDataHandler.GetPref(GlobalDataHandler.MAP_ACTIVE))
         {
             line = Instantiate(linePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             line.name = "line";

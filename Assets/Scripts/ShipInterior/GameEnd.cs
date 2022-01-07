@@ -13,7 +13,7 @@ public class GameEnd : MonoBehaviour
     {
         if(!isEmpty(mapData.path))
         {
-            if (!mapData.firstStart && !global.getVar("minigameFailed", global.hubStats) && mapData.path[mapData.path.Count - 1].Equals("Pend"))
+            if (!mapData.firstStart && !GlobalDataHandler.GetPref(GlobalDataHandler.MINIGAME_FAILED) && mapData.path[mapData.path.Count - 1].Equals("Pend"))
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 SceneManager.LoadScene("Assets/Scenes/Fillers/FillerZF.unity");

@@ -174,7 +174,7 @@ public class SimonGameBoard : MonoBehaviour
         }
 
         ActivateNextLight();
-        CheckLigtsInGame();
+        CheckLightsInGame();
         playerHandler.SetCanClick(false);
         IncrementSequenceLength();
         IncrementScore();
@@ -213,7 +213,7 @@ public class SimonGameBoard : MonoBehaviour
             BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
-            global.setVar("simonFix", true, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.SIMON_FIX, true);
             Proceed();
         }
     }
@@ -290,12 +290,12 @@ public class SimonGameBoard : MonoBehaviour
         }
     }
 
-    private void CheckLigtsInGame()
+    private void CheckLightsInGame()
     {
         if (gameMode == GameMode.InGame && lightsOn == 5)
         {
             SimonDataHandler.GetInstance().Finish();
-            global.setVar("simonBroken", false, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.SIMON_BROKEN, false);
             Proceed();
         }
     }

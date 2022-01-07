@@ -26,7 +26,7 @@ public class FirstPersonLook : MonoBehaviour
 
         if (condition)
         {
-            if (!global.getVar("hubTutorial1", global.dialoguePath))
+            if (!GlobalDataHandler.GetPref(GlobalDataHandler.HUB_TUTORIAL1))
             {
                 Cursor.lockState = CursorLockMode.Confined;
             }
@@ -46,7 +46,7 @@ public class FirstPersonLook : MonoBehaviour
     {
         if (condition)
         {
-            if (global.getVar("hubTutorial1", global.dialoguePath))
+            if (GlobalDataHandler.GetPref(GlobalDataHandler.HUB_TUTORIAL1))
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 // Get smooth velocity.

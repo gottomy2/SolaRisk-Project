@@ -30,19 +30,19 @@ public class NameForm : MonoBehaviour
 
     public void Update()
     {
-        if(assistant1 == null && !global.getVar("intro1", global.dialoguePath))
+        if(assistant1 == null && !GlobalDataHandler.GetPref(GlobalDataHandler.INTRO1))
         {
             form.SetActive(true);
         }
 
         if(assistant2 == null)
         {
-            global.setVar("intro2", true, global.dialoguePath);
+            GlobalDataHandler.SavePref(GlobalDataHandler.INTRO2, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {
-            if (global.getVar("intro1", global.dialoguePath))
+            if (GlobalDataHandler.GetPref(GlobalDataHandler.INTRO1))
             {
                 assistant2.SetActive(true);
             }
@@ -59,15 +59,14 @@ public class NameForm : MonoBehaviour
         {
             warningText.SetActive(false);
             global.PlayerName = input.text;
-            global.setVar("intro1", true, global.dialoguePath);
-
+            GlobalDataHandler.SavePref(GlobalDataHandler.INTRO1, true);
             global.dictionary.Add(
                1, new string[] {
             "Wspaniale " + global.PlayerName,
-            "Zacznijmy od tego ¿e ka¿dy œwie¿o upieczony kapitan powinien wybraæ swój statek!",
-            "Statki oczywiœcie ró¿ni¹ siê od siebie...",
-            "Ka¿dy z nich oferuje pewnego rodzaju udogodnienia podczas podró¿y...",
-            "Och jakie ¿ycie by³oby piêkne gdyby istnia³ jeden który mia³by je wszystkie!",
+            "Zacznijmy od tego ï¿½e kaï¿½dy ï¿½wieï¿½o upieczony kapitan powinien wybraï¿½ swï¿½j statek!",
+            "Statki oczywiï¿½cie rï¿½niï¿½ siï¿½ od siebie...",
+            "Kaï¿½dy z nich oferuje pewnego rodzaju udogodnienia podczas podrï¿½y...",
+            "Och jakie ï¿½ycie byï¿½oby piï¿½kne gdyby istniaï¿½ jeden ktï¿½ry miaï¿½by je wszystkie!",
                }
            );
 

@@ -36,22 +36,21 @@ public class EventManager : MonoBehaviour
 
     private void HandleMinigameFails()
     {
-        if (global.getVar("minigameFailed", global.hubStats) 
-            && global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (GlobalDataHandler.GetPref(GlobalDataHandler.MINIGAME_FAILED)
+            && GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED))
         {
             warningText.SetActive(true);
-            global.setVar("mapActive", false, global.hubStats);
-            //global.setVar("mapAssistantActive", true, global.dialoguePath);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_ACTIVE, false);
             switch ((int) Math.Round(Random.value % 3))
             {
                 case 0:
-                    global.setVar("simonBroken", true, global.hubStats);
+                    GlobalDataHandler.SavePref(GlobalDataHandler.SIMON_BROKEN, true);
                     break;
                 case 1:
-                    global.setVar("wiresBroken", true, global.hubStats);
+                    GlobalDataHandler.SavePref(GlobalDataHandler.WIRES_BROKEN, true);
                     break;
                 case 2:
-                    global.setVar("switchesBroken", true, global.hubStats);
+                    GlobalDataHandler.SavePref(GlobalDataHandler.SWITCHES_BROKEN, true);
                     break;
             }
         }
@@ -70,23 +69,26 @@ public class EventManager : MonoBehaviour
     private void KillAssistant()
     {
         //Destroys assistant if player talked to him before or tutorial is finished
-        global.setVar("mapActive", true, global.hubStats);
-        if (global.getVar("mapTutorial1", global.dialoguePath) 
-            || global.getVar("mapTutorialFinished", global.dialoguePath))
+        Debug.Log("Killing the Assistant");
+        Debug.Log(GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL1 +", " + GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED)));
+        GlobalDataHandler.SavePref(GlobalDataHandler.MAP_ACTIVE, true);
+        if (GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL1) 
+            || GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED))
         {
             Destroy(assistant1);
-            global.setVar("mapAssistantActive", false, global.dialoguePath);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_ASSISTANT_ACTIVE, true);
+            Debug.Log("Assistant Killed");
         }
     }
 
     private void SetMapActive()
     {
-        if (!global.getVar("mapAssistantActive", global.dialoguePath) 
-            && !global.getVar("mapTutorialFinished", global.dialoguePath) 
-            && !global.getVar("mapActive", global.dialoguePath))
+        if (!GlobalDataHandler.GetPref(GlobalDataHandler.MAP_ASSISTANT_ACTIVE) 
+            && !GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED) 
+            && !GlobalDataHandler.GetPref(GlobalDataHandler.MAP_ACTIVE))
         {
             Debug.Log("Setting map active");
-            global.setVar("mapActive", true, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_ACTIVE, true);
         }
     }
 
@@ -101,64 +103,57 @@ public class EventManager : MonoBehaviour
         HandleMinigameFails();
 
         //Resets the map when tutorial is finished.
-        if (global.getVar("mapTutorialFinished", global.dialoguePath) 
-            && global.getVar("mapReset", global.dialoguePath))
+        if (GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED) 
+            && GlobalDataHandler.GetPref(GlobalDataHandler.MAP_RESET))
         {
-            global.setVar("mapReset", false, global.dialoguePath);
+            GlobalDataHandler.SavePref(GlobalDataHandler.MAP_RESET, false);
             SetTutorialFinished();
         }
         else
         {
             if (mapData.firstStart)
             {
-                global.setVar("mapTutorial1", false, global.dialoguePath);
-                global.setVar("mapTutorial2", false, global.dialoguePath);
-                if (!global.getVar("mapTutorialFinished", global.dialoguePath))
-                {
-                    global.setVar("mapAssistantActive", true, global.dialoguePath);
-                }
-                else
-                {
-                    global.setVar("mapAssistantActive", false, global.dialoguePath);
-                }
+                GlobalDataHandler.SavePref(GlobalDataHandler.MAP_TUTORIAL1, false);
+                GlobalDataHandler.SavePref(GlobalDataHandler.MAP_TUTORIAL2, false);
+                GlobalDataHandler.SavePref(
+                    GlobalDataHandler.MAP_ASSISTANT_ACTIVE,
+                    !GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED)
+                    );
             }
         }
 
         KillAssistant();
         ConfirmAssistantIsDead();
         SetMapActive();
-        flyButton.onClick.AddListener(onButtonClick);
+        flyButton.onClick.AddListener(OnButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
     {
-        if (assistant1 == null && global.getVar("mapTutorial1", global.dialoguePath)) {
-            if (global.getVar("mapTutorialFinished", global.dialoguePath))
-            {
-                global.setVar("mapTutorial1", false, global.dialoguePath);
-            }
-            else
-            {
-                global.setVar("mapTutorial1", true, global.dialoguePath);
-            }
+        if (assistant1 == null && GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL1))
+        {
+            GlobalDataHandler.SavePref(
+                GlobalDataHandler.MAP_TUTORIAL1,
+                !GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED)
+                );
         }
     }
 
-    private void onButtonClick()
+    private void OnButtonClick()
     {
         planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();
-        if (!global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (!GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL_FINISHED))
         {
-            if (!global.getVar("mapTutorial1", global.dialoguePath))
+            if (!GlobalDataHandler.GetPref(GlobalDataHandler.MAP_TUTORIAL1))
             {
-                global.setVar("mapTutorial1", true, global.dialoguePath);
+                GlobalDataHandler.SavePref(GlobalDataHandler.MAP_TUTORIAL1, true);
                 SetDifficulty(Difficulty.Easy);
                 OpenAsteroids(State.Tutorial);
             }
             else
             {
-                global.setVar("hubTutorial2", true, global.dialoguePath);
+                GlobalDataHandler.SavePref(GlobalDataHandler.HUB_TUTORIAL2, true);
                 SetDifficulty(Difficulty.Easy);
                 OpenFlappyShip(State.Tutorial);
             }
@@ -221,12 +216,12 @@ public class EventManager : MonoBehaviour
     private void ParseDifficulty()
     {
         planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
-        switch (planet.getDifficulty())
+        difficulty = planet.getDifficulty() switch
         {
-            default: difficulty = Difficulty.Easy; break;
-            case 2: difficulty = Difficulty.Medium; break;
-            case 3: difficulty = Difficulty.Hard; break;
-        }
+            2 => Difficulty.Medium,
+            3 => Difficulty.Hard,
+            _ => Difficulty.Easy
+        };
     }
 
     private void SetDifficulty(Difficulty d)

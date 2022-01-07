@@ -9,27 +9,22 @@ public class PlayerSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        if (!global.getVar("wiresBroken", global.hubStats) && global.getVar("wiresFix",global.hubStats))
+        if (!GlobalDataHandler.GetPref(GlobalDataHandler.WIRES_BROKEN) && GlobalDataHandler.GetPref(GlobalDataHandler.WIRES_FIX))
         {
-            global.setVar("wiresFix", false, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.WIRES_FIX, false);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
-        else if(!global.getVar("switchesBroken",global.hubStats) && global.getVar("switchesFix", global.hubStats))
+        else if(!GlobalDataHandler.GetPref(GlobalDataHandler.SWITCHES_BROKEN) && GlobalDataHandler.GetPref(GlobalDataHandler.SWITCHES_FIX))
         {
-            global.setVar("switchesFix", false, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.SWITCHES_FIX, false);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
 
-        if (!global.getVar("simonBroken", global.hubStats) && global.getVar("simonFix",global.hubStats))
+        if (!GlobalDataHandler.GetPref(GlobalDataHandler.SIMON_BROKEN) && GlobalDataHandler.GetPref(GlobalDataHandler.SIMON_FIX))
         {
-            global.setVar("simonFix", false, global.hubStats);
+            GlobalDataHandler.SavePref(GlobalDataHandler.SIMON_FIX, false);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
