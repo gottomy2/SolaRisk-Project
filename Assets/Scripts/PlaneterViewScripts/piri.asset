@@ -18,5 +18,5 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   visited: 0
   difficulty: 1
-  type: Alien
+  type: Frozen
   clickable: 0

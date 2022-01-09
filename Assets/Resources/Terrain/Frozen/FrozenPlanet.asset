@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afdcfa9d8b66f344957f8f3816a03d6, type: 3}
+  m_Name: FrozenPlanet
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  layers:
+  - texture: {fileID: 2800000, guid: 3ccd8e22eefa6eb409c36d261df406fe, type: 3}
+    tint: {r: 0.7877003, g: 0.84677863, b: 0.9339623, a: 0}
+    tintStrength: 1
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 30.32
+  - texture: {fileID: 2800000, guid: 92fe6289c5edfdd42831d60cc1139f07, type: 3}
+    tint: {r: 0.7793699, g: 0.990566, b: 0.9698712, a: 0}
+    tintStrength: 1
+    startHeight: 0.047
+    blendStrength: 0.071
+    textureScale: 29.34
+  - texture: {fileID: 2800000, guid: e6463dcf7b17f6f47926c5b10815ad0f, type: 3}
+    tint: {r: 0.4711819, g: 0.9247858, b: 0.9716981, a: 0}
+    tintStrength: 0.609
+    startHeight: 0.08
+    blendStrength: 0.077
+    textureScale: 35.1
+  - texture: {fileID: 2800000, guid: b2e43459047181847bccb56831754ed4, type: 3}
+    tint: {r: 0.5578676, g: 0.7116076, b: 0.8773585, a: 0}
+    tintStrength: 0.759
+    startHeight: 0.274
+    blendStrength: 0.324
+    textureScale: 34.2
+  - texture: {fileID: 2800000, guid: 4c53583afdb9a9144b2250016c264e17, type: 3}
+    tint: {r: 0.7703553, g: 0.7483802, b: 0.8679245, a: 0}
+    tintStrength: 0.735
+    startHeight: 0.456
+    blendStrength: 0.302
+    textureScale: 33.57
+  - texture: {fileID: 2800000, guid: 30a9135cab466034482823f0e3ca8cd8, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 0}
+    tintStrength: 1
+    startHeight: 0.8
+    blendStrength: 0.132
+    textureScale: 30.67
