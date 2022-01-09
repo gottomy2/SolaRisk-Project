@@ -23,13 +23,13 @@ public class Main : MonoBehaviour {
 
             if(SceneManager.GetActiveScene() == SceneManager.GetSceneByPath("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity"))
             {
-                global.setVar("wiresBroken", false, global.hubStats);
-                global.setVar("wiresFix", true, global.hubStats);
+                GlobalData.SetVar("wiresBroken", false, GlobalData.hubStats);
+                GlobalData.SetVar("wiresFix", true, GlobalData.hubStats);
             }
             else
             {
-                global.setVar("switchesBroken", false, global.hubStats);
-                global.setVar("switchesFix", true, global.hubStats);
+                GlobalData.SetVar("switchesBroken", false, GlobalData.hubStats);
+                GlobalData.SetVar("switchesFix", true, GlobalData.hubStats);
             }
             SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
         }

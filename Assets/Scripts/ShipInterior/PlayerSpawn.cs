@@ -9,20 +9,20 @@ public class PlayerSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        if (!global.getVar("wiresBroken", global.hubStats) && global.getVar("wiresFix",global.hubStats))
+        if (!GlobalData.GetVar("wiresBroken", GlobalData.hubStats) && GlobalData.GetVar("wiresFix",GlobalData.hubStats))
         {
-            global.setVar("wiresFix", false, global.hubStats);
+            GlobalData.SetVar("wiresFix", false, GlobalData.hubStats);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
-        else if(!global.getVar("switchesBroken",global.hubStats) && global.getVar("switchesFix", global.hubStats))
+        else if(!GlobalData.GetVar("switchesBroken",GlobalData.hubStats) && GlobalData.GetVar("switchesFix", GlobalData.hubStats))
         {
-            global.setVar("switchesFix", false, global.hubStats);
+            GlobalData.SetVar("switchesFix", false, GlobalData.hubStats);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
 
-        if (!global.getVar("simonBroken", global.hubStats) && global.getVar("simonFix",global.hubStats))
+        if (!GlobalData.GetVar("simonBroken", GlobalData.hubStats) && GlobalData.GetVar("simonFix",GlobalData.hubStats))
         {
-            global.setVar("simonFix", false, global.hubStats);
+            GlobalData.SetVar("simonFix", false, GlobalData.hubStats);
             player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
     }

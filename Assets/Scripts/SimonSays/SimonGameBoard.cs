@@ -213,7 +213,7 @@ public class SimonGameBoard : MonoBehaviour
             BlinkButtonsRed();
             playerHandler.SetCanType(true);
             playerHandler.SetCanClick(false);
-            global.setVar("simonFix", true, global.hubStats);
+            GlobalData.SetVar("simonFix", true, GlobalData.hubStats);
             Proceed();
         }
     }
@@ -295,7 +295,7 @@ public class SimonGameBoard : MonoBehaviour
         if (gameMode == GameMode.InGame && lightsOn == 5)
         {
             SimonDataHandler.GetInstance().Finish();
-            global.setVar("simonBroken", false, global.hubStats);
+            GlobalData.SetVar("simonBroken", false, GlobalData.hubStats);
             Proceed();
         }
     }

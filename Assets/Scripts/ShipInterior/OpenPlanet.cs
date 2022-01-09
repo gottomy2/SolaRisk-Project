@@ -22,17 +22,17 @@ public class OpenPlanet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!global.getVar("minigameFailed", global.hubStats))
+        if (!GlobalData.GetVar("minigameFailed", GlobalData.hubStats))
         {
-            global.setVar("planetCanLand", true, global.hubStats);
+            GlobalData.SetVar("planetCanLand", true, GlobalData.hubStats);
         }
         else
         {
-            global.setVar("planetVisited", false, global.hubStats);
+            GlobalData.SetVar("planetVisited", false, GlobalData.hubStats);
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
-        condition = global.getVar("planetCanLand", global.hubStats) && !global.getVar("planetVisited", global.hubStats) && !isEmpty(mapData.path);
+        condition = GlobalData.GetVar("planetCanLand", GlobalData.hubStats) && !GlobalData.GetVar("planetVisited", GlobalData.hubStats) && !isEmpty(mapData.path);
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class OpenPlanet : MonoBehaviour
                 }
 
                 SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
-                global.setVar("planetVisited", true, global.hubStats);
+                GlobalData.SetVar("planetVisited", true, GlobalData.hubStats);
             }
             if (distance > maxDistance && text.activeSelf == true)
             {

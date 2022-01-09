@@ -47,7 +47,7 @@ public class FirstPersonMovement : MonoBehaviour
             // Apply movement.
             rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
         }
-        else if (global.getVar("hubTutorial1", global.dialoguePath))
+        else if (GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
         {
             // Get targetVelocity from input.
             Vector2 targetVelocity = new Vector2(Input.GetAxis("Horizontal") * targetMovingSpeed, Input.GetAxis("Vertical") * targetMovingSpeed);

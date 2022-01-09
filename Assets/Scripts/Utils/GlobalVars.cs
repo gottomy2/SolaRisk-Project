@@ -25,7 +25,7 @@ public class GlobalVars : ScriptableObject
     public variable[] dialoguePath;
     public variable[] hubStats;
 
-    public Dictionary<int, string[]> dictionary = new Dictionary<int, string[]>()
+    public Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>()
     {
         {0, new string[] {
                 "Oho, a kogo to przywia³o?",
@@ -65,7 +65,7 @@ public class GlobalVars : ScriptableObject
         Debug.Log("Data saved to GlobalVars!\n" + data.GetWholeTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
     }
 
-    public bool getVar(string key, variable[] variables)
+    public bool GetVar(string key, variable[] variables)
     {
         bool returned = false;
         for (int i = 0; i < variables.Length; i++)
@@ -78,7 +78,7 @@ public class GlobalVars : ScriptableObject
         return returned;
     }
 
-    public void setVar(string key, bool value, variable[] variables)
+    public void SetVar(string key, bool value, variable[] variables)
     {
         Debug.Log("Key: " + key + ", value:" + value);
         for (int i = 0; i < variables.Length; i++)
