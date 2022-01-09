@@ -58,12 +58,12 @@ public class GlobalData
     public static variable[] hubStats;
 
     //MapData
-    public static bool mapDataFirstTime;
     public static bool firstStart = true;
     public static string playerPosition = "Pstart";
+
     public static List<PlanetData> planets;
-    public static List<string> path;
-    public static string lastFlightType;
+    public static List<string> path = new List<string>();
+    public static string lastFlightType = "";
 
     public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>
     {
@@ -86,7 +86,6 @@ public class GlobalData
             }
         },
     };
-
 
     public static void Init()
     {
@@ -122,6 +121,13 @@ public class GlobalData
             new variable(PLANET_VISITED, false),
             new variable(MAP_ACTIVE, false)
         };
+
+        planets = new List<PlanetData>();
+        for (int i = 0; i < 11; i++)
+        {
+            planets.Add(ScriptableObject.CreateInstance<PlanetData>());
+        }
+        
 
         isInited = true;
     }

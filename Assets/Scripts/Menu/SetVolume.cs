@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class SetVolume : MonoBehaviour
 {
-    public GlobalVars global;
     public AudioMixer mixer;
     private float volume;
     private Slider slider;

@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class NameForm : MonoBehaviour
 {
-    public GlobalVars global;
 
     private TextMeshProUGUI input;
     private Button button;
@@ -17,6 +16,7 @@ public class NameForm : MonoBehaviour
 
     void Awake()
     {
+        GlobalData.Init();
         form = GameObject.Find("Form");
         input = GameObject.Find("TextInput").GetComponent<TextMeshProUGUI>();
         warningText = GameObject.Find("warningText");

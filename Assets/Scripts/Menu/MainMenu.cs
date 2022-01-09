@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
         if (firstTime)
         {
             GlobalData.Init();
-            System.IO.File.CreateText("Assets/Data/data.txt");
+            Debug.Log("Inited stuff");
             firstTime = false;
         }
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MainHandler : MonoBehaviour
 {
-    public MapData mapData;
     public GameObject line;
     CreateMapData createMap;
     ShowPlanets showPlanets;
@@ -18,13 +17,14 @@ public class MainHandler : MonoBehaviour
         showPlanets = gameObject.GetComponent<ShowPlanets>();
         popup = FindObjectOfType<TooltipPopup>();
 
-        if (mapData.firstStart)
+        if (GlobalData.firstStart)
         {
-            mapData.playerPosition = "Pstart";
-            mapData.firstStart = false;
-            createMap.Generate(mapData);
+            GlobalData.playerPosition = "Pstart";
+            GlobalData.firstStart = false;
+            createMap.Generate();
+            Debug.Log("PLANETS SIZE = " + GlobalData.planets.Count);
         }
-        showPlanets.Show(mapData);
+        showPlanets.Show();
         popup.Deactivate();
 
         // GameObject.Find(mapData.playerPosition)
@@ -36,7 +36,7 @@ public class MainHandler : MonoBehaviour
     }
     public void ChangePlayerPosition(string name)
     {
-        mapData.playerPosition = name;
+        GlobalData.playerPosition = name;
         if (name != "Pend")
         {
             char[] x = name.ToCharArray();
@@ -67,7 +67,7 @@ public class MainHandler : MonoBehaviour
             }
         }
 
-        mapData.path.Add(name);
+        GlobalData.path.Add(name);
         SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
         SaveVisitChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().isVisited());
     }

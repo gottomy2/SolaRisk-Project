@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 public class EventManager : MonoBehaviour
 {
     public Button flyButton;
-    public MapData mapData;
-    public GlobalVars global;
     public GameObject assistant1;
     public GameObject warningText;  
     
@@ -109,7 +107,7 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            if (mapData.firstStart)
+            if (GlobalData.firstStart)
             {
                 GlobalData.SetVar("mapTutorial1", false, GlobalData.dialoguePath);
                 GlobalData.SetVar("mapTutorial2", false, GlobalData.dialoguePath);
@@ -146,7 +144,7 @@ public class EventManager : MonoBehaviour
 
     private void onButtonClick()
     {
-        planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
+        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
@@ -190,7 +188,7 @@ public class EventManager : MonoBehaviour
         else
         {
             //Going to the dialogue when no event occured
-            mapData.lastFlightType = "Safe";
+            GlobalData.lastFlightType = "Safe";
             Debug.Log("No event occured");
         }
     }
@@ -198,29 +196,29 @@ public class EventManager : MonoBehaviour
     private void OpenAsteroids(State state)
     {
         Debug.Log("["+ state + "]: Asteroids Minigame occured");
-        mapData.lastFlightType = "Asteroids";
+        GlobalData.lastFlightType = "Asteroids";
         SceneDifficultyHandler.OpenAsteroids(difficulty);
     }
 
     private void OpenFlappyShip(State state)
     {
         Debug.Log("["+ state + "]: OpenFlappyShip Minigame occured");
-        mapData.lastFlightType = "FlappyShip";
+        GlobalData.lastFlightType = "FlappyShip";
         SceneDifficultyHandler.OpenFlappyShip(difficulty);
     }
 
     private void SetTutorialFinished()
     {
-        mapData.firstStart = true;
-        mapData.lastFlightType = "";
-        mapData.playerPosition = "Pstart";
-        mapData.path = null;
+        GlobalData.firstStart = true;
+        GlobalData.lastFlightType = "";
+        GlobalData.playerPosition = "Pstart";
+        GlobalData.path = null;
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     private void ParseDifficulty()
     {
-        planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
+        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         switch (planet.getDifficulty())
         {
             default: difficulty = Difficulty.Easy; break;

@@ -6,14 +6,11 @@ using System.Linq;
 
 public class GameEnd : MonoBehaviour
 {
-    public GlobalVars global;
-    public MapData mapData;
-
     private void Update()
     {
-        if(!isEmpty(mapData.path))
+        if(!isEmpty(GlobalData.path))
         {
-            if (!mapData.firstStart && !GlobalData.GetVar("minigameFailed", GlobalData.hubStats) && mapData.path[mapData.path.Count - 1].Equals("Pend"))
+            if (!GlobalData.firstStart && !GlobalData.GetVar("minigameFailed", GlobalData.hubStats) && GlobalData.path[GlobalData.path.Count - 1].Equals("Pend"))
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 SceneManager.LoadScene("Assets/Scenes/Fillers/FillerZF.unity");
