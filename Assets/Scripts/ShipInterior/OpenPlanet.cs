@@ -7,10 +7,8 @@ using System.Linq;
 public class OpenPlanet : MonoBehaviour
 {
     public GameObject text;
-    public GlobalVars global;
     public float maxDistance = 4f;
     public PlanetData planetData;
-    public MapData mapData;
 
     private bool inView = false;
     private GameObject player;
@@ -22,17 +20,17 @@ public class OpenPlanet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!global.getVar("minigameFailed", global.hubStats))
+        if (!GlobalData.GetVar("minigameFailed", GlobalData.hubStats))
         {
-            global.setVar("planetCanLand", true, global.hubStats);
+            GlobalData.SetVar("planetCanLand", true, GlobalData.hubStats);
         }
         else
         {
-            global.setVar("planetVisited", false, global.hubStats);
+            GlobalData.SetVar("planetVisited", false, GlobalData.hubStats);
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
-        condition = global.getVar("planetCanLand", global.hubStats) && !global.getVar("planetVisited", global.hubStats) && !isEmpty(mapData.path);
+        condition = GlobalData.GetVar("planetCanLand", GlobalData.hubStats) && !GlobalData.GetVar("planetVisited", GlobalData.hubStats) && !isEmpty(GlobalData.path);
     }
 
     // Update is called once per frame
@@ -46,19 +44,19 @@ public class OpenPlanet : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
                 //setting the planet to the correct type
-                currentPlanetName = mapData.path[mapData.path.Count - 1];
-                for (int i = 0; i < mapData.planets.Count; i++)
+                currentPlanetName = GlobalData.path[GlobalData.path.Count - 1];
+                for (int i = 0; i < GlobalData.planets.Count; i++)
                 {
-                    if (mapData.planets[i].name == currentPlanetName)
+                    if (GlobalData.planets[i].name == currentPlanetName)
                     {
-                        planetData.name = mapData.planets[i].planetName;
-                        planetData.type = mapData.planets[i].type;
+                        planetData.name = GlobalData.planets[i].planetName;
+                        planetData.type = GlobalData.planets[i].type;
                         break;
                     }
                 }
 
                 SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
-                global.setVar("planetVisited", true, global.hubStats);
+                GlobalData.SetVar("planetVisited", true, GlobalData.hubStats);
             }
             if (distance > maxDistance && text.activeSelf == true)
             {

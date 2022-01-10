@@ -7,7 +7,6 @@ using TMPro;
 
 public class Assistant : MonoBehaviour
 {
-    public GlobalVars global;
     public int numerator;
 
     private Text messageText;
@@ -36,7 +35,7 @@ public class Assistant : MonoBehaviour
         }
         else
         {
-            string[] messageArray = global.dictionary[numerator];
+            string[] messageArray = GlobalData.DIALOGUE_DICTIONARY[numerator];
             if (pressedCount >= messageArray.Length)
             {
                 hideAndDestroyAssistant();

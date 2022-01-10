@@ -19,7 +19,7 @@ public class OpenSimon : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        condition = global.getVar("simonBroken", global.hubStats);
+        condition = GlobalData.GetVar("simonBroken", GlobalData.hubStats);
     }
 
     // Update is called once per frame

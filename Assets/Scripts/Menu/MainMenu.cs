@@ -13,7 +13,8 @@ public class MainMenu : MonoBehaviour
     {
         if (firstTime)
         {
-            System.IO.File.CreateText("Assets/Data/data.txt");
+            GlobalData.Init();
+            Debug.Log("Inited stuff");
             firstTime = false;
         }
     }

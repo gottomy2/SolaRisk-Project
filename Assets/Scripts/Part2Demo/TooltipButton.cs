@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class TooltipButton : MonoBehaviour
 {
     private string planetName;
-    private MapData mapData;
     MainHandler mainHandler;
     Button button;
     TooltipPopup popup;
@@ -12,8 +11,7 @@ public class TooltipButton : MonoBehaviour
     {
         mainHandler = FindObjectOfType<MainHandler>();
         popup = FindObjectOfType<TooltipPopup>();
-        mapData = mainHandler.mapData;
-        planetName = mainHandler.mapData.playerPosition;
+        planetName = GlobalData.playerPosition;
 
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(Fly);

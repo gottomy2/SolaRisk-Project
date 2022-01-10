@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 public class EventManager : MonoBehaviour
 {
     public Button flyButton;
-    public MapData mapData;
-    public GlobalVars global;
     public GameObject assistant1;
     public GameObject warningText;  
     
@@ -36,22 +34,22 @@ public class EventManager : MonoBehaviour
 
     private void HandleMinigameFails()
     {
-        if (global.getVar("minigameFailed", global.hubStats) 
-            && global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats) 
+            && GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             warningText.SetActive(true);
-            global.setVar("mapActive", false, global.hubStats);
-            //global.setVar("mapAssistantActive", true, global.dialoguePath);
+            GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
+            //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
             switch ((int) Math.Round(Random.value % 3))
             {
                 case 0:
-                    global.setVar("simonBroken", true, global.hubStats);
+                    GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
                     break;
                 case 1:
-                    global.setVar("wiresBroken", true, global.hubStats);
+                    GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
                     break;
                 case 2:
-                    global.setVar("switchesBroken", true, global.hubStats);
+                    GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
                     break;
             }
         }
@@ -59,10 +57,10 @@ public class EventManager : MonoBehaviour
 
     private void SetTutorialDialogue()
     {
-        if (!global.dictionary.ContainsKey(3))
+        if (!GlobalData.DIALOGUE_DICTIONARY.ContainsKey(3))
         {
-            TUTORIAL_DIALOGUE[0] = global.PlayerName + TUTORIAL_DIALOGUE[0];
-            global.dictionary.Add(3, TUTORIAL_DIALOGUE);
+            TUTORIAL_DIALOGUE[0] = GlobalData.playerName + TUTORIAL_DIALOGUE[0];
+            GlobalData.DIALOGUE_DICTIONARY.Add(3, TUTORIAL_DIALOGUE);
         }
     }
 
@@ -70,23 +68,23 @@ public class EventManager : MonoBehaviour
     private void KillAssistant()
     {
         //Destroys assistant if player talked to him before or tutorial is finished
-        global.setVar("mapActive", true, global.hubStats);
-        if (global.getVar("mapTutorial1", global.dialoguePath) 
-            || global.getVar("mapTutorialFinished", global.dialoguePath))
+        GlobalData.SetVar("mapActive", true, GlobalData.hubStats);
+        if (GlobalData.GetVar("mapTutorial1", GlobalData.dialoguePath) 
+            || GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             Destroy(assistant1);
-            global.setVar("mapAssistantActive", false, global.dialoguePath);
+            GlobalData.SetVar("mapAssistantActive", false, GlobalData.dialoguePath);
         }
     }
 
     private void SetMapActive()
     {
-        if (!global.getVar("mapAssistantActive", global.dialoguePath) 
-            && !global.getVar("mapTutorialFinished", global.dialoguePath) 
-            && !global.getVar("mapActive", global.dialoguePath))
+        if (!GlobalData.GetVar("mapAssistantActive", GlobalData.dialoguePath) 
+            && !GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath) 
+            && !GlobalData.GetVar("mapActive", GlobalData.dialoguePath))
         {
             Debug.Log("Setting map active");
-            global.setVar("mapActive", true, global.hubStats);
+            GlobalData.SetVar("mapActive", true, GlobalData.hubStats);
         }
     }
 
@@ -101,25 +99,25 @@ public class EventManager : MonoBehaviour
         HandleMinigameFails();
 
         //Resets the map when tutorial is finished.
-        if (global.getVar("mapTutorialFinished", global.dialoguePath) 
-            && global.getVar("mapReset", global.dialoguePath))
+        if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath) 
+            && GlobalData.GetVar("mapReset", GlobalData.dialoguePath))
         {
-            global.setVar("mapReset", false, global.dialoguePath);
+            GlobalData.SetVar("mapReset", false, GlobalData.dialoguePath);
             SetTutorialFinished();
         }
         else
         {
-            if (mapData.firstStart)
+            if (GlobalData.firstStart)
             {
-                global.setVar("mapTutorial1", false, global.dialoguePath);
-                global.setVar("mapTutorial2", false, global.dialoguePath);
-                if (!global.getVar("mapTutorialFinished", global.dialoguePath))
+                GlobalData.SetVar("mapTutorial1", false, GlobalData.dialoguePath);
+                GlobalData.SetVar("mapTutorial2", false, GlobalData.dialoguePath);
+                if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
                 {
-                    global.setVar("mapAssistantActive", true, global.dialoguePath);
+                    GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
                 }
                 else
                 {
-                    global.setVar("mapAssistantActive", false, global.dialoguePath);
+                    GlobalData.SetVar("mapAssistantActive", false, GlobalData.dialoguePath);
                 }
             }
         }
@@ -132,33 +130,33 @@ public class EventManager : MonoBehaviour
 
     private void ConfirmAssistantIsDead()
     {
-        if (assistant1 == null && global.getVar("mapTutorial1", global.dialoguePath)) {
-            if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (assistant1 == null && GlobalData.GetVar("mapTutorial1", GlobalData.dialoguePath)) {
+            if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
             {
-                global.setVar("mapTutorial1", false, global.dialoguePath);
+                GlobalData.SetVar("mapTutorial1", false, GlobalData.dialoguePath);
             }
             else
             {
-                global.setVar("mapTutorial1", true, global.dialoguePath);
+                GlobalData.SetVar("mapTutorial1", true, GlobalData.dialoguePath);
             }
         }
     }
 
     private void onButtonClick()
     {
-        planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
+        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();
-        if (!global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
-            if (!global.getVar("mapTutorial1", global.dialoguePath))
+            if (!GlobalData.GetVar("mapTutorial1", GlobalData.dialoguePath))
             {
-                global.setVar("mapTutorial1", true, global.dialoguePath);
+                GlobalData.SetVar("mapTutorial1", true, GlobalData.dialoguePath);
                 SetDifficulty(Difficulty.Easy);
                 OpenAsteroids(State.Tutorial);
             }
             else
             {
-                global.setVar("hubTutorial2", true, global.dialoguePath);
+                GlobalData.SetVar("hubTutorial2", true, GlobalData.dialoguePath);
                 SetDifficulty(Difficulty.Easy);
                 OpenFlappyShip(State.Tutorial);
             }
@@ -190,7 +188,7 @@ public class EventManager : MonoBehaviour
         else
         {
             //Going to the dialogue when no event occured
-            mapData.lastFlightType = "Safe";
+            GlobalData.lastFlightType = "Safe";
             Debug.Log("No event occured");
         }
     }
@@ -198,29 +196,29 @@ public class EventManager : MonoBehaviour
     private void OpenAsteroids(State state)
     {
         Debug.Log("["+ state + "]: Asteroids Minigame occured");
-        mapData.lastFlightType = "Asteroids";
+        GlobalData.lastFlightType = "Asteroids";
         SceneDifficultyHandler.OpenAsteroids(difficulty);
     }
 
     private void OpenFlappyShip(State state)
     {
         Debug.Log("["+ state + "]: OpenFlappyShip Minigame occured");
-        mapData.lastFlightType = "FlappyShip";
+        GlobalData.lastFlightType = "FlappyShip";
         SceneDifficultyHandler.OpenFlappyShip(difficulty);
     }
 
     private void SetTutorialFinished()
     {
-        mapData.firstStart = true;
-        mapData.lastFlightType = "";
-        mapData.playerPosition = "Pstart";
-        mapData.path = null;
+        GlobalData.firstStart = true;
+        GlobalData.lastFlightType = "";
+        GlobalData.playerPosition = "Pstart";
+        GlobalData.path = null;
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     private void ParseDifficulty()
     {
-        planet = GameObject.Find(mapData.playerPosition).GetComponent<Planet>();
+        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         switch (planet.getDifficulty())
         {
             default: difficulty = Difficulty.Easy; break;

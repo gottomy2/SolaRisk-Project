@@ -140,9 +140,9 @@ public class ShipController : MonoBehaviour
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
         StartCoroutine(TriggerSceneChange());
-        if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
-            global.setVar("minigameFailed", true, global.hubStats);
+            GlobalData.SetVar("minigameFailed", true, GlobalData.hubStats);
         }
     }
 
@@ -175,7 +175,7 @@ public class ShipController : MonoBehaviour
 
     private void StartCounting()
     {
-        if (global.getVar("mapTutorialFinished", global.dialoguePath))
+        if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             AsteroidDataHandler.GetInstance().RegisterMeasureStart();
         }

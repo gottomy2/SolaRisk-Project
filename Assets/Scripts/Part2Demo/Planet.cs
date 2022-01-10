@@ -9,10 +9,8 @@ public class Planet : MonoBehaviour
     private int difficulty;
     private string type;
     private bool clickable;
-
-    private MapData mapData;
+    
     public float rotationOffset = 20f;
-    public GlobalVars global;
 
     Material[] materials;
     Color[] materialsCopy;
@@ -27,7 +25,6 @@ public class Planet : MonoBehaviour
     void Awake()
     {
         mainHandler = FindObjectOfType<MainHandler>();
-        mapData = mainHandler.mapData;
         materials = GetComponent<Renderer>().materials;
         materialsCopy = new Color[materials.Length];
         linePrefab = mainHandler.line;
@@ -57,7 +54,7 @@ public class Planet : MonoBehaviour
 
     void FixedUpdate()
     {  
-        if (visited && global.getVar("mapActive", global.hubStats))
+        if (visited && GlobalData.GetVar("mapActive", GlobalData.hubStats))
         {
             for (int i = 0; i < materialsCopy.Length; i++)
             {
@@ -68,11 +65,11 @@ public class Planet : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (!visited && clickable && line == null && global.getVar("mapActive",global.hubStats))
+        if (!visited && clickable && line == null && GlobalData.GetVar("mapActive",GlobalData.hubStats))
         {
             line = Instantiate(linePrefab, new Vector3(0, 0, 0), Quaternion.identity);
             line.name = "line";
-            var playerPosition = GameObject.Find(mapData.playerPosition);
+            var playerPosition = GameObject.Find(GlobalData.playerPosition);
             LineController lineController = line.GetComponent<LineController>();
             Transform[] points = new Transform[2];
             points[0] = playerPosition.transform;

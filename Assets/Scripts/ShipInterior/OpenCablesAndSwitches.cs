@@ -19,7 +19,7 @@ public class OpenCablesAndSwitches : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        condition = (global.getVar("wiresBroken", global.hubStats) || global.getVar("switchesBroken", global.hubStats));
+        condition = (GlobalData.GetVar("wiresBroken", GlobalData.hubStats) || GlobalData.GetVar("switchesBroken", GlobalData.hubStats));
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class OpenCablesAndSwitches : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                if(global.getVar("wiresBroken", global.hubStats)){
+                if(GlobalData.GetVar("wiresBroken", GlobalData.hubStats)){
                     SceneManager.LoadScene("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity");
                 }
                 else
