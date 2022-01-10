@@ -14,6 +14,7 @@ public class Main : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+        Cursor.lockState = CursorLockMode.Confined;
     }
     
     public void SwitchChange(int points) {

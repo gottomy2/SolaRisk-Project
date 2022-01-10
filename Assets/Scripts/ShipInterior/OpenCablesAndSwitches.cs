@@ -31,7 +31,6 @@ public class OpenCablesAndSwitches : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
-                Cursor.lockState = CursorLockMode.Confined;
                 if(GlobalData.GetVar("wiresBroken", GlobalData.hubStats)){
                     SceneManager.LoadScene("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity");
                 }
