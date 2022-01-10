@@ -17,8 +17,6 @@ public class EpilogueHandler : MonoBehaviour
     private const int YELLOW_CHOICE = 2;
     private const int RED_CHOICE = 3;
 
-    [SerializeField] private GlobalVars globalVars;
-
     private List<IData> data;
     private List<int> choices;
     private List<bool> visits;
@@ -36,13 +34,9 @@ public class EpilogueHandler : MonoBehaviour
 
     private void Awake()
     {
-        data = globalVars.dataList;
-        choices = globalVars.difficultyChoicesList;
-        visits = globalVars.visitedChoicesList;
-
-        // choices.Clear();
-        // data.Clear();
-        // visits.Clear();
+        data = GlobalData.dataList;
+        choices = GlobalData.difficultyChoicesList;
+        visits = GlobalData.visitedChoicesList;
 
         minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
         minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
@@ -94,9 +88,9 @@ public class EpilogueHandler : MonoBehaviour
         }
         else
         {
-            greenChoices.text = String.Empty;
+            greenChoices.text = string.Empty;
             yellowChoices.text = DEFAULT_DATA;
-            redChoices.text = String.Empty;
+            redChoices.text = string.Empty;
         }
     }
 

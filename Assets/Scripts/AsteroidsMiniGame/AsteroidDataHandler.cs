@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidDataHandler : MonoBehaviour {
-    
-	[SerializeField]
-	private GlobalVars globalVars;
 
 	private bool hasFailed;
 
@@ -36,10 +33,13 @@ public class AsteroidDataHandler : MonoBehaviour {
 	}
 
 	public void RegisterMeasureEnd(){
-		isRegistering = false;
-		Debug.Log("Whole Time: " + wholeTime + ", all shoots: " + shoots);
-		Debug.Log("All clicks: " + clicks);
-		globalVars.SaveData(new AsteroidData(wholeTime, shoots, clicks, !hasFailed));
+		if (isRegistering)
+		{
+			isRegistering = false;
+			Debug.Log("Whole Time: " + wholeTime + ", all shoots: " + shoots);
+			Debug.Log("All clicks: " + clicks);
+			GlobalData.SaveData(new AsteroidData(wholeTime, shoots, clicks, !hasFailed));
+		}
 	}
 
 	public void Update(){

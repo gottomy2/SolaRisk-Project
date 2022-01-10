@@ -7,7 +7,6 @@ public class MainHandler : MonoBehaviour
     CreateMapData createMap;
     ShowPlanets showPlanets;
     public TooltipPopup popup;
-    public GlobalVars globalVars;
     private string playerName;
 
     private void Start()
@@ -29,11 +28,7 @@ public class MainHandler : MonoBehaviour
 
         // GameObject.Find(mapData.playerPosition)
     }
-
-    void Update()
-    {
-
-    }
+    
     public void ChangePlayerPosition(string name)
     {
         GlobalData.playerPosition = name;
@@ -74,11 +69,11 @@ public class MainHandler : MonoBehaviour
 
     private void SaveDifficultyChoiceToProcess(int choice)
     {
-        globalVars.SaveDifficultyChoice(choice);
+        GlobalData.SaveDifficultyChoice(choice);
     }
 
     private void SaveVisitChoiceToProcess(bool isVisited)
     {
-        globalVars.SaveVisitChoice(isVisited);
+        GlobalData.SaveVisitChoice(isVisited);
     }
 }

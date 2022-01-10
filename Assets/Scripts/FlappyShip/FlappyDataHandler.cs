@@ -1,9 +1,6 @@
 using UnityEngine;
 
 public class FlappyDataHandler : MonoBehaviour {
-	
-	[SerializeField]
-	private GlobalVars globalVars;
 
 	private bool hasFailed;
 
@@ -12,8 +9,6 @@ public class FlappyDataHandler : MonoBehaviour {
 	private float wholeTime;
 
 	private int jumps;
-
-	public GlobalVars global;
 
 	private static FlappyDataHandler instance;
 
@@ -34,9 +29,12 @@ public class FlappyDataHandler : MonoBehaviour {
 	}
 
 	public void RegisterMeasureEnd(){
-		isRegistering = false;
-		Debug.Log("Whole Time: " + wholeTime + ", all jumps: " + jumps);
-		globalVars.SaveData(new FlappyData(wholeTime, jumps, !hasFailed));
+		if (isRegistering)
+		{
+			isRegistering = false;
+			Debug.Log("Whole Time: " + wholeTime + ", all jumps: " + jumps);
+			GlobalData.SaveData(new FlappyData(wholeTime, jumps, !hasFailed));
+		}
 	}
 
 	public void Update(){

@@ -7,7 +7,6 @@ public class FirstPersonLook : MonoBehaviour
     Transform character;
     public float sensitivity = 2;
     public float smoothing = 1.5f;
-    public GlobalVars global;
     private bool condition;
 
     Vector2 velocity;

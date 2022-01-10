@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class OpenSimon : MonoBehaviour
 {
     public GameObject text;
-    public GlobalVars global;
     public float maxDistance = 4f;
 
     private bool inView = false;
