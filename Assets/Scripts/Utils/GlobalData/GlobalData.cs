@@ -64,6 +64,11 @@ public class GlobalData
     public static List<PlanetData> planets;
     public static List<string> path = new List<string>();
     public static string lastFlightType = "";
+    
+    //Risk Data
+    public static List<int> difficultyChoicesList;
+    public static List<bool> visitedChoicesList;
+    public static List<IData> dataList;
 
     public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>
     {
@@ -127,8 +132,11 @@ public class GlobalData
         {
             planets.Add(ScriptableObject.CreateInstance<PlanetData>());
         }
+    
+        difficultyChoicesList = new List<int>();
+        visitedChoicesList = new List<bool>();
+        dataList = new List<IData>();
         
-
         isInited = true;
     }
     
@@ -158,4 +166,20 @@ public class GlobalData
             }
         }
     }
+    
+    public static void SaveDifficultyChoice(int choice)
+    {
+        difficultyChoicesList.Add(choice);
+        Debug.Log("Saved difficulty choice: " + choice);
+    }
+    public static void SaveVisitChoice(bool isVisited)
+    {
+        visitedChoicesList.Add(isVisited);
+        Debug.Log("Saved planet visit: " + isVisited);
+    }
+    public static void SaveData(IData data){
+        dataList.Add(data);
+        Debug.Log("Data saved: " + data.GetWholeTime() + ", " + data.GetClicks() + ", " + data.GetHasFinished());
+    }
+
 }

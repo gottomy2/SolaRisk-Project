@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour {
    
     public static Main Instance;
-    public GlobalVars global;
-    
+
     public int switchCount;
     public GameObject winText;
     private int _onCount = 0;

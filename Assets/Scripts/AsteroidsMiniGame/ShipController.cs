@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
-    public GlobalVars global;
     public GameObject explosion;
     public GameObject projectilePrefab;
     public AudioClip explosionSound;
@@ -135,6 +134,9 @@ public class ShipController : MonoBehaviour
 
     private void TriggerDeath()
     {
+        if (isDead)
+            return;
+            
         isDead = true;
         canShoot = false;
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
@@ -225,8 +227,6 @@ public class ShipController : MonoBehaviour
         SceneShader.GetInstance().SetShadeSpeed(2f);
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
-        //change scene here
-
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 

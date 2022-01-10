@@ -1,10 +1,7 @@
 using UnityEngine;
 
 public class SimonDataHandler : MonoBehaviour {
-
-	[SerializeField]
-	private GlobalVars globalVars;
-
+	
 	private bool hasFailed;
 
 	private bool isRegistering;
@@ -46,12 +43,10 @@ public class SimonDataHandler : MonoBehaviour {
 	public void RegisterClick(){
 		clicksNum++;
 		RegisterMeasureEnd();
-		Debug.Log("Clicks: " + clicksNum + ", current measure: " 
-		          + measureResponseTime + ", overall responseTime: " + responseTime);
 	}
 
 	public void Finish(){
-		globalVars.SaveData(new SimonData(responseTime, clicksNum, !hasFailed));
+		GlobalData.SaveData(new SimonData(responseTime, clicksNum, !hasFailed));
 	}
 
 	public bool IsRegistering(){

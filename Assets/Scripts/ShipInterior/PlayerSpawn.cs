@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerSpawn : MonoBehaviour
 {
-    public GlobalVars global;
     public GameObject player;
     // Start is called before the first frame update
     void Start()
     {   
+        SceneShader.GetInstance().SetShadeSpeed(3f);
+        SceneShader.GetInstance().SetIsLighting(true);
+        
         if (!GlobalData.GetVar("wiresBroken", GlobalData.hubStats) && GlobalData.GetVar("wiresFix",GlobalData.hubStats))
         {
             GlobalData.SetVar("wiresFix", false, GlobalData.hubStats);
@@ -30,6 +32,9 @@ public class PlayerSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (SceneShader.GetInstance().GetCurrentOpacity() == 0)
+        {
+            SceneShader.GetInstance().DestroyCurtain();
+        }
     }
 }

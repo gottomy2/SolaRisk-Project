@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class OpenCablesAndSwitches : MonoBehaviour
 {
     public GameObject text;
-    public GlobalVars global;
     public float maxDistance = 4f;
 
     private bool inView = false;

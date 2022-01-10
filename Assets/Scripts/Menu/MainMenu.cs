@@ -14,7 +14,6 @@ public class MainMenu : MonoBehaviour
         if (firstTime)
         {
             GlobalData.Init();
-            Debug.Log("Inited stuff");
             firstTime = false;
         }
     }
