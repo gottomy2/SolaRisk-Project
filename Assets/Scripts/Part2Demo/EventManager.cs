@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     
     private Planet planet;
     private Difficulty difficulty;
+    private bool mapFirst = true;
     private enum State
     {
         Tutorial,
@@ -68,7 +69,6 @@ public class EventManager : MonoBehaviour
     private void KillAssistant()
     {
         //Destroys assistant if player talked to him before or tutorial is finished
-        GlobalData.SetVar("mapActive", true, GlobalData.hubStats);
         if (GlobalData.GetVar("mapTutorial1", GlobalData.dialoguePath) 
             || GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
@@ -79,18 +79,22 @@ public class EventManager : MonoBehaviour
 
     private void SetMapActive()
     {
-        if (!GlobalData.GetVar("mapAssistantActive", GlobalData.dialoguePath) 
-            && !GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath) 
-            && !GlobalData.GetVar("mapActive", GlobalData.dialoguePath))
+        //Sets map active when assistant is killed for the first time:
+        if (assistant1 == null && mapFirst)
         {
-            Debug.Log("Setting map active");
             GlobalData.SetVar("mapActive", true, GlobalData.hubStats);
+            mapFirst = false;
+        }
+        //Sets map inactive when minigame was failed
+        else if (warningText.active) {
+            GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
         }
     }
 
     private void Update()
     {
         ParseDifficulty();
+        SetMapActive();
     }
     
     private void Awake()
@@ -124,7 +128,6 @@ public class EventManager : MonoBehaviour
 
         KillAssistant();
         ConfirmAssistantIsDead();
-        SetMapActive();
         flyButton.onClick.AddListener(onButtonClick);
     }
 

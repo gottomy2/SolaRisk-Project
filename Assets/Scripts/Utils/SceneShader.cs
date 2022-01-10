@@ -22,6 +22,22 @@ public class SceneShader : MonoBehaviour {
         return instance;
     }
 
+    public void DestroyCurtain()
+    {
+        if (blackCurtain != null)
+        {
+            Destroy(blackCurtain);
+        }
+    }
+
+    public void InstantiateCurtain()
+    {
+        if (blackCurtain == null)
+        {
+            blackCurtain = Instantiate(blackCurtain);
+        }
+    }
+
     private void Awake(){
         instance = this;
         currentOpacity = FULL_SOLID;
@@ -33,7 +49,11 @@ public class SceneShader : MonoBehaviour {
             blackCurtain.GetComponent<Image>().color = new Color32(0, 0, 0, (byte) currentOpacity);
     }
 
-    void Update(){
+    void Update() {
+        
+        if (blackCurtain == null)
+            return;
+        
         if(isShading){
             AddToSolid();
         }

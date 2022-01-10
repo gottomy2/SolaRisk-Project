@@ -15,7 +15,6 @@ public class SimonGameBoard : MonoBehaviour
 
     public float buttonSequenceActiveDuration = 0.3f;
     public float buttonSequenceCooldownDuration = 0.1f;
-    public GlobalVars global;
 
     private int[] currentSequence;
     private int currentSequenceLength;

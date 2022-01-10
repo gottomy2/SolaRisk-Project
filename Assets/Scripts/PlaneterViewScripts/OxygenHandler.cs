@@ -9,7 +9,6 @@ public class OxygenHandler : MonoBehaviour {
     private Text m_OxygenLevel;
     private const float m_maxTime = 60f;
     private float m_OxygenTimer;
-    public GlobalVars global;
 
     void Start() {
         m_OxygenLevel = GameObject.Find("OxygenMeter").GetComponent<Text>();

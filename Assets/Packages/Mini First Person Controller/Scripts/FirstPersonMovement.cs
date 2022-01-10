@@ -11,7 +11,6 @@ public class FirstPersonMovement : MonoBehaviour
     public bool IsRunning { get; private set; }
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
-    public GlobalVars global;
     private bool condition;
 
     Rigidbody rigidbody;

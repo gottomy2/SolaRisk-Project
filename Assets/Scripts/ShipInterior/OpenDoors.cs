@@ -6,7 +6,6 @@ public class OpenDoors : MonoBehaviour
 {
     public GameObject doors;
     public GameObject text;
-    public GlobalVars global;
     public float maxDistance = 4f;
     private Animator animator;
     private bool inView = false;

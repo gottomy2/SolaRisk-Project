@@ -37,9 +37,6 @@ public class FlappyLevel : MonoBehaviour
 
     private GameObject startText;
 
-    [SerializeField]
-    public GlobalVars global;
-
     public enum State {
         WaitingToStart,
         Playing,
@@ -80,13 +77,15 @@ public class FlappyLevel : MonoBehaviour
         SceneShader.GetInstance().SetIsLighting(true);
     }
 
-    private void CloseScene(){
+    private IEnumerator CloseScene(){
         SceneShader.GetInstance().SetIsShading(true);
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             GlobalData.SetVar("mapTutorialFinished", true, GlobalData.dialoguePath);
             GlobalData.SetVar("mapReset", true, GlobalData.dialoguePath);
         }
+
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 
@@ -112,7 +111,7 @@ public class FlappyLevel : MonoBehaviour
             FlappyDataHandler.GetInstance().SetIsFailed(true);
             FlappyDataHandler.GetInstance().RegisterMeasureEnd();
             SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
-            CloseScene();
+            StartCoroutine(CloseScene());
         }
     }
 
