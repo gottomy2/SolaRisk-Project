@@ -88,11 +88,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        ParseDifficulty();
-    }
-    
     private void Awake()
     {
         SetTutorialDialogue();
@@ -125,7 +120,7 @@ public class EventManager : MonoBehaviour
         KillAssistant();
         ConfirmAssistantIsDead();
         SetMapActive();
-        flyButton.onClick.AddListener(onButtonClick);
+        flyButton.onClick.AddListener(OnButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
@@ -142,7 +137,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void onButtonClick()
+    private void OnButtonClick()
     {
         planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();
@@ -195,14 +190,14 @@ public class EventManager : MonoBehaviour
 
     private void OpenAsteroids(State state)
     {
-        Debug.Log("["+ state + "]: Asteroids Minigame occured");
+        Debug.Log("["+ state + "]: Asteroids Minigame occured with difficulty: " + difficulty);
         GlobalData.lastFlightType = "Asteroids";
         SceneDifficultyHandler.OpenAsteroids(difficulty);
     }
 
     private void OpenFlappyShip(State state)
     {
-        Debug.Log("["+ state + "]: OpenFlappyShip Minigame occured");
+        Debug.Log("["+ state + "]: OpenFlappyShip Minigame occured with difficulty: " + difficulty);
         GlobalData.lastFlightType = "FlappyShip";
         SceneDifficultyHandler.OpenFlappyShip(difficulty);
     }
@@ -218,7 +213,6 @@ public class EventManager : MonoBehaviour
 
     private void ParseDifficulty()
     {
-        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         switch (planet.getDifficulty())
         {
             default: difficulty = Difficulty.Easy; break;

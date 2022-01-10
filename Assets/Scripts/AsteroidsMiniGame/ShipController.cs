@@ -227,8 +227,6 @@ public class ShipController : MonoBehaviour
         SceneShader.GetInstance().SetShadeSpeed(2f);
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SECONDS_BEFORE_SCENE_CHANGE);
-        //change scene here
-
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 

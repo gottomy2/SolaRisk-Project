@@ -43,8 +43,6 @@ public class SimonDataHandler : MonoBehaviour {
 	public void RegisterClick(){
 		clicksNum++;
 		RegisterMeasureEnd();
-		Debug.Log("Clicks: " + clicksNum + ", current measure: " 
-		          + measureResponseTime + ", overall responseTime: " + responseTime);
 	}
 
 	public void Finish(){
