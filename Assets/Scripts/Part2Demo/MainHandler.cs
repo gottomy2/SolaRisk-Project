@@ -1,4 +1,5 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class MainHandler : MonoBehaviour
@@ -7,8 +8,10 @@ public class MainHandler : MonoBehaviour
     CreateMapData createMap;
     ShowPlanets showPlanets;
     public TooltipPopup popup;
+    public GameObject daysCounter;
     public GlobalVars globalVars;
     private string playerName;
+    
 
     private void Start()
     {
@@ -16,14 +19,22 @@ public class MainHandler : MonoBehaviour
         createMap = gameObject.GetComponent<CreateMapData>();
         showPlanets = gameObject.GetComponent<ShowPlanets>();
         popup = FindObjectOfType<TooltipPopup>();
-
+        
         if (GlobalData.firstStart)
         {
             GlobalData.playerPosition = "Pstart";
             GlobalData.firstStart = false;
+            GlobalData.days = 0;
+            GlobalData.resources = GlobalData.maxResources;
             createMap.Generate();
             Debug.Log("PLANETS SIZE = " + GlobalData.planets.Count);
         }
+
+        string resourceText = GlobalData.resources + "/" + GlobalData.maxResources;
+        UIResourceBar.Instance.SetText(resourceText);
+        UIResourceBar.Instance.SetValue(GlobalData.resources / (float)GlobalData.maxResources);
+        daysCounter.GetComponent<TextMeshProUGUI>().text = "Days: " + GlobalData.days;
+
         showPlanets.Show();
         popup.Deactivate();
 
@@ -32,7 +43,7 @@ public class MainHandler : MonoBehaviour
 
     void Update()
     {
-
+      
     }
     public void ChangePlayerPosition(string name)
     {
