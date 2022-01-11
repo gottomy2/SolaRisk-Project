@@ -78,19 +78,19 @@ public class GlobalData
         {
             0, new[]
             {
-                "Oho, a kogo to przywia³o?",
-                "Nie wydaje mi siê ¿ebyœmy widzieli siê kiedykolwiek wczeœniej...",
-                "Pewnie jesteœ tym rekrutem o którym tyle s³ysza³em!",
-                "Pozwól no ¿e Ci siê przedstawiê, nazywam siê Mao",
-                "A jak Ciebie zw¹?"
+                "Oho, a kogo to przywiało?",
+                "Nie wydaje mi się żebyśmy widzieli się kiedykolwiek wcześniej...",
+                "Pewnie jesteś tym rekrutem, o którym tyle słyszałem!",
+                "Pozwól no że Ci się przedstawię, nazywam się Mao",
+                "A jak Ciebie zwą?"
             }
         },
         {
             2, new[]
             {
                 "Witaj na statku kapitanie!",
-                "Zanim zajmiemy przejdziemy do podró¿y pozwól ¿e Ciê oprowadzê!",
-                "Zacznijmy od g³ównego panelu!, to jest od mapy!"
+                "Zanim zajmiemy przejdziemy do podróży pozwól że Cię oprowadzę!",
+                "Zacznijmy od głównego panelu!, to jest od mapy!"
             }
         },
     };
