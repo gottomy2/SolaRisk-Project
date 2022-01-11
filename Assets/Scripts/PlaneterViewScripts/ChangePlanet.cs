@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChangePlanet : MonoBehaviour {
 
-    public PlanetData pData;
+    //public string pData;
     public GameObject alien;
     public GameObject earthLike;
     public GameObject desert;
@@ -20,9 +20,8 @@ public class ChangePlanet : MonoBehaviour {
 
         m_PlanetAssets = new PlanetAssets();    
         MapGenerator mapGenerator = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
-
-
-        switch (pData.type) {
+       
+        switch (GlobalData.currentPlanetType) {
             case "Lava":
                 mapGenerator.terrainData = m_PlanetAssets.lavaTerrainData ;
                 mapGenerator.noiseData = m_PlanetAssets.lavaNoiseData;

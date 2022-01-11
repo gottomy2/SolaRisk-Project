@@ -15,6 +15,10 @@ public class PickUpChest : MonoBehaviour {
     private void OnDestroy()
     {
         //1resource<-2boxes
-        GlobalData.resources += (4 - m_ChestsActive.Length) / 2;
+        if (m_ChestsActive != null)
+        {
+            GlobalData.resources = Mathf.Clamp(GlobalData.resources + (4 - m_ChestsActive.Length) / 2, 0, GlobalData.maxResources);
+        }
+        
     }
 }

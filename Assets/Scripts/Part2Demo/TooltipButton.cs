@@ -60,14 +60,13 @@ public class TooltipButton : MonoBehaviour
                 popup.Deactivate();
                 GlobalData.days += days;
                 GlobalData.resources -= resources;
+                Destroy(GameObject.Find("line"));
                 eventManager.onButtonClick();
             }
             else
             {
                 text.SetText("Not enough resources");
-
             }
-            Destroy(GameObject.Find("line"));
         }
     }
 

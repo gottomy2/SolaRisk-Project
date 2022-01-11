@@ -48,6 +48,7 @@ public class MainHandler : MonoBehaviour
     public void ChangePlayerPosition(string name)
     {
         GlobalData.playerPosition = name;
+        GlobalData.currentPlanetType = GameObject.Find(name).GetComponent<Planet>().getType();
         if (name != "Pend")
         {
             char[] x = name.ToCharArray();
@@ -81,6 +82,7 @@ public class MainHandler : MonoBehaviour
         GlobalData.path.Add(name);
         SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
         SaveVisitChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().isVisited());
+        GlobalData.SetVar("planetVisited", false, GlobalData.hubStats);
     }
 
     private void SaveDifficultyChoiceToProcess(int choice)
