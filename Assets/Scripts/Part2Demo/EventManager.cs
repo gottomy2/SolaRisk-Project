@@ -128,7 +128,7 @@ public class EventManager : MonoBehaviour
 
         KillAssistant();
         ConfirmAssistantIsDead();
-        flyButton.onClick.AddListener(onButtonClick);
+        //flyButton.onClick.AddListener(onButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
@@ -145,7 +145,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void onButtonClick()
+    public void onButtonClick()
     {
         planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();

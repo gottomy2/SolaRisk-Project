@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +8,15 @@ public class TooltipButton : MonoBehaviour
     MainHandler mainHandler;
     Button button;
     TooltipPopup popup;
+    TextMeshProUGUI text;
+    EventManager eventManager;
     private void Start()
     {
         mainHandler = FindObjectOfType<MainHandler>();
         popup = FindObjectOfType<TooltipPopup>();
         planetName = GlobalData.playerPosition;
+        text = popup.GetComponentInChildren<TextMeshProUGUI>();
+        eventManager = FindObjectOfType<EventManager>();
 
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(Fly);
@@ -55,13 +60,12 @@ public class TooltipButton : MonoBehaviour
                 popup.Deactivate();
                 GlobalData.days += days;
                 GlobalData.resources -= resources;
-                Debug.Log("days:" + GlobalData.days);
-                Debug.Log("resources:" + GlobalData.resources);
-                //UIResourceBar.Instance.SetValue(GlobalData.resources / (float)GlobalData.maxResources);
+                eventManager.onButtonClick();
             }
             else
             {
-                Debug.Log("not enough resources");
+                text.SetText("Not enough resources");
+
             }
             Destroy(GameObject.Find("line"));
         }
