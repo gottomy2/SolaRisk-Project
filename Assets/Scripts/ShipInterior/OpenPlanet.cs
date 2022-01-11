@@ -26,7 +26,7 @@ public class OpenPlanet : MonoBehaviour
         }
         else
         {
-            GlobalData.SetVar("planetVisited", false, GlobalData.hubStats);
+            GlobalData.SetVar("planetCanLand", false, GlobalData.hubStats);
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -44,18 +44,21 @@ public class OpenPlanet : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && inView && distance <= maxDistance)
             {
                 //setting the planet to the correct type
-                currentPlanetName = GlobalData.path[GlobalData.path.Count - 1];
-                for (int i = 0; i < GlobalData.planets.Count; i++)
-                {
-                    if (GlobalData.planets[i].name == currentPlanetName)
-                    {
-                        planetData.name = GlobalData.planets[i].planetName;
-                        planetData.type = GlobalData.planets[i].type;
-                        break;
-                    }
-                }
+
+                //currentPlanetName = GlobalData.path[GlobalData.path.Count - 1];
+                //for (int i = 0; i < GlobalData.planets.Count; i++)
+                //{
+                //    if (GlobalData.planets[i].name == currentPlanetName)
+                //    {
+                //        planetData.name = GlobalData.planets[i].planetName;
+                //        planetData.type = GlobalData.planets[i].type;
+                //        break;
+                //    }
+                //}
 
                 SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
+                GlobalData.resources++;
+                GlobalData.days++;
                 GlobalData.SetVar("planetVisited", true, GlobalData.hubStats);
             }
             if (distance > maxDistance && text.activeSelf == true)
