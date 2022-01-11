@@ -51,7 +51,6 @@ public class AsteroidDataHandler : MonoBehaviour {
 	public void RegisterShoot(){
 		if(isRegistering){
 			shoots++;
-			Debug.Log("Shoots: " + shoots + ", time now: " + wholeTime);
 		}
 	}
 

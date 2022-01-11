@@ -46,7 +46,6 @@ public class FlappyDataHandler : MonoBehaviour {
 	public void RegisterJump(){
 		if(isRegistering){
 			jumps++;
-			Debug.Log("Jumps: " + jumps + ", time now: " + wholeTime);
 		}
 	}
 

@@ -86,7 +86,7 @@ public class EventManager : MonoBehaviour
             mapFirst = false;
         }
         //Sets map inactive when minigame was failed
-        else if (warningText.active) {
+        else if (warningText.active && GlobalData.GetVar(GlobalData.MAP_ACTIVE, GlobalData.hubStats)) {
             GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
         }
     }
@@ -95,6 +95,12 @@ public class EventManager : MonoBehaviour
     {
         ParseDifficulty();
         SetMapActive();
+
+        if (GlobalData.planetChanged)
+        {
+            GlobalData.planetChanged = false;
+            onButtonClick();
+        }
     }
     
     private void Awake()
@@ -128,7 +134,7 @@ public class EventManager : MonoBehaviour
 
         KillAssistant();
         ConfirmAssistantIsDead();
-        flyButton.onClick.AddListener(onButtonClick);
+        //flyButton.onClick.AddListener(onButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
@@ -147,7 +153,7 @@ public class EventManager : MonoBehaviour
 
     private void onButtonClick()
     {
-        planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
+        planet = GameObject.Find(GlobalData.selectedPlanet).GetComponent<Planet>();
         ParseDifficulty();
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {

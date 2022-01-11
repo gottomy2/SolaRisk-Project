@@ -56,6 +56,7 @@ public class OpenPlanet : MonoBehaviour
                 }
 
                 SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
+                GlobalData.SaveVisitChoice(true);
                 GlobalData.SetVar("planetVisited", true, GlobalData.hubStats);
             }
             if (distance > maxDistance && text.activeSelf == true)

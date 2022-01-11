@@ -6,9 +6,7 @@ public class GlobalData
     private const string DEFAULT_STRING = "NO_VALUE";
     private const bool DEFAULT_BOOL = false;
     private const int DEFAULT_INT = 0;
-
-    private const string IS_INITED = "isInited";
-
+    
     public const string PLAYER_NAME = "playerName";
 
     public const string INTRO1 = "intro1";
@@ -63,11 +61,13 @@ public class GlobalData
     public static int days = 0;
     public static int maxResources = 7;
     public static int resources = maxResources;
+    public static bool planetChanged = false;
 
     public static List<PlanetData> planets;
     public static List<string> path = new List<string>();
     public static string lastFlightType = "";
-    
+    public static string selectedPlanet = "";
+
     //Risk Data
     public static List<int> difficultyChoicesList;
     public static List<bool> visitedChoicesList;
@@ -158,12 +158,11 @@ public class GlobalData
 
     public static void SetVar(string key, bool value, variable[] variables)
     {
-        Debug.Log("Key: " + key + ", value:" + value);
         for (int i = 0; i < variables.Length; i++)
         {
             if (variables[i].key == key)
             {
-                Debug.Log("Setting value " + value + " to variables[i].key= " + variables[i].key);
+                Debug.Log("Key: " + key + ", value:" + value);
                 variables[i].value = value;
                 break;
             }
