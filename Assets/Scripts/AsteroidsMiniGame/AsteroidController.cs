@@ -12,9 +12,9 @@ public class AsteroidController : MonoBehaviour
     
     void Start()
     {
-        ship = GameObject.FindGameObjectWithTag("Player");
-        respawnTime = GetRespawnTimeFromDifficulty();
-        StartCoroutine(AsteroidWave());
+        /*ship = GameObject.FindGameObjectWithTag("Player");
+        respawnTime = GetRespawnTimeFromDifficulty();*/
+       /* StartCoroutine(AsteroidWave());*/
     }
     
     private void SpawnAsteroid()
@@ -34,8 +34,10 @@ public class AsteroidController : MonoBehaviour
             rigidBody.AddForce(direction * Random.Range(1000 * GetNumberFromDifficulty(),2000 * GetNumberFromDifficulty()));
         }
     }
-    IEnumerator AsteroidWave()
+    public IEnumerator AsteroidWave()
     {
+        ship = GameObject.FindGameObjectWithTag("Player");
+        respawnTime = GetRespawnTimeFromDifficulty();
         while (!ship.GetComponent<ShipController>().CanSeeEnd())
         {
             yield return new WaitForSeconds(respawnTime);

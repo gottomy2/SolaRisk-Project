@@ -19,6 +19,7 @@ public class Fracture : MonoBehaviour
             //Debug.Log(child.gameObject.name);
             Rigidbody rb = child.gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = false;
+            rb.useGravity = false;
             rb.AddForce(x, y, z);
             child.gameObject.AddComponent<Disappear>();
             Destroy(child.gameObject, 5f);

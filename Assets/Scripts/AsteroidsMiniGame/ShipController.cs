@@ -10,6 +10,7 @@ public class ShipController : MonoBehaviour
     public GameObject projectilePrefab;
     public AudioClip explosionSound;
     public AudioClip laserShoot;
+    public GameObject text;
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
@@ -42,6 +43,8 @@ public class ShipController : MonoBehaviour
     private bool canSeeEnd;
     private bool hasFinished;
 
+    private bool assistantActive = true;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,51 +61,63 @@ public class ShipController : MonoBehaviour
         health = maxHealth;
         ammo = maxAmmo;
         Debug.Log("Health: " + health + "/" + maxHealth);
-        StartCounting();
     }
 
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal") * -1;
-        vertical = Input.GetAxis("Vertical");
-
-        if (!isDead)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            UpdateTimer();
-            CheckTimer();
+            assistantActive = false;
+            StartCoroutine(FindObjectOfType<AsteroidController>().AsteroidWave());
+            text.SetActive(false);
+            StartCounting();
         }
-
-        //DEBUG_OPTIONS();
-
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        if (!assistantActive)
         {
-            AsteroidDataHandler.GetInstance().RegisterClick();
-            Launch();
-        }
+            horizontal = Input.GetAxis("Horizontal") * -1;
+            vertical = Input.GetAxis("Vertical");
 
-        animator.SetFloat("Horizontal", horizontal);
-        animator.SetFloat("Vertical", vertical);
-
-        if (ammo < maxAmmo)
-        {
-            ammoTimer += Time.deltaTime;
-            ammo += Time.deltaTime;
-            UIAmmoBar.Instance.SetValue(ammo / (float) maxAmmo);
-            if (ammoTimer >= ammoReload)
+            if (!isDead)
             {
-                ammoTimer = 0;
+                UpdateTimer();
+                CheckTimer();
+            }
+
+            //DEBUG_OPTIONS();
+
+            if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+            {
+                AsteroidDataHandler.GetInstance().RegisterClick();
+                Launch();
+            }
+
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
+
+            if (ammo < maxAmmo)
+            {
+                ammoTimer += Time.deltaTime;
+                ammo += Time.deltaTime;
+                UIAmmoBar.Instance.SetValue(ammo / (float)maxAmmo);
+                if (ammoTimer >= ammoReload)
+                {
+                    ammoTimer = 0;
+                }
             }
         }
     }
 
     void FixedUpdate()
     {
-        Vector3 position = rigidBody.position;
-        position.x += speed / 2 * horizontal * Time.deltaTime;
-        position.y += speed / 2 * vertical * Time.deltaTime;
-        position.z += speed * (-1) * Time.deltaTime;
+        if (!assistantActive)
+        {
+            Vector3 position = rigidBody.position;
+            position.x += speed / 2 * horizontal * Time.deltaTime;
+            position.y += speed / 2 * vertical * Time.deltaTime;
+            position.z += speed * (-1) * Time.deltaTime;
 
-        rigidBody.MovePosition(position);
+            rigidBody.MovePosition(position);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -256,5 +271,4 @@ public class ShipController : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
         }
     }
-
 }
