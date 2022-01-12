@@ -58,6 +58,7 @@ public class GlobalData
     //MapData
     public static bool firstStart = true;
     public static string playerPosition = "Pstart";
+    public static string currentPlanetType = "Earthlike";
     public static int days = 0;
     public static int maxResources = 7;
     public static int resources = maxResources;

@@ -128,7 +128,7 @@ public class EventManager : MonoBehaviour
 
         KillAssistant();
         ConfirmAssistantIsDead();
-        flyButton.onClick.AddListener(onButtonClick);
+        //flyButton.onClick.AddListener(onButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
@@ -145,7 +145,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void onButtonClick()
+    public void onButtonClick()
     {
         planet = GameObject.Find(GlobalData.playerPosition).GetComponent<Planet>();
         ParseDifficulty();
@@ -169,6 +169,7 @@ public class EventManager : MonoBehaviour
             if (planet.getDifficulty() == 1)
             {
                 RandomizeEvent(0.5f);
+                //RandomizeEvent(0f);
             }
             else if (planet.getDifficulty() == 2)
             {
@@ -192,6 +193,7 @@ public class EventManager : MonoBehaviour
         {
             //Going to the dialogue when no event occured
             GlobalData.lastFlightType = "Safe";
+            SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
             Debug.Log("No event occured");
         }
     }
