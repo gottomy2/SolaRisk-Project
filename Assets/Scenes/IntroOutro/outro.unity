@@ -841,7 +841,7 @@ MonoBehaviour:
     ut diam. Donec tincidunt congue magna quis ornare. Nullam commodo diam in maximus
     accumsan. Vivamus sit amet ornare tellus. Mauris eu blandit nisi. Nam a lacus
     enim. Aenean et ipsum vel ipsum faucibus aliquet at ut ex.
-  endingCredits: 0
+  endingCredits: 1
   textBoxes:
   - {fileID: 2115105577}
   - {fileID: 113462151}

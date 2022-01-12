@@ -13,7 +13,7 @@ public class GameEnd : MonoBehaviour
             if (!GlobalData.firstStart && !GlobalData.GetVar("minigameFailed", GlobalData.hubStats) && GlobalData.path[GlobalData.path.Count - 1].Equals("Pend"))
             {
                 Cursor.lockState = CursorLockMode.Confined;
-                SceneManager.LoadScene("Assets/Scenes/Fillers/FillerZF.unity");
+                SceneManager.LoadScene("Assets/Scenes/IntroOutro/outro.unity");
             }
         }
     }

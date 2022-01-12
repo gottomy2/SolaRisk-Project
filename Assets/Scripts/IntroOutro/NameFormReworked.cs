@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NameFormReworked : MonoBehaviour
@@ -21,6 +22,8 @@ public class NameFormReworked : MonoBehaviour
         if (name.Length > 0) GlobalData.playerName=name;
         else GlobalData.playerName = "Kapitan Jacek";
         Debug.Log("PlayerName: "+GlobalData.playerName);
+
+        SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
     public void FadeIn()
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TextToScreen : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class TextToScreen : MonoBehaviour
             StartCoroutine(ChangeText());
             nextSequence = false;
         }
-        if (outro && !endingCredits)
+        if (outro)
         {
             outro = false;
             StartCoroutine(OpenOutro());
@@ -82,9 +83,16 @@ public class TextToScreen : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(2f);
-        textBoxes[1].GetComponent<TextMeshProUGUI>().text = "AND YOUR NAME IS?";
-        StartCoroutine(textBoxes[1].GetComponent<FadeText>().FadeTextToFullAlpha(1f, textBoxes[1].GetComponent<TextMeshProUGUI>()));
-        nameForm.SetActive(true);
-        nameForm.GetComponent<NameFormReworked>().FadeIn();
+        if (endingCredits)
+        {
+            SceneManager.LoadScene("Assets/Scenes/Epilogue/EpilogueScene.unity");
+        }
+        else
+        {
+            textBoxes[1].GetComponent<TextMeshProUGUI>().text = "AND YOUR NAME IS?";
+            StartCoroutine(textBoxes[1].GetComponent<FadeText>().FadeTextToFullAlpha(1f, textBoxes[1].GetComponent<TextMeshProUGUI>()));
+            nameForm.SetActive(true);
+            nameForm.GetComponent<NameFormReworked>().FadeIn();
+        }
     }
 }
