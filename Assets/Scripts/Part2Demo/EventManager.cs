@@ -21,16 +21,16 @@ public class EventManager : MonoBehaviour
     
     private string[] TUTORIAL_DIALOGUE = {
         ", witaj w panelu kontroli lotu!",
-        "Pozwól, ?e wyt?umacz? Ci jak si? nim pos?ugiwa?.",
-        "Aby dosta? si? do celu naszej podró?y, b?dziemy musieli odwiedzi? a? 3 nieznane planety!",
-        "Na ca?e szcz??cie, system kontroli lotu jest wyposa?ony w czujnik zagro?e?...",
-        "Po najechaniu kursorem na planetê mo¿emy sprawdziæ trudnoœæ danej trasy!",
-        "Wyró?niamy 3 rodzaje tras...",
-        "1.Trasy oznaczone kolorem zielonym, wybieraj¹c takie trasy mamy 50% szansê na unikniêcie przeszkód...",
-        "2.Trasy oznaczone kolorem ¿óltym, wybieraj¹c takie trasy mamy 25% szansê na unikniêcie przeszkód...",
-        "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybieraj¹c takie trasy nie obêdzie siê bez przeszkód.",
-        "To jakimi trasami bêdziemy siê poruszaæ zale¿y tylko i wy³¹cznie od Cieie kapitanie!",
-        "SprawdŸmy jak byœ sobie poradzi³, œmia³o wybierz pierwsz¹ trasê!"
+        "PozwÃ³l, Å¼e wytÅ‚umaczÄ™ Ci jak siÄ™ nim posÅ‚ugiwaÄ‡.",
+        "Aby dostaÄ‡ siÄ™ do celu naszej podrÃ³Å¼y, bÄ™dziemy musieli odwiedziÄ‡ aÅ¼ 3 nieznane planety!",
+        "Na caÅ‚e szczÄ™Å›cie, system kontroli lotu jest wyposaÅ¼ony w czujnik zagroÅ¼enia...",
+        "Po najechaniu kursorem na planetÄ™ moÅ¼emy sprawdziÄ‡ trudnoÅ›Ä‡ i ryzyko niefortunnych zdarzeÅ„ na danej trasie!",
+        "WyrÃ³Å¼niamy 3 rodzaje tras...",
+        "1.Trasy oznaczone kolorem zielonym, wybierajÄ…c takie trasy mamy 50% szansy na unikniÄ™cie przeszkÃ³d...",
+        "2.Trasy oznaczone kolorem Å¼Ã³Å‚tym, wybierajÄ…c takie trasy mamy 25% szansy na unikniÄ™cie przeszkÃ³d...",
+        "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybierajÄ…c takie trasy nie obÄ™dzie siÄ™ bez przeszkÃ³d.",
+        "To jakimi trasami bÄ™dziemy siÄ™ poruszaÄ‡ zaleÅ¼y tylko i wyÅ‚Ä…cznie od Cieie kapitanie!",
+        "SprawdÅºmy jak byÅ› sobie poradziÅ‚... ÅšmiaÅ‚o! Wybierz pierwszÄ… trasÄ™!"
     };
 
     private void HandleMinigameFails()

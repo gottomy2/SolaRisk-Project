@@ -32,6 +32,8 @@ public class EpilogueHandler : MonoBehaviour
 
     private Text summaryText;
 
+    private Text flightDaysText;
+
     private void Awake()
     {
         data = GlobalData.dataList;
@@ -48,6 +50,8 @@ public class EpilogueHandler : MonoBehaviour
         planetsVisited = GameObject.Find("PlanetsVisited").GetComponent<Text>();
 
         summaryText = GameObject.Find("SummaryText").GetComponent<Text>();
+
+        flightDaysText = GameObject.Find("FlightDays").GetComponent<Text>();
     }
 
     private void InitLighting()
@@ -61,6 +65,7 @@ public class EpilogueHandler : MonoBehaviour
         SetRiskFields();
         SetPlanetVisitFields();
         SetSummary(100);
+        SetFlightDays();
         InitLighting();
     }
 
@@ -116,6 +121,11 @@ public class EpilogueHandler : MonoBehaviour
         {
             summaryText.text = RISKY_SOB;
         }
+    }
+
+    private void SetFlightDays()
+    {
+        flightDaysText.text = GlobalData.days.ToString();
     }
 
 }
