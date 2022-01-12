@@ -66,7 +66,6 @@ public class GlobalData
     public static List<PlanetData> planets;
     public static List<string> path = new List<string>();
     public static string lastFlightType = "";
-    public static string selectedPlanet = "";
 
     //Risk Data
     public static List<int> difficultyChoicesList;

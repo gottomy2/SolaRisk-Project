@@ -48,7 +48,6 @@ public class MainHandler : MonoBehaviour
     public void ChangePlayerPosition(string name)
     {
         GlobalData.playerPosition = name;
-        Debug.Log("PLAYERPOSITION NAME: " + name);
         if (name != "Pend")
         {
             char[] x = name.ToCharArray();
