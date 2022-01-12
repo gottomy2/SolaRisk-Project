@@ -194,7 +194,6 @@ public class ShipController : MonoBehaviour
         gameTimer += Time.deltaTime;
 
         timerText.text = GAME_LENGTH - gameTimer < 0f ? "0" : (GAME_LENGTH - gameTimer).ToString();
-        Debug.Log("Timer: " + gameTimer);
     }
 
     private void CheckTimer()

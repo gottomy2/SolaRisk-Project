@@ -57,6 +57,7 @@ public class OpenPlanet : MonoBehaviour
                 //}
 
                 SceneManager.LoadScene("Assets/Scenes/PlanetaryView/SampleScene.unity");
+                GlobalData.SaveVisitChoice(true);
                 GlobalData.resources++;
                 GlobalData.days++;
                 GlobalData.SetVar("planetVisited", true, GlobalData.hubStats);

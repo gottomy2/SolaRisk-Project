@@ -24,9 +24,12 @@ public class AssistantsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GlobalData.GetVar(GlobalData.HUB_TUTORIAL1, GlobalData.dialoguePath))
+            return;
+
         if (assistant1 == null)
         {
-            GlobalData.SetVar("hubTutorial1", true, GlobalData.dialoguePath);
+            GlobalData.SetVar(GlobalData.HUB_TUTORIAL1, true, GlobalData.dialoguePath);
         }
     }
 }

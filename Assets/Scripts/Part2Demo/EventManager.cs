@@ -86,7 +86,7 @@ public class EventManager : MonoBehaviour
             mapFirst = false;
         }
         //Sets map inactive when minigame was failed
-        else if (warningText.active) {
+        else if (warningText.active && GlobalData.GetVar(GlobalData.MAP_ACTIVE, GlobalData.hubStats)) {
             GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
         }
     }

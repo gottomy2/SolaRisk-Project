@@ -22,7 +22,6 @@ public class AsteroidController : MonoBehaviour
         shipTransform = ship.transform;
         for (int i = 0; i < GetWaveNumberFromDifficulty(); i++)
         {
-            Debug.Log("Get num from dif: " + GetWaveNumberFromDifficulty() +", Diff: " + ShipController.GetDifficulty());
             float x = ship.transform.position.x + Random.Range(-150.0f, 150.0f);
             float y = ship.transform.position.y + Random.Range(-150.0f, 150.0f);
             float z = ship.transform.position.z + Random.Range(-300.0f, -250.0f);
