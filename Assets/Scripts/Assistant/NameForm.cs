@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class NameForm : MonoBehaviour
+public class NameForm: MonoBehaviour
 {
 
     private TextMeshProUGUI input;
