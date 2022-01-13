@@ -56,6 +56,11 @@ public class GlobalData
     public static variable[] hubStats;
     public static bool tutorialRepairs;
 
+    public static bool firstTimeOnPlanet = true;
+    public static bool firstTimeSimon = true;
+    public static bool firstTimeWires = true;
+    public static bool firstTimeSwitches = true;
+
     //MapData
     public static bool firstStart = true;
     public static string playerPosition = "Pstart";

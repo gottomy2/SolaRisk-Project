@@ -43,6 +43,8 @@ public class SimonGameBoard : MonoBehaviour
 
     private static SimonGameBoard instance;
 
+    public GameObject tutorial;
+
     public static SimonGameBoard GetInstance()
     {
         return instance;
@@ -58,6 +60,14 @@ public class SimonGameBoard : MonoBehaviour
 
     void Awake()
     {
+        if (GlobalData.firstTimeSimon)
+        {
+            GlobalData.firstTimeSimon = false;
+        }
+        else
+        {
+            tutorial.SetActive(false);
+        }
         Cursor.lockState = CursorLockMode.Confined;
         instance = this;
         state = State.Waiting;
