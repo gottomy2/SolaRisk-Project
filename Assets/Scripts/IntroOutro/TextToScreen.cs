@@ -13,7 +13,7 @@ public class TextToScreen : MonoBehaviour
        "nisl ligula pulvinar enim, quis aliquet diam dolor ut diam. Donec tincidunt congue magna quis ornare. " +
        "Nullam commodo diam in maximus accumsan. Vivamus sit amet ornare tellus. Mauris eu blandit nisi. " +
        "Nam a lacus enim. Aenean et ipsum vel ipsum faucibus aliquet at ut ex.";
-
+    public GameObject captainPortait;
     public bool endingCredits = false;
     public TextMeshProUGUI[] textBoxes;
 
@@ -29,7 +29,7 @@ public class TextToScreen : MonoBehaviour
     {
         textList = text.Split('.').ToList();
         textList.RemoveAt(textList.Count - 1);
-
+        captainPortait.SetActive(false);
         nameForm = GameObject.Find("NameForm");
         
     }
@@ -89,7 +89,9 @@ public class TextToScreen : MonoBehaviour
         }
         else
         {
+            captainPortait.SetActive(true);
             textBoxes[1].GetComponent<TextMeshProUGUI>().text = "A TWOJE IMIÊ TO?";
+            StartCoroutine(captainPortait.GetComponent<FadeText>().FadeImageToFullAlpha(1f));
             StartCoroutine(textBoxes[1].GetComponent<FadeText>().FadeTextToFullAlpha(1f, textBoxes[1].GetComponent<TextMeshProUGUI>()));
             Cursor.lockState = CursorLockMode.Confined;
             nameForm.SetActive(true);
