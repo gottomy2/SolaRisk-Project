@@ -65,7 +65,7 @@ public class TooltipButton : MonoBehaviour
             }
             else
             {
-                text.SetText("Not enough resources");
+                text.SetText("Niewystarczaj¹ca iloœæ zasobów");
             }
         }
     }
