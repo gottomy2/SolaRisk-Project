@@ -89,7 +89,10 @@ public class MainHandler : MonoBehaviour
 
     private void SaveDifficultyChoiceToProcess(int choice)
     {
-        GlobalData.SaveDifficultyChoice(choice);
+        if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
+        {
+            GlobalData.SaveDifficultyChoice(choice);
+        }
     }
     
 }

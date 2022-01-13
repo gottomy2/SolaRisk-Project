@@ -15,6 +15,19 @@ public class DataProcessor {
 		});
 		return i;
 	}
+
+	public static int CalculatePlanetVisitsPercentage(List<bool> visits)
+	{
+		int i = 0;
+		visits.ForEach(e =>
+		{
+			if (e)
+			{
+				i++;
+			}
+		});
+		return 100 * i / visits.Count;
+	}
 	
 	public static double CalculateChoicePercentage(List<int> choices, int choiceToCalculate)
 	{
@@ -28,6 +41,18 @@ public class DataProcessor {
 		
 		return Math.Round((double) 100 * i / choices.Count, 2);
 	}
+
+	public static int GetChoicesCount(List<int> choices, int choiceToCalculate)
+	{
+		int i = 0;
+		choices.ForEach(e =>{
+			if (e == choiceToCalculate)
+			{
+				i++;
+			}
+		});
+		return i;
+	} 
    
 	public static int CalculateRatio(){
 		return 1;
@@ -59,6 +84,11 @@ public class DataProcessor {
 
 	public static string GetFailTryString(List<IData> data){
 		return GetFails(data) + " / " + GetTries(data);
+	}
+
+	public static int CalculateDaysRatio(int days)
+	{
+		return 100 * days / 13;
 	}
 
 	// String "value / value"
