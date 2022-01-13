@@ -24,8 +24,8 @@ public class Jump : MonoBehaviour
 
     void LateUpdate()
     {
-        // Jump when the Jump button is pressed and we are on the ground && when the dialogue with first assistant is completed
-        if (Input.GetButtonDown("Jump") && (!groundCheck || groundCheck.isGrounded) && GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
+        // Jump when the Jump button is pressed and we are on the ground && when the dialogue with assistant is completed
+        if (Input.GetButtonDown("Jump") && (!groundCheck || groundCheck.isGrounded) && GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath) && !GlobalData.GetVar("repairsTutorialActive", GlobalData.dialoguePath))
         {
             rigidbody.AddForce(Vector3.up * 100 * jumpStrength);
             Jumped?.Invoke();

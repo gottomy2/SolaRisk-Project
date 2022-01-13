@@ -36,8 +36,8 @@ public class Crouch : MonoBehaviour
 
     void LateUpdate()
     {
-        //Make sure that player cannot crouch without finishing the first dialogue with assistant
-        if(GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
+        //Make sure that player cannot crouch without finishing dialogue with assistant
+        if(GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath) && !GlobalData.GetVar("repairsTutorialActive", GlobalData.dialoguePath))
         {
             if (Input.GetKey(key))
             {

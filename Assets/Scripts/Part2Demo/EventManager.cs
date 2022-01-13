@@ -33,6 +33,7 @@ public class EventManager : MonoBehaviour
                     GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
                     GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
                     GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
+                    GlobalData.SetVar("repairsTutorialActive", true, GlobalData.dialoguePath);
                     GlobalData.tutorialRepairs = true;
                 }
                 else
@@ -114,7 +115,6 @@ public class EventManager : MonoBehaviour
     {
         SetTutorialDialogue();
         HandleMinigameFails();
-
         //Resets the map when tutorial is finished.
         if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath) 
             && GlobalData.GetVar("mapReset", GlobalData.dialoguePath))
