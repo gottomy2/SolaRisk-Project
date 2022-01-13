@@ -426,7 +426,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.44
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ec1393eed1ff946afb062b32534cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: b177fdc6c92fbde4bb47018af4d9f461, type: 2}
+  mixer: {fileID: 24100000, guid: c4f941d218211f74380ecb39bd7f1d1e, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ AudioSource:
   m_GameObject: {fileID: 1086939987}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: b177fdc6c92fbde4bb47018af4d9f461, type: 2}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c4f941d218211f74380ecb39bd7f1d1e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 0183a6b00e9084ca185793374fbc8dba, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
