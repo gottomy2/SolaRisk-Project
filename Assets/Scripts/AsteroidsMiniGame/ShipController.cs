@@ -12,6 +12,7 @@ public class ShipController : MonoBehaviour
     public AudioClip laserShoot;
     public GameObject text;
     public GameObject assistant;
+    public GameObject tutorial;
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
@@ -56,9 +57,7 @@ public class ShipController : MonoBehaviour
                     "Aby unikn¹æ zniszczeñ statku musimy wymijaæ wszelkie przeszkody na naszej drodze...",
                     "Za wyœwietlanie stanu bariery miêdzygalaktycznej odpowiada niebieski pasek znajduj¹cy siê w lewym dolnym rogu ekranu",
                     "Gdy pasek ten osi¹gnie poziom zerowy, nie obejdzie siê bez napraw statku, ale o tym póŸniej...",
-                    "Ruch statku kontrolujemy za pomoc¹ klawiszy WSAD.",
-                    "Aby oddaæ strza³ i zniszczyæ nacieraj¹c¹ asteroidê nale¿y u¿yæ klawisza spacji.",
-                    "Za wyœwietlanie przegrzania broni odpowiada fioltowy pasek znajduj¹cy siê w lewym dolnym rogu ekranu.",
+                    "Za wyœwietlanie przegrzania broni odpowiada fioletowy pasek znajduj¹cy siê w lewym dolnym rogu ekranu.",
                     "To by by³o na tyle, powodzenia kapitanie!"
                     
                 }
@@ -68,6 +67,7 @@ public class ShipController : MonoBehaviour
         }
         else
         {
+            tutorial.SetActive(false);
             assistantActive = false;
             Cursor.lockState = CursorLockMode.Locked;
         }

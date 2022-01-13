@@ -33,7 +33,7 @@ public class MainHandler : MonoBehaviour
         string resourceText = GlobalData.resources + "/" + GlobalData.maxResources;
         UIResourceBar.Instance.SetText(resourceText);
         UIResourceBar.Instance.SetValue(GlobalData.resources / (float)GlobalData.maxResources);
-        daysCounter.GetComponent<TextMeshProUGUI>().text = "Days: " + GlobalData.days;
+        daysCounter.GetComponent<TextMeshProUGUI>().text = "Dni: " + GlobalData.days;
 
         showPlanets.Show();
         popup.Deactivate();
@@ -49,6 +49,8 @@ public class MainHandler : MonoBehaviour
     {
         GlobalData.playerPosition = name;
         GlobalData.currentPlanetType = GameObject.Find(name).GetComponent<Planet>().getType();
+        GlobalData.currentMeshRenderer = GameObject.Find(name).GetComponent<MeshRenderer>();
+        GlobalData.currentMeshFilter = GameObject.Find(name).GetComponent<MeshFilter>();
         if (name != "Pend")
         {
             char[] x = name.ToCharArray();

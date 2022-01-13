@@ -139,6 +139,35 @@ public class Planet : MonoBehaviour
     {
         return randomRotation;
     }
+    public string getTranslatedType()
+    {
+        string res = "";
+        switch (this.type)
+        {
+            case "Lava":
+                res = "Wulkaniczna";
+                break;
+            case "Desert":
+                res = "Pustynna";
+                break;
+            case "Alien":
+                res = "Obca";
+                break;
+            case "EarthLike":
+                res = "Ziemska";
+                break;
+            case "Frozen":
+                res = "Lodowa";
+                break;
+            case "Tundra":
+                res = "Tundrowa";
+                break;
+            case "Temperate":
+                res = "Umiarkowana";
+                break;
+        }
+        return res;
+    }
     public string getType()
     {
         return type;

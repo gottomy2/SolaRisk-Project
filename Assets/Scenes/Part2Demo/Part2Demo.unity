@@ -1997,6 +1997,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6880698466501953538, guid: 32a02f60920b98942ba5f49a8ed82f1a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880698466532082532, guid: 32a02f60920b98942ba5f49a8ed82f1a, type: 3}
+      propertyPath: m_text
+      value: 'Nazwa: Blahblah
+
+        Planeta: Umiarkowana
+
+        Ryzyko: 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880698466532082532, guid: 32a02f60920b98942ba5f49a8ed82f1a, type: 3}
+      propertyPath: m_margin.z
+      value: -47.714188
+      objectReference: {fileID: 0}
     - target: {fileID: 6880698466623266233, guid: 32a02f60920b98942ba5f49a8ed82f1a, type: 3}
       propertyPath: m_FontData.m_BestFit
       value: 1

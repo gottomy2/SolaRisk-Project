@@ -51,7 +51,7 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
                 }
         }
 
-        text.SetText("Name: " + planet.GetComponent<Planet>().getName() + "\n" + "Type: " + planet.GetComponent<Planet>().getType() + "\n" + "Risk: " + difficulty);
+        text.SetText("Nazwa: " + planet.GetComponent<Planet>().getName() + "\n" + "Planeta: " + planet.GetComponent<Planet>().getTranslatedType() + "\n" + "Ryzyko: " + difficulty);
         button.SetPlanet(planet.name);
         //zoom.EnableZoom();
     }

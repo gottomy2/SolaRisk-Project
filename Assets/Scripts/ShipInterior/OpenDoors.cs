@@ -9,7 +9,7 @@ public class OpenDoors : MonoBehaviour
     public float maxDistance = 4f;
     private Animator animator;
     private bool inView = false;
-    private string state = "Open";
+    private string state = "Otworzyæ";
     private GameObject player;
     private Vector3 playerPosition;
     private float distance;
@@ -33,12 +33,12 @@ public class OpenDoors : MonoBehaviour
                 if (animator.GetBool("DoorUp"))
                 {
                     animator.SetBool("DoorUp", false);
-                    state = "Close";
+                    state = "Zamkn¹æ";
                 }
                 else
                 {
                     animator.SetBool("DoorUp", true);
-                    state = "Open";
+                    state = "Otworzyæ";
                 }
             }
             if (distance > maxDistance && text.activeSelf == true)
@@ -53,13 +53,13 @@ public class OpenDoors : MonoBehaviour
             {
                 if (animator.GetBool("DoorUp"))
                 {
-                    state = "Open";
+                    state = "Otworzyæ";
                 }
                 else
                 {
-                    state = "Close";
+                    state = "Zamkn¹æ";
                 }
-                text.GetComponent<TextMesh>().text = "Click E\nTo " + state + " Doors";
+                text.GetComponent<TextMesh>().text = "Naciœnij E\nAby " + state + " Drzwi";
             }
         }
     }
