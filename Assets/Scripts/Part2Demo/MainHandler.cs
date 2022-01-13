@@ -49,8 +49,6 @@ public class MainHandler : MonoBehaviour
     {
         GlobalData.playerPosition = name;
         GlobalData.currentPlanetType = GameObject.Find(name).GetComponent<Planet>().getType();
-        GlobalData.currentMeshRenderer = GameObject.Find(name).GetComponent<MeshRenderer>();
-        GlobalData.currentMeshFilter = GameObject.Find(name).GetComponent<MeshFilter>();
         if (name != "Pend")
         {
             char[] x = name.ToCharArray();
@@ -94,5 +92,4 @@ public class MainHandler : MonoBehaviour
             GlobalData.SaveDifficultyChoice(choice);
         }
     }
-    
 }
