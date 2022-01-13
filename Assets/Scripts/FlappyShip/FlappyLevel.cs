@@ -104,7 +104,7 @@ public class FlappyLevel : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
+        SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     private void Start() {
