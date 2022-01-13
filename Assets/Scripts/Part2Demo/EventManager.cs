@@ -231,6 +231,7 @@ public class EventManager : MonoBehaviour
         GlobalData.lastFlightType = "";
         GlobalData.playerPosition = "Pstart";
         GlobalData.path = null;
+        SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 
     private void ParseDifficulty()
