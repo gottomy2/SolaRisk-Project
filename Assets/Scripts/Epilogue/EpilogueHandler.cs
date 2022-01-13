@@ -39,7 +39,6 @@ public class EpilogueHandler : MonoBehaviour
         data = GlobalData.dataList;
         choices = GlobalData.difficultyChoicesList;
         visits = GlobalData.visitedChoicesList;
-
         minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
         minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
 
@@ -64,7 +63,7 @@ public class EpilogueHandler : MonoBehaviour
         SetSuccessFields();
         SetRiskFields();
         SetPlanetVisitFields();
-        SetSummary(100);
+        SetSummary(CalculateRiskPercentage());
         SetFlightDays();
         InitLighting();
     }
@@ -128,4 +127,17 @@ public class EpilogueHandler : MonoBehaviour
         flightDaysText.text = GlobalData.days.ToString();
     }
 
+    private int CalculateRiskPercentage()
+    {
+        int dayRatio = DataProcessor.CalculateDaysRatio(GlobalData.days);
+        int planetVisit = DataProcessor.CalculatePlanetVisitsPercentage(visits);
+        double green = DataProcessor.CalculateChoicePercentage(choices,1);
+        double yellow = DataProcessor.CalculateChoicePercentage(choices,2);
+        double red = DataProcessor.CalculateChoicePercentage(choices,3);
+        
+        Debug.Log("Średnia cała: " + (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3));
+
+        return (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3);
+    }
+    
 }
