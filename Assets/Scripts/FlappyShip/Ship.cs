@@ -41,36 +41,47 @@ public class Ship : MonoBehaviour {
     }
 
     private void Update() {
-        switch (state) {
-            default:
-            case State.WaitingToStart:
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                    state = State.Flying;
-                    shipRigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-                    Jump();
-                    if (OnStartedPlaying != null) {
-                        OnStartedPlaying(this, EventArgs.Empty);
-                    }
-                }
-                break;
-            case State.Flying:
-                if (FlappyLevel.GetInstance().IsMoveTriggered() && shipRigidbody2D.transform.position.y != 0f){
-                    MoveToCenter();
-                }
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                    if(!isDead || FlappyLevel.GetInstance().CanType()){
+        if (!GlobalData.flappyShipAssistant)
+        {
+            switch (state)
+            {
+                default:
+                case State.WaitingToStart:
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        state = State.Flying;
+                        shipRigidbody2D.bodyType = RigidbodyType2D.Dynamic;
                         Jump();
+                        if (OnStartedPlaying != null)
+                        {
+                            OnStartedPlaying(this, EventArgs.Empty);
+                        }
                     }
-                }
-                if (shipRigidbody2D.transform.position.y < -40){
-                    if (OnDeath != null) {
-                        OnDeath(this, EventArgs.Empty);
+                    break;
+                case State.Flying:
+                    if (FlappyLevel.GetInstance().IsMoveTriggered() && shipRigidbody2D.transform.position.y != 0f)
+                    {
+                        MoveToCenter();
                     }
-                }
-                break;
-            case State.Finished:  
-                StartCoroutine(LaunchAwayWait());
-                break;
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        if (!isDead || FlappyLevel.GetInstance().CanType())
+                        {
+                            Jump();
+                        }
+                    }
+                    if (shipRigidbody2D.transform.position.y < -40)
+                    {
+                        if (OnDeath != null)
+                        {
+                            OnDeath(this, EventArgs.Empty);
+                        }
+                    }
+                    break;
+                case State.Finished:
+                    StartCoroutine(LaunchAwayWait());
+                    break;
+            }
         }
     }
 

@@ -37,6 +37,8 @@ public class FlappyLevel : MonoBehaviour
 
     private GameObject startText;
 
+    public GameObject assistant;
+
     public enum State {
         WaitingToStart,
         Playing,
@@ -59,6 +61,22 @@ public class FlappyLevel : MonoBehaviour
     }
 
     private void Awake() {
+        if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
+        {
+            GlobalData.DIALOGUE_DICTIONARY.Add(3, new[]
+                {
+                    "Drugim zjawiskiem na jakie mo¿emy trafiæ podczas przelotu planetarnego jest PLACEHOLDER",
+                    "Aby unikn¹æ zniszczeñ statku musimy wymijaæ wszelkie przeszkody na naszej drodze...",
+                }
+            );           
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            GlobalData.flappyShipAssistant = false;
+        }
+        assistant.SetActive(GlobalData.flappyShipAssistant);
+
         instance = this;
         gameMode = GameMode.InGame;
         canType = false;
@@ -117,15 +135,31 @@ public class FlappyLevel : MonoBehaviour
     }
 
     private void Update() {
-        if (state == State.WaitingToStart) {
-            startText.SetActive(true);
-        } else {
-            startText.SetActive(false);
+        if (GlobalData.flappyShipAssistant)
+        {
+            if (assistant == null)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                startText.SetActive(true);
+                GlobalData.flappyShipAssistant = false;
+            }
         }
-        
-        if (state == State.Playing) {
-            HandlePipeMovement();
-            HandlePipeSpawning();
+        else
+        {
+            if (state == State.WaitingToStart)
+            {
+                startText.SetActive(true);
+            }
+            else
+            {
+                startText.SetActive(false);
+            }
+
+            if (state == State.Playing)
+            {
+                HandlePipeMovement();
+                HandlePipeSpawning();
+            }
         }
     }
 
