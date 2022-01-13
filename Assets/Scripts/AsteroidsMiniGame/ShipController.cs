@@ -72,6 +72,8 @@ public class ShipController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
         assistant.SetActive(assistantActive);
+        canShoot = !assistantActive;
+
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
         rigidBody = GetComponent<Rigidbody>();
@@ -81,7 +83,6 @@ public class ShipController : MonoBehaviour
         isDead = false;
         canSeeEnd = false;
         hasFinished = false;
-        canShoot = true;
         health = maxHealth;
         ammo = maxAmmo;
         Debug.Log("Health: " + health + "/" + maxHealth);
@@ -97,6 +98,7 @@ public class ShipController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && !assistantActive)
         {
+            canShoot = true;
             assistantActive = false;
             StartCoroutine(FindObjectOfType<AsteroidController>().AsteroidWave());
             text.SetActive(false);
