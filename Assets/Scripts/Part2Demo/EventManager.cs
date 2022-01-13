@@ -21,23 +21,35 @@ public class EventManager : MonoBehaviour
 
     private void HandleMinigameFails()
     {
-        if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats) 
-            && GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
+        if(GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
-            warningText.SetActive(true);
-            GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
-            //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
-            switch ((int) Math.Round(Random.value % 3))
+            if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats))
             {
-                case 0:
+                warningText.SetActive(true);
+                GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
+                //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
+                if (!GlobalData.tutorialRepairs)
+                {
                     GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
-                    break;
-                case 1:
                     GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
-                    break;
-                case 2:
                     GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
-                    break;
+                    GlobalData.tutorialRepairs = true;
+                }
+                else
+                {
+                    switch ((int)Math.Round(Random.value % 3))
+                    {
+                        case 0:
+                            GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
+                            break;
+                        case 1:
+                            GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
+                            break;
+                        case 2:
+                            GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
+                            break;
+                    }
+                }
             }
         }
     }

@@ -54,6 +54,7 @@ public class GlobalData
     //Tutorial & Game
     public static variable[] dialoguePath;
     public static variable[] hubStats;
+    public static bool tutorialRepairs;
 
     //MapData
     public static bool firstStart = true;
@@ -91,9 +92,6 @@ public class GlobalData
             new variable(MAP_TUTORIAL_FINISHED, false),
             new variable(MAP_ASSISTANT_ACTIVE, true),
             new variable(MAP_RESET, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false)
         };
 
         hubStats = new[]
@@ -119,7 +117,9 @@ public class GlobalData
         difficultyChoicesList = new List<int>();
         visitedChoicesList = new List<bool>();
         dataList = new List<IData>();
-        
+
+        tutorialRepairs = false;
+
         isInited = true;
     }
     
