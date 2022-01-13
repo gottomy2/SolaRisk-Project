@@ -21,7 +21,7 @@ public class NameFormReworked : MonoBehaviour
     {
         string name = gameObject.GetComponent<TMP_InputField>().text;
         if (name.Length > 0) GlobalData.playerName=name;
-        else GlobalData.playerName = "Kapitan Jacek";
+        else GlobalData.playerName = "Jacek";
         Debug.Log("PlayerName: "+GlobalData.playerName);
         GlobalData.DIALOGUE_DICTIONARY.Add(
             0, new[]

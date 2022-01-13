@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour
         if (!GlobalData.DIALOGUE_DICTIONARY.ContainsKey(1))
         {
             GlobalData.DIALOGUE_DICTIONARY.Add(1, new []{
-            "witaj w panelu kontroli lotu!",
+            "Witaj w panelu kontroli lotu!",
             "Pozwól, że wytłumaczę Ci jak się nim posługiwać.",
             "Aby dostać się do celu naszej podróży, będziemy musieli odwiedzić aż 3 nieznane planety!",
             "Na całe szczęście, system kontroli lotu jest wyposażony w czujnik zagrożenia...",

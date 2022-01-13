@@ -836,12 +836,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2e64ab5f8703a40a890b7900af46e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "Dawno temu w odleg\u0142ej galaktyce. Rasa Yautja zmaga\u0142a si\u0119
-    z ogromnym problemem jedzeniowym. Od 30 lat plaga Blight mutowa\u0142a i niszczy\u0142a
-    kolejne \u017Ar\xF3d\u0142a po\u017Cywienia. Po tym czasie jedynym po\u017Cywieniem
-    zosta\u0142a kukurydza. Ty jako znany kapitan gwiezdnej floty zosta\u0142e\u015B
-    powo\u0142any na odnalezienie planety. Planety kt\xF3ra b\u0119dzie mo\u017Cliwa
-    do zasiedlenia przez twoj\u0105 ras\u0119. Tutaj zaczyna si\u0119 przygoda."
+  text: "Dawno temu w odleg\u0142ej galaktyce. Rasa Yautja boryka\u0142a si\u0119
+    z ogromnym problemem \u017Cywno\u015Bciowym. Przez 30 lat plaga Blight mutowa\u0142a
+    i niszczy\u0142a kolejne \u017Ar\xF3d\u0142a po\u017Cywienia. Po tym czasie jedynym
+    dost\u0119pnym po\u017Cywieniem by\u0142a kukurydza. Ty, jako s\u0142ynny kapitan
+    gwiezdnej floty, zosta\u0142e\u015B wezwany do odnalezienia planety. Planety,
+    kt\xF3ra b\u0119dzie nadawa\u0107 si\u0119 do zamieszkania przez twoj\u0105 ras\u0119.
+    Tutaj zaczyna si\u0119 TWOJA przygoda. "
   endingCredits: 0
   textBoxes:
   - {fileID: 2115105577}
@@ -1437,7 +1438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOHN CENAAA!!!
+  m_text: Kapitan Jacek
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66a6a53d9f87a1d4c853503a6b793088, type: 2}
   m_sharedMaterial: {fileID: -4375578952883365425, guid: 66a6a53d9f87a1d4c853503a6b793088, type: 2}

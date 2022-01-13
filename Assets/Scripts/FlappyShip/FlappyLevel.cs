@@ -38,7 +38,7 @@ public class FlappyLevel : MonoBehaviour
     private GameObject startText;
 
     public GameObject assistant;
-
+    public GameObject tutorial;
     public enum State {
         WaitingToStart,
         Playing,
@@ -65,7 +65,7 @@ public class FlappyLevel : MonoBehaviour
         {
             GlobalData.DIALOGUE_DICTIONARY.Add(3, new[]
                 {
-                    "Drugim zjawiskiem na jakie mo¿emy trafiæ podczas przelotu planetarnego jest PLACEHOLDER",
+                    "Drugim zjawiskiem na jakie mo¿emy trafiæ podczas przelotu planetarnego jest anomalia czasoprzestrzenna",
                     "Aby unikn¹æ zniszczeñ statku musimy wymijaæ wszelkie przeszkody na naszej drodze...",
                 }
             );           
@@ -74,6 +74,7 @@ public class FlappyLevel : MonoBehaviour
         else
         {
             GlobalData.flappyShipAssistant = false;
+            tutorial.SetActive(false);
         }
         assistant.SetActive(GlobalData.flappyShipAssistant);
 

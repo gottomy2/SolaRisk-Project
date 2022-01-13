@@ -836,9 +836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2e64ab5f8703a40a890b7900af46e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "Po przeleceniu przez wiele planet. Wiele tub, asteroid. Uda\u0142o Ci si\u0119
-    dotrze\u0107 do wymarzonego celu na kt\xF3rym nie ma plagi. Jedynie co pozosta\u0142o
-    to pozna\u0107 planet\u0119 i jej sekrety."
+  text: "Po d\u0142ugiej podr\xF3\u017Cy przez wiele \u015Bwiat\xF3w. Du\u017Co rur,
+    asteroid. Dotar\u0142e\u015B do wymarzonego celu. Pozosta\u0142o tylko pozna\u0107
+    planet\u0119 i jej tajemnice."
   endingCredits: 1
   textBoxes:
   - {fileID: 2115105577}
