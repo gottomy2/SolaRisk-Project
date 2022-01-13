@@ -91,6 +91,7 @@ public class TextToScreen : MonoBehaviour
         {
             textBoxes[1].GetComponent<TextMeshProUGUI>().text = "AND YOUR NAME IS?";
             StartCoroutine(textBoxes[1].GetComponent<FadeText>().FadeTextToFullAlpha(1f, textBoxes[1].GetComponent<TextMeshProUGUI>()));
+            Cursor.lockState = CursorLockMode.Confined;
             nameForm.SetActive(true);
             nameForm.GetComponent<NameFormReworked>().FadeIn();
         }
