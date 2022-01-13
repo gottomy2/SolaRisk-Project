@@ -156,6 +156,7 @@ public class ShipController : MonoBehaviour
         canShoot = false;
         AsteroidDataHandler.GetInstance().SetIsFailed(true);
         AsteroidDataHandler.GetInstance().RegisterMeasureEnd();
+        GlobalData.days++;
         StartCoroutine(TriggerSceneChange());
         if (GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {

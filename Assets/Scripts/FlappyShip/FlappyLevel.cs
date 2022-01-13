@@ -110,6 +110,7 @@ public class FlappyLevel : MonoBehaviour
             SetCanType(false);
             FlappyDataHandler.GetInstance().SetIsFailed(true);
             FlappyDataHandler.GetInstance().RegisterMeasureEnd();
+            GlobalData.days++;
             SoundManager.PlaySound(GameAssets.GetInstance().deathSound);
             StartCoroutine(CloseScene());
         }
