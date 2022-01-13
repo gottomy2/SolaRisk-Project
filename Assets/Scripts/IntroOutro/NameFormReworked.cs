@@ -11,6 +11,7 @@ public class NameFormReworked : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         button = GameObject.Find("Button");
         button.GetComponent<Button>().onClick.AddListener(SetName);
         gameObject.SetActive(false);
@@ -22,6 +23,18 @@ public class NameFormReworked : MonoBehaviour
         if (name.Length > 0) GlobalData.playerName=name;
         else GlobalData.playerName = "Kapitan Jacek";
         Debug.Log("PlayerName: "+GlobalData.playerName);
+        GlobalData.DIALOGUE_DICTIONARY.Add(
+            0, new[]
+            {
+                "Witaj na statku kapitanie " + GlobalData.playerName + "!",
+                "Od czasu twojego ostatniego lotu trochê siê pozmienia³o.",
+                "Pozwól ¿e Ciê oprowadzê, zanim wyruszymy w podró¿.",
+                "To nic innego jak symulacja...",
+                "Zreszt¹ to pewnie nie Twoja pierwsza!",
+                "Zacznijmy od g³ównego panelu, to jest od Mapy!"
+            }
+        );
+
 
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }

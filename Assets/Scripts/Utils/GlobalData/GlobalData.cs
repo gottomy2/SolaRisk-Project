@@ -73,27 +73,7 @@ public class GlobalData
     public static List<bool> visitedChoicesList;
     public static List<IData> dataList;
 
-    public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>
-    {
-        {
-            0, new[]
-            {
-                "Oho, a kogo to przywiało?",
-                "Nie wydaje mi się żebyśmy widzieli się kiedykolwiek wcześniej...",
-                "Pewnie jesteś tym rekrutem, o którym tyle słyszałem!",
-                "Pozwól no że Ci się przedstawię, nazywam się Mao",
-                "A jak Ciebie zwą?"
-            }
-        },
-        {
-            2, new[]
-            {
-                "Witaj na statku kapitanie!",
-                "Zanim zajmiemy przejdziemy do podróży pozwól że Cię oprowadzę!",
-                "Zacznijmy od głównego panelu!, to jest od mapy!"
-            }
-        },
-    };
+    public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>();
 
     public static void Init()
     {

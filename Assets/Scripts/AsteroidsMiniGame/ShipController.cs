@@ -11,6 +11,7 @@ public class ShipController : MonoBehaviour
     public AudioClip explosionSound;
     public AudioClip laserShoot;
     public GameObject text;
+    public GameObject assistant;
     AudioSource audioSource;
 
     private const float SECONDS_BEFORE_SCENE_CHANGE = 3f;
@@ -47,7 +48,30 @@ public class ShipController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
+        {
+            GlobalData.DIALOGUE_DICTIONARY.Add(2, new[]
+                {
+                    "Pierwszym zjawiskiem na jakie mo¿emy trafiæ podczas przelotu planetarnego jest burza asteroid!",
+                    "Aby unikn¹æ zniszczeñ statku musimy wymijaæ wszelkie przeszkody na naszej drodze...",
+                    "Za wyœwietlanie stanu bariery miêdzygalaktycznej odpowiada niebieski pasek znajduj¹cy siê w lewym dolnym rogu ekranu",
+                    "Gdy pasek ten osi¹gnie poziom zerowy, nie obejdzie siê bez napraw statku, ale o tym póŸniej...",
+                    "Ruch statku kontrolujemy za pomoc¹ klawiszy WSAD.",
+                    "Aby oddaæ strza³ i zniszczyæ nacieraj¹c¹ asteroidê nale¿y u¿yæ klawisza spacji.",
+                    "Za wyœwietlanie przegrzania broni odpowiada fioltowy pasek znajduj¹cy siê w lewym dolnym rogu ekranu.",
+                    "To by by³o na tyle, powodzenia kapitanie!"
+                    
+                }
+            );
+            text.SetActive(false);
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            assistantActive = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        assistant.SetActive(assistantActive);
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         SceneShader.GetInstance().SetIsLighting(true);
         rigidBody = GetComponent<Rigidbody>();
@@ -65,7 +89,13 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (assistant == null && assistantActive)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            text.SetActive(true);
+            assistantActive = false;
+        }
+        if (Input.GetKeyDown(KeyCode.E) && !assistantActive)
         {
             assistantActive = false;
             StartCoroutine(FindObjectOfType<AsteroidController>().AsteroidWave());
