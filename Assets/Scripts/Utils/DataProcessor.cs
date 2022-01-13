@@ -26,9 +26,9 @@ public class DataProcessor {
 				i++;
 			}
 		});
-		return 100 * i / visits.Count;
+		return 100 - (100 * i / visits.Count);
 	}
-	
+
 	public static double CalculateChoicePercentage(List<int> choices, int choiceToCalculate)
 	{
 		int i = 0;
@@ -41,33 +41,7 @@ public class DataProcessor {
 		
 		return Math.Round((double) 100 * i / choices.Count, 2);
 	}
-
-	public static int GetChoicesCount(List<int> choices, int choiceToCalculate)
-	{
-		int i = 0;
-		choices.ForEach(e =>{
-			if (e == choiceToCalculate)
-			{
-				i++;
-			}
-		});
-		return i;
-	} 
-   
-	public static int CalculateRatio(){
-		return 1;
-	}
-
-	private static int GetFails(List<IData> data){
-		int i = 0;
-		foreach(var d in data){
-			if(!d.GetHasFinished()){
-				i++;
-			}
-		}
-		return i;
-	}
-
+	
 	private static int GetSucceeded(List<IData> data){
 		int i = 0;
 		foreach(var d in data){
@@ -81,16 +55,7 @@ public class DataProcessor {
 	private static int GetTries(List<IData> data){
 		return data.Count;
 	}
-
-	public static string GetFailTryString(List<IData> data){
-		return GetFails(data) + " / " + GetTries(data);
-	}
-
-	public static int CalculateDaysRatio(int days)
-	{
-		return 100 * days / 13;
-	}
-
+	
 	// String "value / value"
 	public static string GetSuccededTryString(List<IData> data){
 		return GetSucceeded(data) + " / " + GetTries(data);
@@ -100,9 +65,14 @@ public class DataProcessor {
 		return 100 * GetSucceeded(data) / GetTries(data);
 	}
 
-	//0-100 percent
-	public static int GetFailTryRatio(List<IData> data){
-		return 100 * GetFails(data) / GetTries(data);
+	public static double CalculateMedian(int[] sourceNumbers) {
+		int[] nums = (int[])sourceNumbers.Clone();
+		Array.Sort(nums);
+		
+		int size = nums.Length;
+		int middle = size / 2;
+		
+		return (size % 2 != 0) ? nums[middle] : (nums[middle] + nums[middle - 1]) / 2;
 	}
 
 }
