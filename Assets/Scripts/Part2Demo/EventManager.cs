@@ -18,50 +18,63 @@ public class EventManager : MonoBehaviour
         Tutorial,
         Game
     }
-    
-    private string[] TUTORIAL_DIALOGUE = {
-        ", witaj w panelu kontroli lotu!",
-        "Pozwól, że wytłumaczę Ci jak się nim posługiwać.",
-        "Aby dostać się do celu naszej podróży, będziemy musieli odwiedzić aż 3 nieznane planety!",
-        "Na całe szczęście, system kontroli lotu jest wyposażony w czujnik zagrożenia...",
-        "Po najechaniu kursorem na planetę możemy sprawdzić trudność i ryzyko niefortunnych zdarzeń na danej trasie!",
-        "Wyróżniamy 3 rodzaje tras...",
-        "1.Trasy oznaczone kolorem zielonym, wybierając takie trasy mamy 50% szansy na uniknięcie przeszkód...",
-        "2.Trasy oznaczone kolorem żółtym, wybierając takie trasy mamy 25% szansy na uniknięcie przeszkód...",
-        "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
-        "To jakimi trasami będziemy się poruszać zależy tylko i wyłącznie od Cieie kapitanie!",
-        "Sprawdźmy jak byś sobie poradził... Śmiało! Wybierz pierwszą trasę!"
-    };
 
     private void HandleMinigameFails()
     {
-        if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats) 
-            && GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
+        if(GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
-            warningText.SetActive(true);
-            GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
-            //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
-            switch ((int) Math.Round(Random.value % 3))
+            if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats))
             {
-                case 0:
+                warningText.SetActive(true);
+                GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
+                //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
+                if (!GlobalData.tutorialRepairs)
+                {
                     GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
-                    break;
-                case 1:
                     GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
-                    break;
-                case 2:
                     GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
-                    break;
+                    GlobalData.tutorialRepairs = true;
+                }
+                else
+                {
+                    switch ((int)Math.Round(Random.value % 3))
+                    {
+                        case 0:
+                            GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
+                            break;
+                        case 1:
+                            GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
+                            break;
+                        case 2:
+                            GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
+                            break;
+                    }
+                }
             }
         }
     }
 
     private void SetTutorialDialogue()
     {
-        if (!GlobalData.DIALOGUE_DICTIONARY.ContainsKey(3))
+        if (!GlobalData.DIALOGUE_DICTIONARY.ContainsKey(1))
         {
-            TUTORIAL_DIALOGUE[0] = GlobalData.playerName + TUTORIAL_DIALOGUE[0];
-            GlobalData.DIALOGUE_DICTIONARY.Add(3, TUTORIAL_DIALOGUE);
+            GlobalData.DIALOGUE_DICTIONARY.Add(1, new []{
+            "witaj w panelu kontroli lotu!",
+            "Pozwól, że wytłumaczę Ci jak się nim posługiwać.",
+            "Aby dostać się do celu naszej podróży, będziemy musieli odwiedzić aż 3 nieznane planety!",
+            "Na całe szczęście, system kontroli lotu jest wyposażony w czujnik zagrożenia...",
+            "Po najechaniu kursorem na planetę możemy sprawdzić trudność i ryzyko niefortunnych zdarzeń na danej trasie!",
+            "Wyróżniamy 3 rodzaje tras...",
+            "1.Trasy oznaczone kolorem zielonym, wybierając takie trasy mamy 50% szansy na uniknięcie przeszkód...",
+            "2.Trasy oznaczone kolorem żółtym, wybierając takie trasy mamy 25% szansy na uniknięcie przeszkód...",
+            "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
+            "Nie zapominajmy również o tym, że nasze zasoby są ograniczone!",
+            "Zapas żywności starczy nam na nie dłużej niż 7 dni",
+            "Podróże kolejno zieloną, żółtą i czerwoną trasą zajmują po 3, 2, 1 dni...",
+            "W razie gdyby brakowało nam zasobów za pomocą specjalnego skafandra będziemy mogli zejść na planetę i postarać się ich dozbierać.",
+            "To jakimi trasami będziemy się poruszać zależy tylko i wyłącznie od Ciebie kapitanie!",
+            "Sprawdźmy jak byś sobie poradził... Śmiało! Wybierz pierwszą trasę!"
+            });
         }
     }
 

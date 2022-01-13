@@ -54,6 +54,7 @@ public class GlobalData
     //Tutorial & Game
     public static variable[] dialoguePath;
     public static variable[] hubStats;
+    public static bool tutorialRepairs;
 
     //MapData
     public static bool firstStart = true;
@@ -73,27 +74,7 @@ public class GlobalData
     public static List<bool> visitedChoicesList;
     public static List<IData> dataList;
 
-    public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>
-    {
-        {
-            0, new[]
-            {
-                "Oho, a kogo to przywiało?",
-                "Nie wydaje mi się żebyśmy widzieli się kiedykolwiek wcześniej...",
-                "Pewnie jesteś tym rekrutem, o którym tyle słyszałem!",
-                "Pozwól no że Ci się przedstawię, nazywam się Mao",
-                "A jak Ciebie zwą?"
-            }
-        },
-        {
-            2, new[]
-            {
-                "Witaj na statku kapitanie!",
-                "Zanim zajmiemy przejdziemy do podróży pozwól że Cię oprowadzę!",
-                "Zacznijmy od głównego panelu!, to jest od mapy!"
-            }
-        },
-    };
+    public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>();
 
     public static void Init()
     {
@@ -111,9 +92,6 @@ public class GlobalData
             new variable(MAP_TUTORIAL_FINISHED, false),
             new variable(MAP_ASSISTANT_ACTIVE, true),
             new variable(MAP_RESET, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false),
-            new variable(MAP_ASSISTANT_ACTIVE, false)
         };
 
         hubStats = new[]
@@ -139,7 +117,9 @@ public class GlobalData
         difficultyChoicesList = new List<int>();
         visitedChoicesList = new List<bool>();
         dataList = new List<IData>();
-        
+
+        tutorialRepairs = false;
+
         isInited = true;
     }
     
