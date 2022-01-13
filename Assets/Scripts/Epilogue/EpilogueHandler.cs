@@ -9,9 +9,10 @@ public class EpilogueHandler : MonoBehaviour
 
     private const string DEFAULT_DATA = "No Data Provided";
     private const string PERCENTAGE_CHAR = "%";
-    private const string RISKY_SOB = "YOU RISKY SON OF A BITCH";
-    private const string NEUTRAL_BRD = "YOU NEUTRAL BASTARD";
-    private const string AVERSIVE_BRT = "YOU AVERSIVE BRAT";
+    
+    private const string RISKY = "W podejmowaniu decyzji wykazałeś się ryzykownymi wyborami!";
+    private const string NEUTRAL = "W podejmowaniu decyzji wykazałeś się neutralnością";
+    private const string AVERSIVE = "W podejmowaniu decyzji wykazałeś się awersją do ryzyka";
 
     private const int GREEN_CHOICE = 1;
     private const int YELLOW_CHOICE = 2;
@@ -39,6 +40,7 @@ public class EpilogueHandler : MonoBehaviour
         data = GlobalData.dataList;
         choices = GlobalData.difficultyChoicesList;
         visits = GlobalData.visitedChoicesList;
+
         minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
         minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
 
@@ -110,15 +112,18 @@ public class EpilogueHandler : MonoBehaviour
     {
         if (riskPercentage <= 40)
         {
-            summaryText.text = AVERSIVE_BRT;
+            summaryText.color = Color.green;
+            summaryText.text = AVERSIVE;
         }
         else if (riskPercentage > 40 && riskPercentage <= 60)
         {
-            summaryText.text = NEUTRAL_BRD;
+            summaryText.color = Color.yellow;
+            summaryText.text = NEUTRAL;
         }
         else
         {
-            summaryText.text = RISKY_SOB;
+            summaryText.color = Color.red;
+            summaryText.text = RISKY;
         }
     }
 
@@ -135,9 +140,10 @@ public class EpilogueHandler : MonoBehaviour
         double yellow = DataProcessor.CalculateChoicePercentage(choices,2);
         double red = DataProcessor.CalculateChoicePercentage(choices,3);
         
-        Debug.Log("Średnia cała: " + (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3));
-
+        Debug.Log("Overall average risk percentage: " + (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3));
+        
         return (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3);
     }
     
+
 }
