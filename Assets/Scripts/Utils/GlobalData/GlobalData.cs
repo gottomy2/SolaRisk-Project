@@ -74,6 +74,9 @@ public class GlobalData
     public static List<bool> visitedChoicesList;
     public static List<IData> dataList;
 
+    //Flappy Ship Data
+    public static bool flappyShipAssistant;
+
     public static Dictionary<int, string[]> DIALOGUE_DICTIONARY = new Dictionary<int, string[]>();
 
     public static void Init()
@@ -119,6 +122,7 @@ public class GlobalData
         dataList = new List<IData>();
 
         tutorialRepairs = false;
+        flappyShipAssistant = true;
 
         isInited = true;
     }
