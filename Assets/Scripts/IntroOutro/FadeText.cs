@@ -28,4 +28,15 @@ public class FadeText : MonoBehaviour
         }
         faded = true;
     }
+
+    public IEnumerator FadeImageToFullAlpha(float t)
+    {
+        Image i = gameObject.GetComponent<Image>();
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+        while (i.color.a < 1.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
+            yield return null;
+        }
+    }
 }

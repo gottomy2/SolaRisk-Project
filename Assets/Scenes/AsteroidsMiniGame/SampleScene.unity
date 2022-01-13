@@ -2250,6 +2250,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104635786}
   m_CullTransparentMesh: 1
+--- !u!1 &2109881270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2688399607323416219, guid: ae10cf0a12b63e9468ac4e99333e40cd, type: 3}
+  m_PrefabInstance: {fileID: 1378085290997716468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1378085290997716468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2439,6 +2444,10 @@ PrefabInstance:
       propertyPath: laserHit
       value: 
       objectReference: {fileID: 8300000, guid: f9eb44b85c96be5429737d4dcadbfa3b, type: 3}
+    - target: {fileID: 2011025446135668724, guid: b9925824db56d024f914a176b98f7ba5, type: 3}
+      propertyPath: tutorial
+      value: 
+      objectReference: {fileID: 2109881270}
     - target: {fileID: 2011025446135668724, guid: b9925824db56d024f914a176b98f7ba5, type: 3}
       propertyPath: assistant
       value: 
