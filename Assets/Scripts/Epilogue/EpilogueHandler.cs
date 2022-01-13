@@ -22,6 +22,8 @@ public class EpilogueHandler : MonoBehaviour
     private List<int> choices;
     private List<bool> visits;
 
+    private int days;
+
     private Text minigameSuccess;
     private Text minigameSuccessRatio;
 
@@ -37,10 +39,11 @@ public class EpilogueHandler : MonoBehaviour
 
     private void Awake()
     {
+        days = GlobalData.days;
         data = GlobalData.dataList;
         choices = GlobalData.difficultyChoicesList;
         visits = GlobalData.visitedChoicesList;
-
+        
         minigameSuccessRatio = GameObject.Find("SuccessRatio").GetComponent<Text>();
         minigameSuccess = GameObject.Find("Success").GetComponent<Text>();
 
@@ -129,20 +132,22 @@ public class EpilogueHandler : MonoBehaviour
 
     private void SetFlightDays()
     {
-        flightDaysText.text = GlobalData.days.ToString();
+        flightDaysText.text = days.ToString();
     }
 
     private int CalculateRiskPercentage()
     {
-        int dayRatio = DataProcessor.CalculateDaysRatio(GlobalData.days);
-        int planetVisit = DataProcessor.CalculatePlanetVisitsPercentage(visits);
-        double green = DataProcessor.CalculateChoicePercentage(choices,1);
-        double yellow = DataProcessor.CalculateChoicePercentage(choices,2);
-        double red = DataProcessor.CalculateChoicePercentage(choices,3);
+        double median = DataProcessor.CalculateMedian(choices.ToArray());
         
-        Debug.Log("Overall average risk percentage: " + (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3));
-        
-        return (int) (dayRatio + planetVisit + green + 2 * yellow + 3 * red) / (1 + 1 + 1 + 2 + 3);
+        Debug.Log("Median: "+ median);
+
+        return median switch
+        {
+            1 => 25,
+            2 => 50,
+            3 => 100,
+            _ => 0
+        };
     }
     
 
