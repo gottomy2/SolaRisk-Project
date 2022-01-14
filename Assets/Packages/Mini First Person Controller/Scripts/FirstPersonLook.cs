@@ -25,18 +25,18 @@ public class FirstPersonLook : MonoBehaviour
 
         if (condition)
         {
-            if (!GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
+            if (!GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath) || GlobalData.GetVar("repairsTutorialActive",GlobalData.dialoguePath))
             {
                 Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.Locked;
-            }            
+            }
         }
         else
         {
-            // Lock the mouse cursor to the game screen.
+            // Lock the mouse cursor to the game in planetary View.
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
@@ -45,7 +45,7 @@ public class FirstPersonLook : MonoBehaviour
     {
         if (condition)
         {
-            if (GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
+            if (GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath) && !GlobalData.GetVar("repairsTutorialActive", GlobalData.dialoguePath))
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 // Get smooth velocity.

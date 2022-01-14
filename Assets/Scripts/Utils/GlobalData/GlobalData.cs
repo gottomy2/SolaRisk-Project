@@ -20,6 +20,7 @@ public class GlobalData
     public const string MAP_RESET = "mapReset";
     public const string MINIGAME_FAILED = "minigameFailed";
     public const string MAP_ACTIVE = "mapActive";
+    public const string REPAIRS_TUTORIAL_ACTIVE = "repairsTutorialActive";
 
     public const string SIMON_BROKEN = "simonBroken";
     public const string SIMON_FIX = "simonFix";
@@ -103,6 +104,7 @@ public class GlobalData
             new variable(MAP_TUTORIAL_FINISHED, false),
             new variable(MAP_ASSISTANT_ACTIVE, true),
             new variable(MAP_RESET, false),
+            new variable(REPAIRS_TUTORIAL_ACTIVE, false)
         };
 
         hubStats = new[]
