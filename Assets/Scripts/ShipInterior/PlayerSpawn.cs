@@ -10,22 +10,22 @@ public class PlayerSpawn : MonoBehaviour
     {   
         SceneShader.GetInstance().SetShadeSpeed(3f);
         SceneShader.GetInstance().SetIsLighting(true);
-        
+
         if (!GlobalData.GetVar("wiresBroken", GlobalData.hubStats) && GlobalData.GetVar("wiresFix",GlobalData.hubStats))
         {
             GlobalData.SetVar("wiresFix", false, GlobalData.hubStats);
-            player.transform.position = new Vector3(0f, 1.52f, -4f);
+            //player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
         else if(!GlobalData.GetVar("switchesBroken",GlobalData.hubStats) && GlobalData.GetVar("switchesFix", GlobalData.hubStats))
         {
             GlobalData.SetVar("switchesFix", false, GlobalData.hubStats);
-            player.transform.position = new Vector3(0f, 1.52f, -4f);
+           // player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
 
         if (!GlobalData.GetVar("simonBroken", GlobalData.hubStats) && GlobalData.GetVar("simonFix",GlobalData.hubStats))
         {
             GlobalData.SetVar("simonFix", false, GlobalData.hubStats);
-            player.transform.position = new Vector3(0f, 1.52f, -4f);
+            //player.transform.position = new Vector3(0f, 1.52f, -4f);
         }
     }
 

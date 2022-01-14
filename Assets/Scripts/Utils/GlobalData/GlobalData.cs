@@ -50,6 +50,8 @@ public class GlobalData
     
     //Player Name
     public static string playerName = "PLAYER_1";
+    public static Vector3 playerTransformPosition;
+    public static Quaternion playerTransformRotation;
 
     //Tutorial & Game
     public static variable[] dialoguePath;
@@ -129,6 +131,9 @@ public class GlobalData
 
         tutorialRepairs = false;
         flappyShipAssistant = true;
+
+        playerTransformPosition = new Vector3(-7.12f, 1.52f, -7e-15f);
+        playerTransformRotation = new Quaternion(0, -94.137f, 0, 0);
 
         isInited = true;
     }
