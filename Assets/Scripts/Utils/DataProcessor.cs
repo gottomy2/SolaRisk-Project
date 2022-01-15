@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class DataProcessor {
 
@@ -14,19 +15,6 @@ public class DataProcessor {
 			}
 		});
 		return i;
-	}
-
-	public static int CalculatePlanetVisitsPercentage(List<bool> visits)
-	{
-		int i = 0;
-		visits.ForEach(e =>
-		{
-			if (e)
-			{
-				i++;
-			}
-		});
-		return 100 - (100 * i / visits.Count);
 	}
 
 	public static double CalculateChoicePercentage(List<int> choices, int choiceToCalculate)
@@ -63,16 +51,6 @@ public class DataProcessor {
 
 	public static int GetSuccessTryRatio(List<IData> data){
 		return 100 * GetSucceeded(data) / GetTries(data);
-	}
-
-	public static double CalculateMedian(int[] sourceNumbers) {
-		int[] nums = (int[])sourceNumbers.Clone();
-		Array.Sort(nums);
-		
-		int size = nums.Length;
-		int middle = size / 2;
-		
-		return (size % 2 != 0) ? nums[middle] : (nums[middle] + nums[middle - 1]) / 2;
 	}
 
 }

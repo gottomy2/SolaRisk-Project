@@ -106,8 +106,7 @@ public class EpilogueHandler : MonoBehaviour
     private void SetPlanetVisitFields()
     {
         planetsVisited.text = visits.Any()
-            ? (DataProcessor.CalculatePlanetVisits(visits)
-               + " / " + visits.Count)
+            ? (DataProcessor.CalculatePlanetVisits(visits).ToString())
             : DEFAULT_DATA;
     }
 
@@ -137,17 +136,7 @@ public class EpilogueHandler : MonoBehaviour
 
     private int CalculateRiskPercentage()
     {
-        double median = DataProcessor.CalculateMedian(choices.ToArray());
-        
-        Debug.Log("Median: "+ median);
-
-        return median switch
-        {
-            1 => 25,
-            2 => 50,
-            3 => 100,
-            _ => 0
-        };
+        return (int) RiskProcessor.CalculateRiskPercentage(RiskProcessor.CalculateChoiceAverage(choices));
     }
     
 
