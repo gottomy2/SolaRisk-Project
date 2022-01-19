@@ -39,6 +39,7 @@ public class EpilogueHandler : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         days = GlobalData.days;
         data = GlobalData.dataList;
         choices = GlobalData.difficultyChoicesList;

@@ -51,7 +51,6 @@ public class ShipController : MonoBehaviour
 
     void Start()
     {
-        GlobalData.Init();
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             GlobalData.DIALOGUE_DICTIONARY.Add(2, new[]
