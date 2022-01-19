@@ -47,8 +47,11 @@ public class ShipController : MonoBehaviour
 
     private bool assistantActive = true;
 
+    private bool gamesStarted = false;
+
     void Start()
     {
+        GlobalData.Init();
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             GlobalData.DIALOGUE_DICTIONARY.Add(2, new[]
@@ -103,8 +106,9 @@ public class ShipController : MonoBehaviour
             StartCoroutine(FindObjectOfType<AsteroidController>().AsteroidWave());
             text.SetActive(false);
             StartCounting();
+            gamesStarted = true;
         }
-        if (!assistantActive)
+        if (!assistantActive && gamesStarted)
         {
             horizontal = Input.GetAxis("Horizontal") * -1;
             vertical = Input.GetAxis("Vertical");
