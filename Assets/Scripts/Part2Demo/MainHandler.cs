@@ -11,8 +11,10 @@ public class MainHandler : MonoBehaviour
     public GameObject daysCounter;
     public GlobalVars globalVars;
     private string playerName;
-    
 
+
+    private const string END_PLANET_NAME = "Pend";
+    
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -40,11 +42,7 @@ public class MainHandler : MonoBehaviour
 
         // GameObject.Find(mapData.playerPosition)
     }
-
-    void Update()
-    {
-      
-    }
+    
     public void ChangePlayerPosition(string name)
     {
         GlobalData.playerPosition = name;
@@ -81,7 +79,12 @@ public class MainHandler : MonoBehaviour
 
         GlobalData.path.Add(name);
         GlobalData.planetChanged = true;
-        SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
+
+        if (!name.Equals(END_PLANET_NAME))
+        {
+            SaveDifficultyChoiceToProcess(GameObject.Find(name).GetComponent<Planet>().getDifficulty());
+        }
+        
         GlobalData.SetVar("planetVisited", false, GlobalData.hubStats);
     }
 
