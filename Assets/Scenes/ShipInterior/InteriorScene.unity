@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45132595, g: 0.5002453, b: 0.5692458, a: 1}
+  m_IndirectSpecularColor: {r: 0.4513253, g: 0.5002446, b: 0.56924516, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -20449,7 +20449,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528245358}
-  m_Text: "Click E \nTo Open Map"
+  m_Text: "Naci\u015Bnij E \nAby Otworzy\u0107 Map\u0119"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
