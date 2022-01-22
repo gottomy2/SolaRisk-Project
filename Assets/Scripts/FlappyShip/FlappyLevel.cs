@@ -96,14 +96,18 @@ public class FlappyLevel : MonoBehaviour
         SceneShader.GetInstance().SetIsLighting(true);
     }
 
-    private IEnumerator CloseScene(){
-        SceneShader.GetInstance().SetIsShading(true);
+    private void OnDestroy()
+    {
         if (!GlobalData.GetVar("mapTutorialFinished", GlobalData.dialoguePath))
         {
             GlobalData.SetVar("mapTutorialFinished", true, GlobalData.dialoguePath);
+            GlobalData.SetVar("minigameFailed", true, GlobalData.hubStats);
             GlobalData.SetVar("mapReset", true, GlobalData.dialoguePath);
         }
+    }
 
+    private IEnumerator CloseScene(){
+        SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
