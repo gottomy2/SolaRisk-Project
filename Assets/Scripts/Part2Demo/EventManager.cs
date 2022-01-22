@@ -13,6 +13,7 @@ public class EventManager : MonoBehaviour
     private Planet planet;
     private Difficulty difficulty;
     private bool mapFirst = true;
+
     private enum State
     {
         Tutorial,
@@ -38,15 +39,15 @@ public class EventManager : MonoBehaviour
                 }
                 else
                 {
-                    switch ((int)Math.Round(Random.value % 3))
+                    switch (Random.Range(1,3))
                     {
-                        case 0:
+                        case 1:
                             GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
                             break;
-                        case 1:
+                        case 2:
                             GlobalData.SetVar("wiresBroken", true, GlobalData.hubStats);
                             break;
-                        case 2:
+                        case 3:
                             GlobalData.SetVar("switchesBroken", true, GlobalData.hubStats);
                             break;
                     }
