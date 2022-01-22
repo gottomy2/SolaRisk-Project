@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
                 }
                 else
                 {
-                    switch (Random.Range(1,3))
+                    switch (Random.Range(1,4))
                     {
                         case 1:
                             GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
