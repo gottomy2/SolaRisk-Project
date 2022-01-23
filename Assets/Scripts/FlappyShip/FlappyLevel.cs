@@ -75,6 +75,7 @@ public class FlappyLevel : MonoBehaviour
         {
             GlobalData.flappyShipAssistant = false;
             tutorial.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
         }
         assistant.SetActive(GlobalData.flappyShipAssistant);
 
