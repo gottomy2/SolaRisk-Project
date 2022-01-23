@@ -28,7 +28,6 @@ public class EventManager : MonoBehaviour
             {
                 warningText.SetActive(true);
                 GlobalData.SetVar("mapActive", false, GlobalData.hubStats);
-                //GlobalData.SetVar("mapAssistantActive", true, GlobalData.dialoguePath);
                 if (!GlobalData.tutorialRepairs)
                 {
                     GlobalData.SetVar("simonBroken", true, GlobalData.hubStats);
@@ -69,12 +68,12 @@ public class EventManager : MonoBehaviour
             "Wyróżniamy 3 rodzaje tras...",
             "1.Trasy oznaczone kolorem zielonym, wybierając takie trasy mamy 50% szansy na uniknięcie przeszkód...",
             "2.Trasy oznaczone kolorem żółtym, wybierając takie trasy mamy 25% szansy na uniknięcie przeszkód...",
-            "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
+            "I wreszcie numer 3, Trasy oznaczone ko*lorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
             "Nie zapominajmy również o tym, że nasze zasoby są ograniczone!",
             "Zapas żywności starczy nam na nie dłużej niż 7 dni",
             "Podróże kolejno zieloną, żółtą i czerwoną trasą zajmują po 3, 2, 1 dni...",
             "W razie gdyby brakowało nam zasobów za pomocą specjalnego skafandra będziemy mogli zejść na planetę i postarać się ich dozbierać.",
-            "To jakimi trasami będziemy się poruszać zależy tylko i wyłącznie od Ciebie kapitanie!",
+            "To jakimi trasami będziemy się poruszać zależy tylko i wyłącznie od Ciebie kapitanie, jednak powinnismy dostać się do celu naszej podróży jak najszybciej to możliwe.",
             "Sprawdźmy jak byś sobie poradził... Śmiało! Wybierz pierwszą trasę!"
             });
         }
