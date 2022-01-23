@@ -68,7 +68,7 @@ public class EventManager : MonoBehaviour
             "Wyróżniamy 3 rodzaje tras...",
             "1.Trasy oznaczone kolorem zielonym, wybierając takie trasy mamy 50% szansy na uniknięcie przeszkód...",
             "2.Trasy oznaczone kolorem żółtym, wybierając takie trasy mamy 25% szansy na uniknięcie przeszkód...",
-            "I wreszcie numer 3, Trasy oznaczone ko*lorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
+            "I wreszcie numer 3, Trasy oznaczone kolorem czerwonym. wybierając takie trasy nie obędzie się bez przeszkód.",
             "Nie zapominajmy również o tym, że nasze zasoby są ograniczone!",
             "Zapas żywności starczy nam na nie dłużej niż 7 dni",
             "Podróże kolejno zieloną, żółtą i czerwoną trasą zajmują po 3, 2, 1 dni...",
