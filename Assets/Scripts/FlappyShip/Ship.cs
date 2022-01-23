@@ -112,7 +112,6 @@ public class Ship : MonoBehaviour {
         TakeOff();
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(1f);
-        //Scene change here
         SceneManager.LoadScene("Assets/Scenes/Part2Demo/Part2Demo.unity");
     }
 

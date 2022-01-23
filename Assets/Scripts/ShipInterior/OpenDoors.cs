@@ -13,14 +13,11 @@ public class OpenDoors : MonoBehaviour
     private GameObject player;
     private Vector3 playerPosition;
     private float distance;
-    // Start is called before the first frame update
     void Start()
     {
         animator = doors.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
-    // Update is called once per frame
     void Update()
     {
         playerPosition = player.transform.position;

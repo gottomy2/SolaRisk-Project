@@ -13,15 +13,12 @@ public class OpenSimon : MonoBehaviour
     private Vector3 playerPosition;
     private float distance;
     private bool condition;
-
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         condition = GlobalData.GetVar("simonBroken", GlobalData.hubStats);
     }
 
-    // Update is called once per frame
     void Update()
     { 
         playerPosition = player.transform.position;

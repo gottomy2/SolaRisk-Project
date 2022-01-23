@@ -53,7 +53,6 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
 
         text.SetText("Nazwa: " + planet.GetComponent<Planet>().getName() + "\n" + "Planeta: " + planet.GetComponent<Planet>().getTranslatedType() + "\n" + "Ryzyko: " + difficulty);
         button.SetPlanet(planet.name);
-        //zoom.EnableZoom();
     }
     public void Deactivate()
     {
@@ -62,7 +61,6 @@ public class TooltipPopup : MonoBehaviour, IPointerExitHandler
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         if (line != null) Destroy(line);
-        //zoom.DisableZoom();
         gameObject.SetActive(false);
     }
 }

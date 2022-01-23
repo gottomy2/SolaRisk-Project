@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class ShowTutorial : MonoBehaviour
 {
     public GameObject tutorial;
-    // Start is called before the first frame update
     void Awake()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByPath("Assets/Scenes/FixLightsWireSwitches/FixTheWires.unity"))

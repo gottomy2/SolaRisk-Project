@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Repairs : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
         if (GlobalData.GetVar("minigameFailed", GlobalData.hubStats) && !GlobalData.GetVar("simonBroken", GlobalData.hubStats) && !GlobalData.GetVar("wiresBroken", GlobalData.hubStats) && !GlobalData.GetVar("switchesBroken", GlobalData.hubStats))

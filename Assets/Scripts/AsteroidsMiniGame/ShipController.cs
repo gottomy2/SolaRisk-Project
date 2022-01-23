@@ -118,8 +118,6 @@ public class ShipController : MonoBehaviour
                 CheckTimer();
             }
 
-            //DEBUG_OPTIONS();
-
             if (Input.GetKeyDown(KeyCode.Space) && canShoot)
             {
                 AsteroidDataHandler.GetInstance().RegisterClick();

@@ -7,11 +7,8 @@ public class AssistantsManager : MonoBehaviour
     public GameObject assistant1;
     public GameObject assistant2;
 
-
-    // Start is called before the first frame update
     private void Awake()
     {
-        //assistant2 = GameObject.Find("assistantImage2");
         if (GlobalData.GetVar("hubTutorial1", GlobalData.dialoguePath))
         {
             assistant1.gameObject.SetActive(false);
@@ -44,8 +41,6 @@ public class AssistantsManager : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (assistant2 == null && GlobalData.GetVar("repairsTutorialActive", GlobalData.dialoguePath))

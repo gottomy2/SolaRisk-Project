@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ChangePlanet : MonoBehaviour {
 
-    //public string pData;
     public GameObject alien;
     public GameObject earthLike;
     public GameObject desert;
@@ -73,8 +72,6 @@ public class ChangePlanet : MonoBehaviour {
                 temperate.SetActive(true);
                 mapGenerator.DrawMapInEditor();
                 break;
-            // default: Destroy(this);
-                // break;
         }
         GameObject.Find("Mesh").AddComponent<MeshCollider>();
     }

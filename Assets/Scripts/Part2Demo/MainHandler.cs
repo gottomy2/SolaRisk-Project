@@ -39,8 +39,6 @@ public class MainHandler : MonoBehaviour
 
         showPlanets.Show();
         popup.Deactivate();
-
-        // GameObject.Find(mapData.playerPosition)
     }
     
     public void ChangePlayerPosition(string name)

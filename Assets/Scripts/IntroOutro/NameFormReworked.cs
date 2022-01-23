@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class NameFormReworked : MonoBehaviour
 {
     private GameObject button;
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -31,6 +30,7 @@ public class NameFormReworked : MonoBehaviour
                 "Pozwól ¿e Ciê oprowadzê, zanim wyruszymy w podró¿.",
                 "To nic innego jak symulacja...",
                 "Zreszt¹ to pewnie nie Twoja pierwsza!",
+
                 "Zacznijmy od g³ównego panelu, to jest od Mapy!"
             }
         );

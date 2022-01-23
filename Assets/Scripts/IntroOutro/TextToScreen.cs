@@ -24,7 +24,6 @@ public class TextToScreen : MonoBehaviour
     private bool nextSequence = true;
     private bool outro = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         textList = text.Split('.').ToList();
@@ -34,7 +33,6 @@ public class TextToScreen : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (nextSequence && counter < textList.Count)

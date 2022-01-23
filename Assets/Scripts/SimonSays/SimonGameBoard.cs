@@ -195,7 +195,6 @@ public class SimonGameBoard : MonoBehaviour
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
         SceneShader.GetInstance().SetIsShading(true);
         yield return new WaitForSeconds(SCENE_CHANGE_DELAY);
-        //Change scene here
         SceneManager.LoadScene("Assets/Scenes/ShipInterior/InteriorScene.unity");
     }
 

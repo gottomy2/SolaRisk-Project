@@ -141,7 +141,6 @@ public class EventManager : MonoBehaviour
 
         KillAssistant();
         ConfirmAssistantIsDead();
-        //flyButton.onClick.AddListener(onButtonClick);
     }
 
     private void ConfirmAssistantIsDead()
@@ -182,7 +181,6 @@ public class EventManager : MonoBehaviour
             if (planet.getDifficulty() == 1)
             {
                 RandomizeEvent(0.5f);
-                //RandomizeEvent(0f);
             }
             else if (planet.getDifficulty() == 2)
             {

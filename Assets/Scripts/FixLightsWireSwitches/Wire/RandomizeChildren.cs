@@ -5,7 +5,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class RandomizeChildren : MonoBehaviour {
-    // Start is called before the first frame update
     private void Awake() {
         for (int i = 0; i < transform.childCount; i++) {
             int newSpot = Random.Range(0, transform.childCount);

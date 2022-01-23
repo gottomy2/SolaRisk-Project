@@ -17,7 +17,6 @@ public class OpenPlanet : MonoBehaviour
     private bool condition;
     private string currentPlanetName;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!GlobalData.GetVar("minigameFailed", GlobalData.hubStats))
@@ -33,7 +32,6 @@ public class OpenPlanet : MonoBehaviour
         condition = GlobalData.GetVar("planetCanLand", GlobalData.hubStats) && !GlobalData.GetVar("planetVisited", GlobalData.hubStats) && !isEmpty(GlobalData.path);
     }
 
-    // Update is called once per frame
     void Update()
     {
         playerPosition = player.transform.position;
